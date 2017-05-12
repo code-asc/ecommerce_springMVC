@@ -1,0 +1,4 @@
+.itemthumb img:hover
+{
+  transform:scale(0.9);
+}

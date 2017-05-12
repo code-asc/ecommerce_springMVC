@@ -1,0 +1,11 @@
+$(document).ready(function(){
+  $("#onBuyNow").click(function(event){
+    $.ajax({
+      url:"/Controller/singleBuy.cfc",
+      data:{method:"buyNow"},
+      success:function(){
+        $(location).attr('href','payment.cfm');
+      }
+    });
+  })
+});

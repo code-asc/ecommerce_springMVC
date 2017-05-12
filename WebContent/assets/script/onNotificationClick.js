@@ -1,0 +1,11 @@
+$(document).ready(function(){
+  $("#dLabel").click(function(event){
+    $("#notify").text("");
+    $.ajax({
+      url:"/Controller/adminData.cfc?method=markAsReadNotification",
+      success:function(responseText){
+        console.log(responseText);
+      }
+    })
+  })
+})

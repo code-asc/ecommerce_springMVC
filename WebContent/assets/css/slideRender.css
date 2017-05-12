@@ -1,0 +1,25 @@
+
+.carousel-inner{
+  width:100%;
+  max-height: 600px ;
+}
+
+
+.carousel-inner > .item > img {
+    border: 1px solid #DDDDDD;
+    float: left;
+    margin: 0pt 3px;
+    padding: 2px;
+    min-height: 150px;
+    width:  100%;
+}
+
+#changeMargin
+{
+  margin-left: 48px;
+}
+
+#thumbNailRow
+{
+  margin-top:40px;
+}

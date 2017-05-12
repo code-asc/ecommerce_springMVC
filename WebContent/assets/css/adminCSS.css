@@ -1,0 +1,91 @@
+.active
+{
+  margin-left:0px;
+}
+
+.colorGreen
+{
+  background-color: #2eb82e;
+
+}
+
+.colorDarkGreen
+{
+background-color:#00a78e;
+}
+
+.colorRed
+{
+  background-color: #d95459;
+}
+
+.colorLightBlue
+{
+  background-color: #55acee;
+}
+
+.fa-list-ol
+{
+  color: #55acee;
+}
+
+.fa-list
+{
+  color:#d95459;
+}
+
+.fa-users
+{
+  color:#00a78e;
+}
+
+.fa-file-text-o
+{
+color:#2eb82e;
+}
+
+.fa-truck
+{
+  color:#FC8213;
+}
+
+
+.fa-user
+{
+  color:#337AB7;
+}
+
+.colorShip
+{
+  background-color: #FC8213;
+}
+
+.colorBlue
+{
+  background-color: #337AB7
+}
+
+#customerInfo{
+      box-shadow: 0px 0px 4px #999;
+  color:#ffffff;
+  font-family: 'Carrois Gothic', sans-serif;
+  margin-left: 46px;
+  margin-bottom: 20px;
+}
+
+.adminHeaderInfo
+{
+  color:#ffffff;
+  font-family: 'Carrois Gothic', sans-serif;
+}
+
+
+
+.setCircle
+{
+  background-color:#ffffff;
+  display: inline-block;
+  border-radius: 60px;
+  box-shadow: 0px 0px 2px #888;
+  margin-top: 4px;
+}
