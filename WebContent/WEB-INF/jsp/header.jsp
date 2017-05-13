@@ -29,7 +29,7 @@
 			<button class="btn btn-default navbar-toggle" data-toggle="collapse" data-target="#myMenu">
 				<span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 			</button>
-			<a href="/index.cfm"><img class=" img-size" src="/ProjectDemo/assets/images/logo.png"></a>
+			<a href="index.html"><img class=" img-size" src="/ProjectDemo/assets/images/logo.png"></a>
 		</div>
 
 		<div class="collapse navbar-collapse" id="myMenu">

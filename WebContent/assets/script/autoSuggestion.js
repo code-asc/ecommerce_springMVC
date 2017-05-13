@@ -18,5 +18,9 @@ $(document).ready(function(){
 
     }
   })
-  $("#getSuggestion").autocomplete({source:brand});
+  $("#getSuggestion").autocomplete({source:brand,
+	  open:function(){
+		  $(".ui-autocomplete").css("z-index",99999999);
+	  }
+	  });
 });
