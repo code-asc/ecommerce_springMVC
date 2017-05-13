@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.app.model.BrandsOnly;
 import com.app.model.HomePageLargeImage;
 import com.app.model.HomePageThumbNail;
+import com.app.service.GetOnlyBrands;
 import com.app.service.HomePageDisplay;
 
 
@@ -18,6 +20,9 @@ public class HomePageDataController {
 
 	@Autowired
 	HomePageDisplay pageDisplay;
+	
+	@Autowired
+	GetOnlyBrands onlyBrands;
 	
 	@RequestMapping(value="/getHomePageLargeContent" , method=RequestMethod.GET)
 	public @ResponseBody List<HomePageLargeImage> pageData()
@@ -29,5 +34,11 @@ public class HomePageDataController {
 	public @ResponseBody List<HomePageThumbNail> pageDataThumNail()
 	{
 		return pageDisplay.homePageDisplayThumbNail();
+	}
+	
+	@RequestMapping(value="/getOnlybrands" , method=RequestMethod.GET)
+	public @ResponseBody List<BrandsOnly> getBrands()
+	{
+		return onlyBrands.onlyBrands();
 	}
 }
