@@ -1,9 +1,9 @@
 $.extend({
-  xResponse:function(urlComponent,componentMethodName){
+  xResponse:function(urlComponent){
     var returnVariable=null;
     $.ajax({
       url:urlComponent,
-      data:{method:componentMethodName},
+    
       async: false,
       success:function(responseText)
       {

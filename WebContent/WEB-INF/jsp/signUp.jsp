@@ -65,7 +65,7 @@ Functionality : It will show sign up page
                             </c:when>
                             <c:otherwise>
                             <h2>SignUp Here</h2>
-                            <form:form commandName="signUpDetails" method="POST">
+                            <form:form commandName="signUpDetails" method="POST" id="signUp_form">
                             
                             <div class="form-group input-field">
                                   <div class="input-group">
@@ -115,9 +115,18 @@ Functionality : It will show sign up page
                             </form:form>
                             </c:otherwise>
                             </c:choose>
+                            </div>
+                            </div>
                                 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 
 
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script src="/ProjectDemo/assets/script/autoSuggestion.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/additional-methods.min.js"></script>
+    <script src="/ProjectDemo/assets/script/validateClientTest.js"></script>
 </body>
 </html>
     

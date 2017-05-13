@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -23,19 +23,13 @@
 
 <body style="margin-top: 110px">
 
-
-
-
 	<nav class="navbar navbar-default navbar-fixed-top navbar-static-top">
 	<div class="container-fluid">
 		<div class="navbar-header">
-			<button class="btn btn-default navbar-toggle" data-toggle="collapse"
-				data-target="#myMenu">
-				<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
+			<button class="btn btn-default navbar-toggle" data-toggle="collapse" data-target="#myMenu">
+				<span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 			</button>
-			<a href="/index.cfm"><img class=" img-size"
-				src="/ProjectDemo/assets/images/logo.png"></a>
+			<a href="/index.cfm"><img class=" img-size" src="/ProjectDemo/assets/images/logo.png"></a>
 		</div>
 
 		<div class="collapse navbar-collapse" id="myMenu">
@@ -139,8 +133,7 @@
 			<form class="navbar-form navbar-left" action="/common/header.cfm"
 				method="post">
 				<div class="input-group">
-					<input type="text" class="form-control" placeholder="Search"
-						name="searchVal" id="getSuggestion">
+					<input type="text" class="form-control" placeholder="Search" name="searchVal" id="getSuggestion">
 					<div class="input-group-btn">
 						<button class="btn btn-default btn-search-color"
 							name="searchSubmit" type="submit">
@@ -159,14 +152,25 @@
 				</a>
 
 					<ul class="dropdown-menu" id="loginButton">
-
-
-
-						<li><a href="signin.html"><i class="fa fa-sign-in"
-								aria-hidden="true"></i>&nbsp SignIn</a></li>
-						<li><a href="signup.html"><i class="fa fa-plus"
-								aria-hidden="true"></i>&nbsp SignUp</a></li>
-
+					
+					
+					<c:choose>
+					<c:when test="${sessionScope.isUserLoggedIn}">
+					<li>
+					<div id="fullName"><c:out value="${sessionScope.userFullName}"></c:out></div>
+					</li>
+					<li class="divider"/>
+					<li><a href="logout.html"><i class="fa fa-sign-out" aria-hidden="true"></i> &nbsp SignOut</a></li>
+					</c:when>
+					<c:otherwise>
+						<li>
+						<a href="signin.html"><i class="fa fa-sign-in"aria-hidden="true"></i>&nbsp SignIn</a>
+						</li>
+						<li>
+						<a href="signup.html"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp SignUp</a>
+						</li>
+						</c:otherwise>
+						</c:choose>
 					</ul>
 				<li>
 				<a href="/view/userCart.cfm"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp Cart&nbsp</a>
@@ -178,14 +182,9 @@
 	</div>
 	</nav>
 
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<!-- 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
 	<!-- Include all compiled plugins (below), or include individual files as needed -->
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-	<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-	<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-
+	
 
 	<!--  <script src="/ProjectDemo/script/autoSuggestion.js"></script>
       <script src="/ProjectDemo/assets/script/userSocketAjax.js"></script>

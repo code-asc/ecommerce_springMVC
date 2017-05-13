@@ -34,7 +34,7 @@ public class SignIn {
 		}
 		else
 		{
-			return "index";
+			return "redirect:index.html";
 		}
 	}
 	
@@ -45,8 +45,7 @@ public class SignIn {
 		if(doUserLogin.isUserValid(signInModel.getEmail() , signInModel.getPassword() , session , request))
 		{
 			
-		model.addAttribute("name", "wow");
-		return "index";
+		return "redirect:index.html";
 		}
 		else
 		{

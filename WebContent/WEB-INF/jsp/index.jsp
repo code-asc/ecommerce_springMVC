@@ -14,8 +14,8 @@
         <!-- Bootstrap -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="/assets/css/slideRender.css">
-        <link rel="stylesheet" href="/assets/css/transformEffect.css">
+        <link rel="stylesheet" href="/ProjectDemo/assets/css/slideRender.css">
+        <link rel="stylesheet" href="/ProjectDemo/assets/css/transformEffect.css">
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
         <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
@@ -28,11 +28,8 @@
     </head>
 
     <body>
-        <!---  <div ng-include="'header.cfm'">
-
-    </div>
-    --->
-
+        <!--  <div ng-include="'header.cfm'"> </div>-->
+<%@ include file="/WEB-INF/jsp/header.jsp" %>
 
                 <div class="container-fluid" id="changeMargin" style="margin-bottom:100px">
                     <div class="row">
@@ -60,24 +57,16 @@
                     </div>
                 </div>
 
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
-                          <cfcache action="cache" timespan="#createTimespan(0,14,0,0)#" >
-                            <cfinclude template="/common/footer.cfm" />
-                          </cfcache>
-                        </div>
-                    </div>
-                </div>
+               
 
                 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 
                 <!-- Include all compiled plugins (below), or include individual files as needed -->
                 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-                <script src="/assets/script/homeAjax.js"></script>
-                <script src="/assets/script/mainAjaxCallForHomePage.js"></script>
-                <script src="/assets/script/autoSuggestion.js"></script>
+                <script src="/ProjectDemo/assets/script/homeAjax.js"></script>
+                <script src="/ProjectDemo/assets/script/mainAjaxCallForHomePage.js"></script>
+                <script src="/ProjectDemo/assets/script/autoSuggestion.js"></script>
 
     </body>
 

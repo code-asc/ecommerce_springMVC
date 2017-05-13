@@ -28,7 +28,7 @@ $.validator.setDefaults({
   }
 });
 
-  $("#cf_form").validate({
+  $("#signUp_form").validate({
     rules:{
       firstName:{
         required:true,

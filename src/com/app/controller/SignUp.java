@@ -1,5 +1,7 @@
 package com.app.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,9 +21,16 @@ public class SignUp {
 	RegisterNewUser registerNewUser;
 
 	@RequestMapping(value="/signup" , method=RequestMethod.GET)
-	public String onGetForSignUp(@ModelAttribute("signUpDetails") SignUpModel signUpModel)
+	public String onGetForSignUp(@ModelAttribute("signUpDetails") SignUpModel signUpModel , HttpSession session)
 	{
+		if(session.getAttribute("isUserLoggedIn")==null)
+		{
 		return "signUp";
+		}
+		else
+		{
+			return "index";
+		}
 	}
 	
 	@RequestMapping(value="/signup" , method=RequestMethod.POST)

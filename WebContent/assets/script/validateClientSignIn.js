@@ -26,7 +26,7 @@ $(document).ready(function(){
       $(element).closest(".form-group").removeClass("has-error");
     }
   });
-  $("#cf_form_signin").validate({
+  $("#form_signin").validate({
     rules:{
       email:{
         required:true,

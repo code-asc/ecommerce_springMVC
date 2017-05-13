@@ -44,7 +44,7 @@ Functionality : It is used for sign In purpose
 
 <body>
 
-
+<%@ include file="/WEB-INF/jsp/header.jsp" %>
 	<div class="container-fluid">
 
 		<div class="row">
@@ -84,9 +84,9 @@ Functionality : It is used for sign In purpose
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-    <!-- <script src="/assets/script/autoSuggestion.js"></script> -->
+    <!-- <script src="/ProjectDemo/assets/script/autoSuggestion.js"></script> -->
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/additional-methods.min.js"></script>
-<!--<script src="/assets/script/validateClientSignIn.js"></script>-->
+    <script src="/ProjectDemo/assets/script/validateClientSignIn.js"></script>
 </body>
 </html>

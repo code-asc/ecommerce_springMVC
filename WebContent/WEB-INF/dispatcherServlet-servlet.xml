@@ -14,8 +14,32 @@
 <context:component-scan base-package="com.app"/>
 
 <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+<property name="order" value="2"/>
 <property name="prefix" value="/WEB-INF/jsp/"/>
 <property name="suffix" value=".jsp"/>
+</bean>
+
+
+<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+<property name="order" value="1"/>
+<property name="contentNegotiationManager">
+<bean class="org.springframework.web.accept.ContentNegotiationManager">
+<constructor-arg>
+<bean class="org.springframework.web.accept.PathExtensionContentNegotiationStrategy">
+<constructor-arg>
+<map>
+<entry key="json"  value="application/json"></entry>
+</map>
+</constructor-arg>
+</bean>
+</constructor-arg>
+</bean>
+</property>
+<property name="defaultViews">
+<list>
+<bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView"/>
+</list>
+</property>
 </bean>
 
 

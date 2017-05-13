@@ -12,9 +12,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class UserDetails {
 	
-	String url = "jdbc:sqlserver://MINDFIRE-PC;DatabaseName=onlineShopping;";
-	String userName = "sa";
-	String password = "mindfire";
+	private String url = "jdbc:sqlserver://MINDFIRE-PC;DatabaseName=onlineShoppingSpring;";
+	private String userName = "sa";
+	private String password = "mindfire";
 	
 	public ResultSet doLogin(String userEmail, String userPassword) {
 		Connection con = null;
@@ -111,7 +111,6 @@ public class UserDetails {
 	{
 		boolean isSuccess = false;
 		Connection con = null;
-		ResultSet rs = null;
 		CallableStatement cstmt=null;
 		try
 		{
