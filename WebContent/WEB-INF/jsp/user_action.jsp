@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
@@ -25,29 +26,15 @@
     </head>
 
     <body>
-<%@ include file="/WEB-INF/jsp/header.jsp" %>
-<!--         <cfset SESSION.currentURL=#cgi.SCRIPT_NAME#>
-            <cfset SESSION.currentURL=#replace(SESSION.currentURL, "/project_ecommerce/", "", "All")#&"?"&#CGI.QUERY_STRING#>
-                <cfset SESSION.allowPreviousURL=true>
+<%@include file="/WEB-INF/jsp/header.jsp" %>
 
-                    <cfif structKeyExists(url, "subCategoryID") AND IsNumeric(#url.subCategoryID#)>
-                        <cfset SESSION.subCategoryID=#url.subCategoryID#>
-                          <cfelse>
-                          <cfset SESSION.subCategoryID=0>
-                    </cfif>
-
- -->
                     <div class="container-fluid">
                         <div class="row">
-                          <cfset LOCAL.getDetails=createObject("component","Controller.retriveProduct")>
-                            <cfif structKeyExists(URL,"checkBrand")>
-                          <cfset retriveProduct = LOCAL.getDetails.displayProductBasedOnCategory(brand=#URL.checkBrand#)>
-                            <cfelse>
-                              <cfset retriveProduct = LOCAL.getDetails.displayProductBasedOnCategory()>
-                          </cfif>
-                           <cfset retriveBrand = LOCAL.getDetails.getProductBrand(subCategoryID=#SESSION.subCategoryID#)>
+                
+                             
+                            <c:choose>
+                            <c:when test="${not empty requestScope.formBrands}">
 
-                             <cfif retriveProduct.recordCount GT 0>
                                 <div class="col-md-2 col-sm-2 col-xm-2 col-lg-2" style="margin-bottom:80px">
                                     <div class="panel panel-primary behclick-panel">
                                         <div class="panel-heading">
@@ -58,18 +45,20 @@
                                                 <h4 class="panel-title"><a href="#collapse0" data-toggle="collapse"><i class="fa fa-caret-down" aria-hidden="true"></i>&nbsp Brand</a></h4>
                                             </div>
                                             <div id="collapse0" class="panel-collapse collapse in">
-                                                <cfoutput query="retriveBrand">
-                                                    <cfset brand=#retriveBrand.brandID#>
-                                                        <ul class="list-group">
+
+                                         <c:forEach items="${requestScope.formBrands}" var="getBrands">
+                                         <ul class="list-group">
                                                             <li class="list-group-item">
                                                                 <div class="checkbox">
                                                                     <label>
-                                                                        <input type="checkbox" value='#brand#' name="checkBrand" class="checkBrand"> #retriveBrand.brandName#
+                                                                        <input type="checkbox" value='${getBrands.brandID}' name="checkBrand" class="checkBrand"> ${getBrands.brandName}
                                                                     </label>
                                                                 </div>
                                                             </li>
                                                         </ul>
-                                                </cfoutput>
+                                         </c:forEach>
+                                             
+                                                
                                             </div>
 
                                             <div class="panel-heading">
@@ -109,46 +98,42 @@
                                 </div>
 
                                 <div id="filterTarget">
-                                    <cfloop query="retriveProduct">
-                                        <cfoutput>
 
-                                            <div class="col-sm-3 col-md-3 col-xm-3 col-lg-3" style="float : left ; margin-bottom:30px">
 
-                                                <a href="/view/user_action_single.cfm?productID=#retriveProduct.productID#">
-                                                    <div class="itemthumb"> <img src="#retriveProduct.thumbNailPhoto#" class="img-responsive img-rounded"></div>
-                                                </a>
-                                                <br/>
-                                                <strong>#retriveProduct.brandName#</strong>
-                                                <p>
-                                                    <cfif retriveProduct.discount GT 0>
-                                                        <strike>Rs.#retriveProduct.unitPrice#</strike>
-                                                        <strong>Rs.#LsNumberFormat(precisionEvaluate(retriveProduct.unitPrice-(retriveProduct.unitPrice*(retriveProduct.discount/100))),"0.00")#</strong>
-                                                        <h5>(#retriveProduct.discount#% <i>Off</i>)<h5>
-        <span class="label label-info">#retriveProduct.productName#</span>
-        <cfelse>
-          <strong>Rs.#retriveProduct.unitPrice#</strong>
-          <div class="label label-success">#retriveProduct.productName#</div>
-      </cfif></p>
+<c:forEach items="${requestScope.product}" var="retriveProduct">
+<div class="col-sm-3 col-md-3 col-xm-3 col-lg-3" style="float : left ; margin-bottom:30px">
 
-  </div>
-</cfoutput>
-</cfloop>
+                <a href="user_action_single.html?productID=${retriveProduct.productID}">
+                    <div class="itemthumb"> <img src="${retriveProduct.thumbNailPhoto}" class="img-responsive img-rounded"></div>
+                </a>
+                       <br/>
+                <strong>${retriveProduct.brandName}</strong>
+                <p>
+                <c:choose>
+                <c:when test="${retriveProduct.discount > 0}">
+                         <strike>Rs.${retriveProduct.unitPrice}</strike>
+                         <strong>Rs.<c:out value="${retriveProduct.unitPrice-(retriveProduct.unitPrice*(retriveProduct.discount/100))}"/></strong>
+                         <h5>(${retriveProduct.discount}% <i>Off</i>)<h5>
+                         <span class="label label-info">${retriveProduct.productName}</span>
+                </c:when>
+                <c:otherwise>
+                <strong>Rs.${retriveProduct.unitPrice}</strong>
+          <div class="label label-success">${retriveProduct.productName}</div>
+                </c:otherwise>
+                </c:choose>
+                </div>
+</c:forEach>
 </div>
-<cfelse>
+</c:when>
+<c:otherwise>
   <cfinclude template="/common/productNotFound.cfm" />
-</cfif>
+  </c:otherwise>
+  </c:choose>
+  
 </div>
 </div>
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
-          <cfcache action="cache" timespan="#createTimespan(0,14,0,0)#" >
-            <cfinclude template="/common/footer.cfm" />
-          </cfcache>
-        </div>
-    </div>
-</div>
+
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 

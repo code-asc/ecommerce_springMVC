@@ -19,4 +19,9 @@ public class GetOnlyBrands {
 	{
 		return getOnlyBrands.brandOnly();
 	}
+	
+	public List<BrandsOnly> onlyBrands(int subCategoryID)
+	{
+		return getOnlyBrands.getBrandBySubCategory(subCategoryID);
+	}
 }
