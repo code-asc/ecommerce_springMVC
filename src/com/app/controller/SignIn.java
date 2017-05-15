@@ -24,7 +24,7 @@ public class SignIn {
 	
 	
 	@RequestMapping(value="/signin" , method=RequestMethod.GET)
-	public String onGetForSignIn(@ModelAttribute("loginForm") SignInModel signInModel, HttpServletRequest request , HttpSession session)
+	public String onGetForSignIn(@ModelAttribute("loginForm") SignInModel signInModel, HttpServletRequest request , HttpSession session , Model model)
 	{
 		//System.out.println("the user part : "+request.getSession(false));
 
@@ -49,6 +49,8 @@ public class SignIn {
 		}
 		else
 		{
+			model.addAttribute("showMessage", true);
+			model.addAttribute("signInStatus","Invaild Credentials");
 			return "signIn";
 		}
 	}

@@ -48,6 +48,18 @@ Functionality : It is used for sign In purpose
 	<div class="container-fluid">
 
 		<div class="row">
+		
+		<div class="row">
+		<c:choose>
+		<c:when test="${showMessage}">
+		<div class="alert alert-warning">
+		<div class="text-center">
+		${signInStatus}
+		</div>
+		</div>
+		</c:when>
+		</c:choose>
+		</div>
 			<div class="col-md-3" id="form-border" style="margin: auto; left: 0; right: 0; position: absolute">
 				<h2>SignIn</h2>
 

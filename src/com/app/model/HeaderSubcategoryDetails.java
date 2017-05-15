@@ -5,6 +5,8 @@ public class HeaderSubcategoryDetails {
 	private String categoryType;
 	private String subCategoryType;
 	private int subCategoryID;
+	
+	
 	public String getCategoryType() {
 		return categoryType;
 	}

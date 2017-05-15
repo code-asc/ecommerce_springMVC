@@ -57,7 +57,7 @@ Functionality : It will show sign up page
                             
                             
                             <c:choose>
-                            <c:when test="${requestScope.hideAndOnlyShowMessage}">
+                            <c:when test="${requestScope.showMessage}">
                             <div class="alert alert-warning">
                     <c:out value="${requestScope.signUpStatus}"/>
                     </div>

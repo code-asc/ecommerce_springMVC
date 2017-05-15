@@ -6,38 +6,55 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.app.model.LoggedInUserInfo;
+
 @Repository
 public class UserDetails {
+	
 	
 	private String url = "jdbc:sqlserver://MINDFIRE-PC;DatabaseName=onlineShoppingSpring;";
 	private String userName = "sa";
 	private String password = "mindfire";
 	
-	public ResultSet doLogin(String userEmail, String userPassword) {
+	public List<LoggedInUserInfo> doLogin(String userEmail, String userPassword) {
 		Connection con = null;
 		ResultSet rs = null;
 		PreparedStatement stmt = null;
+		List<LoggedInUserInfo> list = new ArrayList<>();
+		
 		//int userCount = 0;
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			con = DriverManager.getConnection(url, userName, password);
-			String sqlStatement = "select userID , userFirstName , userLastName , userMiddleName from Customer where userEmail=? AND userPassword=hashbytes('sha2_512',convert(varchar, ?))";
+			String sqlStatement = "select userID , userFirstName , userLastName , userMiddleName , userEmail , userProfilePhoto , roles from Customer where userEmail=? AND userPassword=hashbytes('sha2_512',convert(varchar, ?))";
 		    stmt = con.prepareStatement(sqlStatement);
 			stmt.setString(1, userEmail);
 			stmt.setString(2, userPassword);
 		    rs = stmt.executeQuery();
 		   
-			/*while (rs.next()) {
-				userCount++;
-			}*/
+			while (rs.next()) {
+				
+				LoggedInUserInfo userInfo = new LoggedInUserInfo();
+				userInfo.setRole(rs.getString("roles"));
+				userInfo.setUserEmail(rs.getString("userEmail"));
+				System.out.println(rs.getString("userEmail"));
+				userInfo.setUserFirstName(rs.getString("userFirstName"));
+				userInfo.setUserMiddleName(rs.getString("userMiddleName"));
+				userInfo.setUserLastName(rs.getString("userLastName"));
+				userInfo.setUserProfilePhoto(rs.getString("userProfilePhoto"));
+				userInfo.setUserID(rs.getInt("userID"));
+				list.add(userInfo);
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("error : " +e);
-		} /*finally {
+		} finally {
 			if (con != null) {
 				try {
 					con.close();
@@ -64,8 +81,8 @@ public class UserDetails {
 			
 			
 		}
-		*/
-		return rs;	
+
+		return list;	
 	}
 	
 	

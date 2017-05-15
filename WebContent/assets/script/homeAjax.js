@@ -7,8 +7,7 @@ $(document).ready(function() {
 // This is used to add images dynamically to carousel
 var addImageToCarousel = function() {
 	var i = 0;
-	var data = $
-			.xResponse("http://localhost:8081/ProjectDemo/getHomePageLargeContent.json");
+	var data = $.xResponse("getHomePageLargeContent.json");
 
 	var JSONdata = data;
 	$.each(JSONdata, function(key, val) {
@@ -34,7 +33,7 @@ var addThumbNailImageToHome = function() {
 	var path = null;
 	var subCategoryID = 0;
 	var data = $
-			.xResponse("http://localhost:8081/ProjectDemo/getHomePageThumbNailContent.json");
+			.xResponse("getHomePageThumbNailContent.json");
 	var JSONdata = data;
 	$
 			.each(

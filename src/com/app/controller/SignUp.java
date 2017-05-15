@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
+
 
 import com.app.model.SignUpModel;
 import com.app.service.RegisterNewUser;
@@ -36,7 +36,7 @@ public class SignUp {
 	@RequestMapping(value="/signup" , method=RequestMethod.POST)
 	public String onPostForSignUp(@ModelAttribute("signUpDetails") SignUpModel signUpModel , Model model)
 	{
-		ModelAndView mv=new ModelAndView();
+
 		String firstName=signUpModel.getFirstName();
 		String middleName=signUpModel.getMiddleName();
 		String lastName=signUpModel.getLastName();
@@ -45,7 +45,7 @@ public class SignUp {
 		String mobile=signUpModel.getMobile();
 		if(registerNewUser.doUserRegister(firstName ,  middleName ,  lastName ,  email ,  password , mobile))
 		{
-			model.addAttribute("hideAndOnlyShowMessage",true);
+			model.addAttribute("showMessage",true);
 			model.addAttribute("signUpStatus", "Registered Successful . Please Sign In .");
 			return "signUp";
 			

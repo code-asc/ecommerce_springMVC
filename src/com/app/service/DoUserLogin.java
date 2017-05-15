@@ -1,7 +1,7 @@
 package com.app.service;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.app.model.LoggedInUserInfo;
 import com.app.repository.UserDetails;
 
 @Service
@@ -18,29 +19,31 @@ public class DoUserLogin {
 	UserDetails userDetails;
 
 	public boolean isUserValid(String email, String password , HttpSession session , HttpServletRequest request) {
-		
-		
-		ResultSet rs = userDetails.doLogin(email, password);
+		System.out.print("waiting....works");
 		String userFirstName="";
 		String userLastName="";
 		String userMiddleName="";
 		String userFullName="";
+		String userEmail="";
+		String userProfilePhoto="";
+		String role="";
 		int userID=-1;
 		int userCount = 0;
 		boolean returnVal=false;
-		try {
-			while (rs.next()) {
-				
-				userFirstName=rs.getString("userFirstName");
-				userLastName=rs.getString("userLastName");
-				userMiddleName=rs.getString("userMiddleName");
-				userID=rs.getInt("userID");
-				userCount++;
-				
-			}
-			
+		
+		
+		try{
+			List<LoggedInUserInfo> list = userDetails.doLogin(email, password);
+			LoggedInUserInfo userInfo=list.get(0);
+		    userCount = list.size();
 			if(userCount==1)
 			{
+				userFirstName=userInfo.getUserFirstName();
+				userLastName=userInfo.getUserLastName();
+				userMiddleName=userInfo.getUserMiddleName();
+			    userEmail=userInfo.getUserEmail();
+			    userProfilePhoto=userInfo.getUserProfilePhoto();
+			    role=userInfo.getRole();
 				session=request.getSession(true);
 				userFullName=userFirstName+" "+ userMiddleName+" "+userLastName;
 				session.setMaxInactiveInterval(11*60);
@@ -49,12 +52,10 @@ public class DoUserLogin {
 				session.setAttribute("isUserLoggedIn", true);
 				returnVal=true;
 			}
-			
-			System.out.println("userCount :: "+userCount);
-			System.out.println("userID :: "+session.getAttribute("userFullName"));
-			System.out.println("session age :: "+session.getMaxInactiveInterval());
-		} catch (SQLException e) {
-			e.printStackTrace();
+		}
+		catch(Exception e)
+		{
+			return false;
 		}
 		
 		return returnVal;

@@ -41,22 +41,8 @@
 							<!-- Modal content-->
 							<div class="modal-content">
 
-								<div class="modal-body">
+								<div class="modal-body" id="menMenuList">
 
-
-									<cfset
-										subCategory=LOCAL.categoryInfoObject.getCategoryForHeader(arg1=2,arg2=3)>
-									<div class="row">
-										<!--  <cfoutput query="subCategory" group="categoryType">
-                                                    <div class="col-md-6 col-sm-6 col-xm-6 col-lg-6">
-                                                        <h4>#subCategory.categoryType#</h4>
-                                                        <cfoutput>
-                                                            <a href="/view/user_action.cfm?subCategoryType=#subCategory.subCategoryType#&subCategoryID=#subCategory.subCategoryID#">#subCategory.subCategoryType#</a>
-                                                            <br/>
-                                                        </cfoutput>
-                                                    </div>
-                                                </cfoutput> -->
-									</div>
 								</div>
 
 							</div>
@@ -73,23 +59,8 @@
 							<!-- Modal content-->
 							<div class="modal-content">
 
-								<div class="modal-body">
+								<div class="modal-body" id="womenMenuList">
 
-									<cfset
-										subCategory=LOCAL.categoryInfoObject.getCategoryForHeader(arg1=4,arg2=5)>
-									<div class="row">
-										<!-- <cfoutput query="subCategory" group="categoryType">
-                                                    <div class="col-md-6 col-sm-6 col-xm-6 col-lg-6">
-                                                        <h4>#subCategory.categoryType#</h4>
-                                                        <cfoutput>
-                                                            -#subCategory.subCategoryType#-
-                                                            <a href="/view/user_action.cfm?subCategoryType=#subCategory.subCategoryType#&subCategoryID=#subCategory.subCategoryID#">#subCategory.subCategoryType#</a>
-                                                            <br/>
-                                                        </cfoutput>
-                                                    </div>
-                                                </cfoutput>
- -->
-									</div>
 								</div>
 
 							</div>
@@ -106,23 +77,9 @@
 							<!-- Modal content-->
 							<div class="modal-content">
 
-								<div class="modal-body">
+								<div class="modal-body" id="electronicMenuList">
 
 
-									<cfset
-										subCategory=LOCAL.categoryInfoObject.getCategoryForHeader(arg1=1)>
-									<div class="row">
-										<!-- <cfoutput query="subCategory" group="categoryType">
-                                                    <div class="col-md-4 col-sm-4 col-xm-4 col-lg-4">
-                                                        <h4>#subCategory.categoryType#</h4>
-                                                        <cfoutput>
-                                                          <a href="/view/user_action.cfm?subCategoryType=#subCategory.subCategoryType#&subCategoryID=#subCategory.subCategoryID#">#subCategory.subCategoryType#</a>
-
-                                                            <br/>
-                                                        </cfoutput> 
-                                                    </div>
-                                                </cfoutput> -->
-									</div>
 								</div>
 
 							</div>
@@ -144,20 +101,24 @@
 			</form>
 
 			<ul class="nav navbar-nav">
-				<li><a href="#" type="button" class="dropdown-toggle"
-					data-toggle="dropdown" data-target="loginButton"
+				<li><a href="#" type="button" class="dropdown-toggle" data-toggle="dropdown" data-target="loginButton"
 					style="padding-top: 10px"> <i class="fa fa-user"
-						aria-hidden="true"></i>&nbsp Login
+						aria-hidden="true">
+						</i>
+						<c:choose>
+						<c:when test="${sessionScope.isUserLoggedIn}"><span><i class="fa fa-caret-down" aria-hidden="true"></i></span></c:when>
+						<c:otherwise>&nbsp Login</c:otherwise>
+						</c:choose>
 
 				</a>
 
-					<ul class="dropdown-menu" id="loginButton">
+					<ul class="dropdown-menu" id="loginButton" style="margin-left: 20px; width: 280px;">
 					
 					
 					<c:choose>
 					<c:when test="${sessionScope.isUserLoggedIn}">
 					<li>
-					<div id="fullName"><c:out value="${sessionScope.userFullName}"></c:out></div>
+					<span id="fullName"><c:out value="${sessionScope.userFullName}"/></span>
 					</li>
 					<li class="divider"/>
 					<li><a href="logout.html"><i class="fa fa-sign-out" aria-hidden="true"></i> &nbsp SignOut</a></li>
@@ -172,10 +133,14 @@
 						</c:otherwise>
 						</c:choose>
 					</ul>
+				
+				<c:choose>
+				<c:when test="${sessionScope.isUserLoggedIn}">
 				<li>
 				<a href="/view/userCart.cfm"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp Cart&nbsp</a>
 				</li>
-
+				</c:when>
+				</c:choose>
 			</ul>
 
 		</div>
@@ -191,6 +156,7 @@
         <script src="/ProjectDemo/assets/script/onWindowClose.js"></script>
         <script src="/ProjectDemo/assets/script/onNotificationClick.js"></script>
 -->
+<script src="/ProjectDemo/assets/script/menMenuData.js"></script>
 </body>
 
 </html>
