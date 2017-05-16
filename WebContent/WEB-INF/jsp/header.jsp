@@ -92,8 +92,7 @@
 				<div class="input-group">
 					<input type="text" class="form-control" placeholder="Search" name="searchVal" id="getSuggestion">
 					<div class="input-group-btn">
-						<button class="btn btn-default btn-search-color"
-							name="searchSubmit" type="submit">
+						<button class="btn btn-default btn-search-color" name="searchSubmit" type="submit" style="height:34px">
 							<i class="glyphicon glyphicon-search"></i>
 						</button>
 					</div>
@@ -156,7 +155,7 @@
         <script src="/ProjectDemo/assets/script/onWindowClose.js"></script>
         <script src="/ProjectDemo/assets/script/onNotificationClick.js"></script>
 -->
-<script src="/ProjectDemo/assets/script/menMenuData.js"></script>
+<script src="/ProjectDemo/assets/script/headerMenuData.js"></script>
 </body>
 
 </html>

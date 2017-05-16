@@ -24,38 +24,38 @@ $.each($("input[name='checkBrand']:checked"),function(index,val)
 
 
 $.ajax({
-  url:"/Controller/authentication.cfc?method=filterProduct",
-  data:{brand:JSON.stringify(brandArr) , discount:JSON.stringify(discountArr)},
+  url:"filterProducts.json",
+  data:{brandID:JSON.stringify(brandArr) , discount:JSON.stringify(discountArr)},
 }).done(function(responseText,textStatus,jsXHR){
 
-if(JSON.parse(responseText).length)
-  $.each(JSON.parse(responseText),function(index, val)
+if(responseText.length)
+  $.each(responseText,function(index, val)
 {
   $.each(val,function(index,value)
 {
-  if(index=="BRANDNAME")
+  if(index=="brandName")
   {
     brandName=value;
   }
-  else if(index=="PRODUCTNAME")
+  else if(index=="productName")
   {
     productName=value;
   }
-else if(index=="UNITPRICE")
+else if(index=="unitPrice")
   {
     unitPrice=value;
   }
-  else if (index=="DISCOUNT") {
+  else if (index=="discount") {
     discount=value;
   }
-  else if(index=="PRODUCTDESC")
+  else if(index=="productDesc")
   {
     productDesc=value;
   }
-  else if (index=="PRODUCTID") {
-    productID="user_action_single.cfm?productID="+value;
+  else if (index=="productID") {
+    productID="user_action_single.html?productID="+value;
   }
-  else
+  else if (index=="thumbNailPhoto")
   {
     thumbNailPhoto=value;
   }
@@ -72,7 +72,7 @@ $("#filterTarget").append('<div class="col-sm-3 col-md-3 col-xm-3 col-lg-3" styl
 });
 
 else {
-  $("#filterTarget").append('<div class="col-sm-12 col-md-12 col-xm-12 col-lg-10"><div class="row"><img src="/assets/images/notFound.png" class="img-responsive" style="position:absolute ; margin:auto ; left:0 ; right:0"></div><div class="row text-center" style="margin-top:80px"><h3>We couldnt find the product</h3><h3>Something went wrong :-( </h3></div></div>');
+  $("#filterTarget").append('<div class="col-sm-12 col-md-12 col-xm-12 col-lg-10"><div class="row"><img src="/ProjectDemo/assets/images/notFound.png" class="img-responsive" style="position:absolute ; margin:auto ; left:0 ; right:0"></div><div class="row text-center" style="margin-top:80px"><h3>We couldnt find the product</h3><h3>Something went wrong :-( </h3></div></div>');
 }
 
 }).fail(function(jsXHR,textStatus,errorThrown){

@@ -1,6 +1,5 @@
 package com.app.controller;
 
-import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 

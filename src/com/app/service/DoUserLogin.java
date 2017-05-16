@@ -20,32 +20,33 @@ public class DoUserLogin {
 
 	public boolean isUserValid(String email, String password , HttpSession session , HttpServletRequest request) {
 		System.out.print("waiting....works");
-		String userFirstName="";
-		String userLastName="";
-		String userMiddleName="";
-		String userFullName="";
-		String userEmail="";
-		String userProfilePhoto="";
-		String role="";
-		int userID=-1;
+		String userFirstName = "";
+		String userLastName = "";
+		String userMiddleName = "";
+		String userFullName = "";
+		String userEmail = "";
+		String userProfilePhoto = "";
+		String role = "";
+		int userID = -1;
 		int userCount = 0;
-		boolean returnVal=false;
+		boolean returnVal = false;
 		
 		
 		try{
 			List<LoggedInUserInfo> list = userDetails.doLogin(email, password);
-			LoggedInUserInfo userInfo=list.get(0);
+			LoggedInUserInfo userInfo = list.get(0);
 		    userCount = list.size();
-			if(userCount==1)
+			if(userCount == 1)
 			{
-				userFirstName=userInfo.getUserFirstName();
-				userLastName=userInfo.getUserLastName();
-				userMiddleName=userInfo.getUserMiddleName();
-			    userEmail=userInfo.getUserEmail();
-			    userProfilePhoto=userInfo.getUserProfilePhoto();
-			    role=userInfo.getRole();
-				session=request.getSession(true);
-				userFullName=userFirstName+" "+ userMiddleName+" "+userLastName;
+				userFirstName = userInfo.getUserFirstName();
+				userLastName = userInfo.getUserLastName();
+				userMiddleName = userInfo.getUserMiddleName();
+			    userEmail = userInfo.getUserEmail();
+			    userProfilePhoto = userInfo.getUserProfilePhoto();
+			    role = userInfo.getRole();
+			    userID = userInfo.getUserID();
+				session = request.getSession(true);
+				userFullName = userFirstName+" "+ userMiddleName+" "+userLastName;
 				session.setMaxInactiveInterval(11*60);
 				session.setAttribute("userID", userID);
 				session.setAttribute("userFullName", userFullName);

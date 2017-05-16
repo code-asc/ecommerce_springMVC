@@ -18,4 +18,9 @@ public class GetProductDetails {
 	{
 		return productDetailsOnly.productDetailsUsingSubCategoryID(subCategoryID);
 	}
+	
+	public List<ProductDetails> getOnlyProductDetailsByProductID(int productID)
+	{
+		return productDetailsOnly.productDetailsUsingProductID(productID);
+	}
 }
