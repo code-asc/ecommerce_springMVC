@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +32,7 @@ public class productDisplay {
 	@Autowired
 	FilteredProduct filteredProducts;
 	
+	
 	@RequestMapping(value = "/user_action" , method = RequestMethod.GET)
 	public String getProductDisplayPage(@RequestParam("subCategoryID") int subCategoryID , Model model , HttpSession session )
 	{
@@ -42,10 +44,12 @@ public class productDisplay {
 	
 	
 	@RequestMapping(value="/user_action_single" , method=RequestMethod.GET)
-	public String getProductDisplayPageByProductID(@RequestParam("productID") int productID, Model model)
+	public String getProductDisplayPageByProductID(@RequestParam("productID") int productID , Model model , HttpSession session)
 	{
 		model.addAttribute("productID" , productID);
 		model.addAttribute("retriveProduct" , getProductDetails.getOnlyProductDetailsByProductID(productID));
+		model.addAttribute("suggestProduct" , getProductDetails.getSuggestedProducts(productID, (int)session.getAttribute("subCategoryID")));
+		
 		return "user_action_single";
 	}
 	
@@ -53,7 +57,8 @@ public class productDisplay {
 	@RequestMapping(value="/filterProducts" , method=RequestMethod.GET)
 	public @ResponseBody List<ProductDetails> returnFilteredProducts(@RequestParam("brandID") String brandID , @RequestParam("discount") String discount , HttpSession session)
 	{
-		return filteredProducts.getFilteredProducts(brandID, discount, (int)session.getAttribute("subCategoryID"));
+/*		System.out.println("The subCategory : "+(int)session.getAttribute("subCategoryID"));
+*/		return filteredProducts.getFilteredProducts(brandID, discount, (int)session.getAttribute("subCategoryID"));
 	}
 	
 	

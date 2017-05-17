@@ -1,5 +1,5 @@
 <!---
-FileName      :signin.cfm
+FileName      :signIn.jsp
 Functionality : It is used for sign In purpose
 --->
 

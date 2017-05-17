@@ -29,7 +29,8 @@
                             <div class="container">
              
                                                 
-                                                
+                                                <c:choose>
+                                                <c:when test="${not empty retriveProduct}">
                                                     <div class="row">
                                                     
                                                     <c:forEach items="${retriveProduct}" var="product">
@@ -44,7 +45,7 @@
                                                             <c:choose>
                                                             <c:when test="${product.discount > 0}">
                                                             	<strike>Rs.${product.unitPrice}</strike>
-                                                                <strong>Rs.<c:out value="${product.unitPrice-(product.unitPrice*(product.discount/100))}"/></strong>
+                                                                <strong>Rs.<c:out value="${product.unitPrice-product.unitPrice*product.discount/100}"/></strong>
                                                                 <h4>(${product.discount}% OFF)</h4> ${product.productName}
                                                             </c:when>
                                                             <c:otherwise>
@@ -67,32 +68,7 @@
                                                         <div class="col-md-3 col-sm-3 col-xm-3 col-lg-3">
 
                                                             <br/>
-<!--                                                             <cfif NOT StructKeyExists(SESSION, "stLoggedInUser")>
-                                                                <button class="btn btn-success" disabled="true"><i class="fa fa-credit-card" aria-hidden="true"></i> &nbspBuy Now</button>
 
-                                                                <button class="btn btn-info" id="onAddCart" disabled="true"><i class="fa fa-shopping-cart" aria-hidden="true"></i> &nbspAdd To Cart</button>
-                                                                <cfelse>
-
-                                                                    - Condition for admin -
-                                                                    <cfif NOT SESSION.stLoggedInUser.userRole EQ 'admin'>
-                                                                        <cfif LOCAL.retriveProduct.unitInStock GT 0>
-                                                                            <a class="btn btn-success" href="/view/user_action_single.cfm?buyNow"><i class="fa fa-credit-card" aria-hidden="true"></i> &nbspBuy Now</a>
-                                                                              <button class="btn btn-info" id="onAddCart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> &nbspAdd To Cart</button>
-                                                                            <cfelse>
-                                                                                <button class="btn btn-warning" disabled="true">No Stock</button>
-
-                                                                        </cfif>
-
-
-
-                                                                        <cfelse>
-
-                                                                            <a class="btn btn-primary" href="/view/adminProductEdit.cfm?productID=#url.productID#"><i class="fa fa-pencil" aria-hidden="true"></i> &nbspEdit</a>
-                                                                            <a class="btn btn-danger" href="/view/user_action_single.cfm?removeProduct=#LOCAL.retriveProduct.productID#"><i class="fa fa-trash" aria-hidden="true"></i> &nbspRemove</a>
-                                                                            
-                                                                           
-                                                                    </cfif>
-                                                            </cfif> -->
                                                             
                                                             <c:choose>
                                                             <c:when test="${not sessionScope.isUserLoggedIn}">
@@ -115,48 +91,50 @@
                                                 </cfoutput>
                                                 </c:forEach>
                                                 </div>
-
-<!--                                                 -Similar Products -
-
-                                                <div class="row" style="margin-top:35px;margin-bottom:40px;border-top:1px solid #eaeaec">
-                                                  <cfif LOCAL.retriveProduct.recordCount GT 0>
-                                                    <cfset LOCAL.suggestProduct=LOCAL.productQuery.similarProducts(subCategoryID=#LOCAL.retriveProduct.subCategoryID#,productID=#LOCAL.retriveProduct.productID#)>
-
-                                                    <cfif NOT isNull(LOCAL.suggestProduct)>
+                                                
+                                                		<div class="row" style="margin-top:35px;margin-bottom:40px;border-top:1px solid #eaeaec">
+                                                <c:choose>
+                                                <c:when test="${not empty suggestProduct}">
+                                                
                                                         <h4>Similar Products</h4>
-
-                                                        <cfoutput query="LOCAL.suggestProduct">
+                                                        <c:forEach items="${requestScope.suggestProduct}" var="suggestProduct">
                                                             <div class="col-sm-3 col-md-3 col-xs-2">
-                                                                <a href="/view/user_action_single.cfm?productID=#LOCAL.suggestProduct.productID#">
-                                                                    <div class="itemthumb"> <img src="#LOCAL.suggestProduct.thumbNailPhoto#" class="img-responsive"></div>
+                                                                 <a href="user_action_single.html?productID=${suggestProduct.productID}">
+                                                                     <div class="itemthumb"> <img src="${suggestProduct.thumbNailPhoto}" class="img-responsive"></div>
                                                                 </a>
                                                                 <br/>
-                                                                <strong style="color:black">#LOCAL.suggestProduct.brandName#</strong>
+                                                                <strong style="color:black">${suggestProduct.brandName}</strong>
                                                                 <br/>
-                                                                <cfif LOCAL.retriveProduct.discount GT 0>
-                                                                    <strike>Rs.#LOCAL.retriveProduct.unitPrice#</strike>
-                                                                    <p><strong>Rs.#LsNumberFormat(precisionEvaluate(LOCAL.suggestProduct.unitPrice-(LOCAL.suggestProduct.unitPrice*(LOCAL.suggestProduct.discount/100))),"0.00")#</strong></p>
-                                                                    <h5>(#LOCAL.retriveProduct.discount#% <i>Off</i>)<h5>
-  <cfelse>
-    <strong>Rs.#LOCAL.suggestProduct.unitPrice#</strong>
-</cfif>
-</div>
-    </cfoutput>
-</cfif>
-</cfif>
-</div>
-<cfelse>
-<div class="row">
-  <cfinclude template="/common/productNotFound.cfm" />
-</div>
-</cfif>
-</cfif>
+
+															<c:choose>
+															<c:when test="${suggestProduct.discount > 0}">
+															<strike>Rs.${suggestProduct.unitPrice}</strike>
+															 <p><strong>Rs.${suggestProduct.unitPrice-suggestProduct.unitPrice*suggestProduct.discount/100}</strong></p>
+															<h5>(${suggestProduct.discount}% <i>Off</i>)</h5>
+															</c:when>
+															<c:otherwise>
+															<strong>Rs.${suggestProduct.unitPrice}</strong>
+															</c:otherwise>
+															</c:choose>
+															</div>
+															</c:forEach>
+															</c:when>
+															</c:choose>
+															</div>
+                                                
+                                                </c:when>
+                                                <c:otherwise>
+                                                	<%@ include file="/WEB-INF/jsp/productNotFound.jsp"%>
+                                                </c:otherwise>
+                                                </c:choose>
+                                                </div>
 
 
-- -
+                                                
+												
 
-</cfif>
-<div class="container-fluid">
+
+<!--<div class="container-fluid">
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
           <cfcache action="cache" timespan="#createTimespan(0,14,0,0)#" >

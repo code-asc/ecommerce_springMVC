@@ -23,4 +23,9 @@ public class GetProductDetails {
 	{
 		return productDetailsOnly.productDetailsUsingProductID(productID);
 	}
+	
+	public List<ProductDetails> getSuggestedProducts(int productID , int subCategoryID)
+	{
+		return productDetailsOnly.similarProducts(productID, subCategoryID);
+	}
 }

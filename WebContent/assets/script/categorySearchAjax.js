@@ -29,39 +29,39 @@ $.each($("input[name='checkCategory']:checked"),function(index,val)
 })
 
 $.ajax({
-  url:"/Controller/viewFilterCategory.cfc?method=filterProduct",
-  data:{brand:JSON.stringify(brandArr) , discount:JSON.stringify(discountArr) ,category:JSON.stringify(categoryArr)},
+  url:"filterProducts.json",
+  data:{brandID:JSON.stringify(brandArr) , discount:JSON.stringify(discountArr)},
 }).done(function(responseText,textStatus,jqXHR){
-  //alert(categoryArr[1]);
-  if(JSON.parse(responseText).length)
-  {//alert(responseText)
-  $.each(JSON.parse(responseText),function(index, val)
+
+	if(responseText.length)
+  {
+  $.each(responseText,function(index, val)
 {
   $.each(val,function(index,value)
 {
-  if(index=="BRANDNAME")
+  if(index == "brandName")
   {
     brandName=value;
   }
-  else if(index=="PRODUCTNAME")
+  else if(index == "productName")
   {
-    productName=value;
+    productName = value;
   }
-else if(index=="UNITPRICE")
+else if(index == "unitPrice")
   {
-    unitPrice=value;
+    unitPrice = value;
   }
-  else if (index=="DISCOUNT") {
-    discount=value;
+  else if (index == "discount") {
+    discount = value;
   }
-  else if(index=="PRODUCTDESC")
+  else if(index == "productDesc")
   {
-    productDesc=value;
+    productDesc = value;
   }
-  else if (index=="PRODUCTID") {
-    productID="user_action_single.cfm?productID="+value;
+  else if (index == "productID") {
+    productID = "user_action_single.html?productID="+value;
   }
-  else
+  else if(index == "thumbNailPhoto")
   {
     thumbNailPhoto=value;
   }

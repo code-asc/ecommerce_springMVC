@@ -44,10 +44,8 @@ public class SignIn {
 	{
 		if(doUserLogin.isUserValid(signInModel.getEmail() , signInModel.getPassword() , session , request))
 		{
-			
-		return "redirect:index.html";
-		}
-		else
+			return "redirect:index.html";
+		}else
 		{
 			model.addAttribute("showMessage", true);
 			model.addAttribute("signInStatus","Invaild Credentials");

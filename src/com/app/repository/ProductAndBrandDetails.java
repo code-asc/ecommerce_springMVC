@@ -323,4 +323,193 @@ public class ProductAndBrandDetails
 			}
 		return list;
 	}
-}
+	
+	public List<ProductDetails> productInfoForSearchPage()
+	{
+		List<ProductDetails> list = new ArrayList<>();
+		Connection con = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		try{
+			String sql = "SELECT Products.productID , Products.productName , Products.subCategoryID ,Products.productDesc ,Products.unitPrice ,ProductPhoto.thumbNailPhoto ,Products.discount ,Brands.brandName from Products "
+					+ "INNER JOIN ProductPhoto "
+					+ "on "
+					+ "Products.photoID=ProductPhoto.photoID "
+					+ "INNER JOIN Brands "
+					+ "on "
+					+ "Products.brandID=Brands.brandID "
+					+ "INNER JOIN SubCategory "
+					+ "ON "
+					+ "Products.subCategoryID=SubCategory.subCategoryID "
+					+ "INNER JOIN Category "
+					+ "ON "
+					+ "Subcategory.categoryID=Category.categoryID "
+					+ "where "
+					+ "Products.status='available' ";
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			con = DriverManager.getConnection(url , userName , password);
+			stmt = con.createStatement();
+			rs=stmt.executeQuery(sql);
+			while(rs.next())
+			{
+				ProductDetails productDetails = new ProductDetails();
+				productDetails.setProductID(rs.getInt("productID"));
+				productDetails.setProductName(rs.getString("productName"));
+				productDetails.setProductDesc(rs.getString("productDesc"));
+				productDetails.setUnitPrice(rs.getBigDecimal("unitPrice"));
+				productDetails.setThumbNailPhoto(rs.getString("thumbNailPhoto"));
+				productDetails.setBrandName(rs.getString("brandName"));
+				productDetails.setDiscount(rs.getBigDecimal("discount"));
+				list.add(productDetails);
+			}
+			
+		}catch(SQLException e)
+		{
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}catch(ClassNotFoundException e)
+		{
+			e.printStackTrace();
+		}finally{
+			try{
+				rs.close();
+				stmt.close();
+				con.close();
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+			}
+		return list;
+
+	}
+	
+	public List<ProductDetails> productInfoForSearchPage(String brand)
+	{
+		List<ProductDetails> list = new ArrayList<>();
+		Connection con = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		try{
+			String sql = "SELECT Products.productID , Products.productName , Products.subCategoryID ,Products.productDesc ,Products.unitPrice ,ProductPhoto.thumbNailPhoto ,Products.discount ,Brands.brandName from Products "
+					+ "INNER JOIN ProductPhoto "
+					+ "on "
+					+ "Products.photoID=ProductPhoto.photoID "
+					+ "INNER JOIN Brands "
+					+ "on "
+					+ "Products.brandID=Brands.brandID "
+					+ "INNER JOIN SubCategory "
+					+ "ON "
+					+ "Products.subCategoryID=SubCategory.subCategoryID "
+					+ "INNER JOIN Category "
+					+ "ON "
+					+ "Subcategory.categoryID=Category.categoryID "
+					+ "where "
+					+ "Products.status='available' "
+					+ "AND "
+					+ "Brands.brandName LIKE ?";
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			con = DriverManager.getConnection(url , userName , password);
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, "%"+brand+"%");
+			rs=stmt.executeQuery();
+			while(rs.next())
+			{
+				ProductDetails productDetails = new ProductDetails();
+				productDetails.setProductID(rs.getInt("productID"));
+				productDetails.setProductName(rs.getString("productName"));
+				productDetails.setProductDesc(rs.getString("productDesc"));
+				productDetails.setUnitPrice(rs.getBigDecimal("unitPrice"));
+				productDetails.setThumbNailPhoto(rs.getString("thumbNailPhoto"));
+				productDetails.setBrandName(rs.getString("brandName"));
+				productDetails.setDiscount(rs.getBigDecimal("discount"));
+				productDetails.setSubCategoryID(rs.getInt("subCategoryID"));
+				list.add(productDetails);
+			}
+			
+		}catch(SQLException e)
+		{
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}catch(ClassNotFoundException e)
+		{
+			e.printStackTrace();
+		}finally{
+			try{
+				rs.close();
+				stmt.close();
+				con.close();
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+			}
+		return list;
+
+	}
+	
+	public List<ProductDetails> similarProducts(int productID , int subCategoryID)
+	{
+		List<ProductDetails> list = new ArrayList<>();
+		Connection con = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		try{
+			
+			String sql = "SELECT TOP 3 Products.productID , Products.productName , Products.subCategoryID ,Products.productDesc ,Products.unitPrice ,ProductPhoto.thumbNailPhoto ,Products.discount ,Brands.brandName from Products "
+					+ "INNER JOIN ProductPhoto "
+					+ "on "
+					+ "Products.photoID=ProductPhoto.photoID "
+					+ "INNER JOIN Brands "
+					+ "on "
+					+ "Products.brandID=Brands.brandID "
+					+ "INNER JOIN SubCategory "
+					+ "ON "
+					+ "Products.subCategoryID=SubCategory.subCategoryID "
+					+ "INNER JOIN Category "
+					+ "ON "
+					+ "Subcategory.categoryID=Category.categoryID "
+					+ "where "
+					+ "Products.status = ? "
+					+ "AND "
+					+ "Products.subCategoryID = ? "
+					+ "AND "
+					+ "NOT Products.productID = ?";
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			con = DriverManager.getConnection(url , userName , password);
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, "available");
+			stmt.setInt(2, subCategoryID);
+			stmt.setInt(3,productID);
+			rs=stmt.executeQuery();
+			while(rs.next())
+			{
+				ProductDetails productDetails = new ProductDetails();
+				productDetails.setProductID(rs.getInt("productID"));
+				productDetails.setProductName(rs.getString("productName"));
+				productDetails.setProductDesc(rs.getString("productDesc"));
+				productDetails.setUnitPrice(rs.getBigDecimal("unitPrice"));
+				productDetails.setThumbNailPhoto(rs.getString("thumbNailPhoto"));
+				productDetails.setBrandName(rs.getString("brandName"));
+				productDetails.setDiscount(rs.getBigDecimal("discount"));
+				productDetails.setSubCategoryID(rs.getInt("subCategoryID"));
+				list.add(productDetails);
+			}
+		}catch(SQLException e)
+		{
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}catch(ClassNotFoundException e)
+		{
+			e.printStackTrace();
+		}finally{
+			try{
+				rs.close();
+				stmt.close();
+				con.close();
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+			}
+		return list;
+		}
+	}
+
