@@ -9,16 +9,24 @@ import com.app.model.ProductDetails;
 import com.app.repository.ProductAndBrandDetails;
 
 @Service
-public class SearchPageProductDetails {
+public class SearchPageProductDetails implements SearchOptionInfo {
 	
 	@Autowired
 	ProductAndBrandDetails details;
 	
+	/* (non-Javadoc)
+	 * @see com.app.service.SearchOptionInfo#getSearchDetails(java.lang.String)
+	 */
+	@Override
 	public List<ProductDetails> getSearchDetails(String brand)
 	{
 		return details.productInfoForSearchPage(brand);
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.app.service.SearchOptionInfo#getSearchDetails()
+	 */
+	@Override
 	public List<ProductDetails> getSearchDetails()
 	{
 		return details.productInfoForSearchPage();

@@ -10,15 +10,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 
+
 import com.app.model.SignUpModel;
-import com.app.service.RegisterNewUser;
+import com.app.service.RegisterUser;
 
 
 @Controller
 public class SignUp {
 	
 	@Autowired
-	RegisterNewUser registerNewUser;
+	RegisterUser registerNewUser;
 
 	@RequestMapping(value="/signup" , method=RequestMethod.GET)
 	public String onGetForSignUp(@ModelAttribute("signUpDetails") SignUpModel signUpModel , HttpSession session)

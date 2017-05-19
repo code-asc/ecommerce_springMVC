@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.app.model.SignInModel;
-import com.app.service.DoUserLogin;
+import com.app.service.CartCount;
+import com.app.service.UserLogin;
 
 
 @SessionAttributes("name")
@@ -20,15 +21,17 @@ import com.app.service.DoUserLogin;
 public class SignIn {
 
 	@Autowired
-	DoUserLogin doUserLogin;
+	UserLogin doUserLogin;
 	
+	@Autowired
+	CartCount cartCount;
 	
-	@RequestMapping(value="/signin" , method=RequestMethod.GET)
+	@RequestMapping(value = "/signin" , method = RequestMethod.GET)
 	public String onGetForSignIn(@ModelAttribute("loginForm") SignInModel signInModel, HttpServletRequest request , HttpSession session , Model model)
 	{
 		//System.out.println("the user part : "+request.getSession(false));
 
-		if(session.getAttribute("isUserLoggedIn")==null)
+		if(session.getAttribute("isUserLoggedIn") == null)
 		{
 		return "signIn";
 		}
@@ -39,11 +42,20 @@ public class SignIn {
 	}
 	
 	
-	@RequestMapping(value="/signin" , method=RequestMethod.POST)
+	@RequestMapping(value = "/signin" , method = RequestMethod.POST)
 	public String onPostForSignIn(@ModelAttribute("loginForm") SignInModel signInModel , Model model , HttpSession session , HttpServletRequest request)
 	{
 		if(doUserLogin.isUserValid(signInModel.getEmail() , signInModel.getPassword() , session , request))
 		{
+			try{
+			int count = cartCount.getCartCount((int)session.getAttribute("userID"));
+			session.setAttribute("cartCount" , count);		
+			}
+			catch(Exception e)
+			{
+				System.out.println(e.getMessage());
+				e.printStackTrace();
+			}
 			return "redirect:index.html";
 		}else
 		{

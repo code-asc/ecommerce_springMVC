@@ -9,21 +9,33 @@ import com.app.model.ProductDetails;
 import com.app.repository.ProductAndBrandDetails;
 
 @Service
-public class GetProductDetails {
+public class GetProductDetails implements ProductInfo {
 	
 	@Autowired
 	ProductAndBrandDetails productDetailsOnly;
 	
+	/* (non-Javadoc)
+	 * @see com.app.service.ProductInfo#getOnlyProductDetails(int)
+	 */
+	@Override
 	public List<ProductDetails> getOnlyProductDetails(int subCategoryID)
 	{
 		return productDetailsOnly.productDetailsUsingSubCategoryID(subCategoryID);
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.app.service.ProductInfo#getOnlyProductDetailsByProductID(int)
+	 */
+	@Override
 	public List<ProductDetails> getOnlyProductDetailsByProductID(int productID)
 	{
 		return productDetailsOnly.productDetailsUsingProductID(productID);
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.app.service.ProductInfo#getSuggestedProducts(int, int)
+	 */
+	@Override
 	public List<ProductDetails> getSuggestedProducts(int productID , int subCategoryID)
 	{
 		return productDetailsOnly.similarProducts(productID, subCategoryID);

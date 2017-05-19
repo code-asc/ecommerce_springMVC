@@ -10,11 +10,15 @@ import com.app.repository.ProductAndBrandDetails;
 import com.google.gson.Gson;
 
 @Service
-public class FilteredProduct {
+public class FilteredProduct implements FilterProductList {
 	
 	@Autowired
 	ProductAndBrandDetails getProducts;
 	
+	/* (non-Javadoc)
+	 * @see com.app.service.FilterProductList#getFilteredProducts(java.lang.String, java.lang.String, int)
+	 */
+	@Override
 	public List<ProductDetails> getFilteredProducts(String brandID , String discount , int subCategoryID)
 	{
 		ArrayList<String> brandIDList = new Gson().fromJson(brandID, ArrayList.class);

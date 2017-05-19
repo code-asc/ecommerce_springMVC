@@ -10,18 +10,26 @@ import com.app.repository.HomePageData;
 
 
 @Service
-public class HomePageDisplay {
+public class HomePageDisplay implements HomePageInfo {
 	
 	@Autowired
 	private HomePageData homePageData;
 	
 	
+	/* (non-Javadoc)
+	 * @see com.app.service.HomePageInfo#homePageDisplay()
+	 */
+	@Override
 	public List<HomePageLargeImage> homePageDisplay()
 	{
 		return homePageData.homePageContent();
 		
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.app.service.HomePageInfo#homePageDisplayThumbNail()
+	 */
+	@Override
 	public List<HomePageThumbNail> homePageDisplayThumbNail()
 	{
 		return homePageData.homePageContentThumbNail();

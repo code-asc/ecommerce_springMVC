@@ -13,22 +13,22 @@ import com.app.model.BrandsOnly;
 import com.app.model.HeaderSubcategoryDetails;
 import com.app.model.HomePageLargeImage;
 import com.app.model.HomePageThumbNail;
-import com.app.service.GetCategoryAndSubCategoryDetails;
-import com.app.service.GetOnlyBrands;
-import com.app.service.HomePageDisplay;
+import com.app.service.BrandInfo;
+import com.app.service.CategoryAndSubInfo;
+import com.app.service.HomePageInfo;
 
 
 @Controller
 public class HomePageDataController {
 
 	@Autowired
-	HomePageDisplay pageDisplay;
+	HomePageInfo pageDisplay;
 	
 	@Autowired
-	GetOnlyBrands onlyBrands;
+	BrandInfo onlyBrands;
 	
 	@Autowired
-	GetCategoryAndSubCategoryDetails categoryAndSubCategoryDetails ; 
+	CategoryAndSubInfo categoryAndSubCategoryDetails ; 
 	
 	@RequestMapping(value="/getHomePageLargeContent" , method=RequestMethod.GET)
 	public @ResponseBody List<HomePageLargeImage> pageData()

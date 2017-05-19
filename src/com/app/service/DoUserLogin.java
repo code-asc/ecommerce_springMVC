@@ -12,11 +12,15 @@ import com.app.model.LoggedInUserInfo;
 import com.app.repository.UserDetails;
 
 @Service
-public class DoUserLogin {
+public class DoUserLogin implements UserLogin {
 
 	@Autowired
 	UserDetails userDetails;
 
+	/* (non-Javadoc)
+	 * @see com.app.service.UserLogin#isUserValid(java.lang.String, java.lang.String, javax.servlet.http.HttpSession, javax.servlet.http.HttpServletRequest)
+	 */
+	@Override
 	public boolean isUserValid(String email, String password , HttpSession session , HttpServletRequest request) {
 		System.out.print("waiting....works");
 		String userFirstName = "";

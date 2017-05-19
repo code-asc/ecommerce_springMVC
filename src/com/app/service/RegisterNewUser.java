@@ -5,11 +5,15 @@ import org.springframework.stereotype.Service;
 import com.app.repository.UserDetails;
 
 @Service
-public class RegisterNewUser {
+public class RegisterNewUser implements RegisterUser {
 
 	@Autowired
 	UserDetails userDetails;
 	
+	/* (non-Javadoc)
+	 * @see com.app.service.RegisterUser#doUserRegister(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
+	 */
+	@Override
 	public boolean doUserRegister(String firstName , String middleName , String lastName , String email , String password , String mobile)
 	{
 		boolean isUserRegistered = false;

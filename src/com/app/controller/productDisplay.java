@@ -15,22 +15,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.app.model.ProductDetails;
-import com.app.service.FilteredProduct;
-import com.app.service.GetOnlyBrands;
-import com.app.service.GetProductDetails;
+import com.app.service.BrandInfo;
+import com.app.service.FilterProductList;
+import com.app.service.ProductInfo;
 
 @Controller
 @SessionAttributes({"productID" , "subCategoryID"})
 public class productDisplay {
 	
 	@Autowired
-	GetOnlyBrands brands;
+	BrandInfo brands;
 	
 	@Autowired
-	GetProductDetails getProductDetails;
+	ProductInfo getProductDetails;
 	
 	@Autowired
-	FilteredProduct filteredProducts;
+	FilterProductList filteredProducts;
 	
 	
 	@RequestMapping(value = "/user_action" , method = RequestMethod.GET)

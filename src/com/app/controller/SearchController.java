@@ -11,18 +11,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.app.model.ProductDetails;
-import com.app.service.GetOnlyBrands;
-import com.app.service.SearchPageProductDetails;
+import com.app.service.BrandInfo;
+import com.app.service.SearchOptionInfo;
 
 @Controller
 @SessionAttributes({"subCategoryID"})
 public class SearchController {
 	
 	@Autowired
-	SearchPageProductDetails details;
+	SearchOptionInfo details;
 	
 	@Autowired
-	GetOnlyBrands brands;
+	BrandInfo brands;
 	
 	@RequestMapping(value="/search" , method=RequestMethod.GET)
 	public String postSearchPage(@RequestParam("searchVal") String searchVal , Model model)

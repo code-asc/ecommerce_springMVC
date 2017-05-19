@@ -137,7 +137,15 @@
 				<c:choose>
 				<c:when test="${sessionScope.isUserLoggedIn}">
 				<li>
-				<a href="/view/userCart.cfm"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp Cart&nbsp</a>
+				<a href="userCart.html"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp Cart&nbsp
+				<c:choose>
+				<c:when test="${not empty sessionScope.cartCount}">
+					<span class="badge" id="traceCount">
+						<c:out value="${sessionScope.cartCount}"/>
+  					</span>
+				</c:when>
+				</c:choose>
+				</a>
 				</li>
 				</c:when>
 				</c:choose>

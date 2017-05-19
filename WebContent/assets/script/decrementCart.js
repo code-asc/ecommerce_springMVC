@@ -2,25 +2,26 @@ $(document).ready(function(){
   $(".decrement").click(function(event){
     var detailID=$(this).attr("value");
     $.ajax({
-      url:'/Controller/authentication.cfc?method=decrementQuantity',
-      data:{id:JSON.stringify(detailID) },
+      url:'decrementQuantity.json',
+      data:{detailID:detailID},
     }).done(function(responseText,textStatus,jsXHR){
+
       var eachPrice=parseInt($("#"+detailID+"eachPrice").html());
 
-      $.each(JSON.parse(responseText),function(index,val){
+      $.each(responseText,function(index,val){
         $.each(val,function(index,key)
       {
-        if(index=="QUANTITY"){
+        if(index=="quantity"){
 $("#"+detailID).html(key);
 }
-else if (index=="SUM") {
+else if (index=="sum") {
 $("#totalPriceAll").text(key);
 }
-else if(index=="TOTALCART")
+else if(index=="totalCart")
 {
 $("#traceCount").text(key);
 }
-else{
+else if(index == "totalPriceForEachProduct"){
 $("#"+detailID+"paraID").html("Total:Rs.<strong><span id="+detailID+"SingleProduct"+">"+key+"</span></strong>");
 
 }
