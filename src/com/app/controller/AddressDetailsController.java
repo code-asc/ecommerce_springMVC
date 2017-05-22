@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.app.model.UpdateAddress;
+import com.app.repository.AddressDetails;
 import com.app.service.AddressInfo;
 import com.app.service.CartBuy;
 import com.app.service.CartCount;
@@ -32,6 +33,9 @@ public class AddressDetailsController {
 	@Autowired
 	CartCount cartCount;
 	
+	@Autowired
+	SetDefaultAddress setDefaultAddress;
+	
 	@RequestMapping(value = "/addressConfirm" , method = RequestMethod.GET)
 	public String showUserDefaultAddress(Model model ,  HttpSession session , @RequestParam("buy") String option)
 	{
@@ -43,12 +47,10 @@ public class AddressDetailsController {
 				
 					 if(("singleBuy").compareTo(option) == 0)
 							{
-								System.out.println("allow single buy....wow");
 								model.addAttribute("allowSingleBuy" , true);
 							}
 					 else if(("cartBuy").compareTo("option") == 0) 
 							{
-								System.out.println("dont allow single buy....wow");
 								model.addAttribute("allowSingleBuy" , false);
 							}
 					
@@ -91,8 +93,21 @@ public class AddressDetailsController {
 	
 	
 	@RequestMapping(value = "address" , method = RequestMethod.GET)
-	public String getAddress(@ModelAttribute("addressField") UpdateAddress updateAddress)
+	public String getNewAddress(@ModelAttribute("addressField") UpdateAddress updateAddress , @RequestParam("buy") String buyType)
 	{
 		return "address";
+	}
+	
+	@RequestMapping(value = "address" , method = RequestMethod.POST)
+	public String postNewAddress(@ModelAttribute("addressField") UpdateAddress updateAddress ,  @RequestParam("buy") String buyType , HttpSession session)
+	{
+		String country = updateAddress.getCountry();
+		String state = updateAddress.getState();
+		String city = updateAddress.getCity();
+		String address = updateAddress.getAddress();
+		String address2 = updateAddress.getAddress2();
+		String zipCode = updateAddress.getPincode();
+		setDefaultAddress.setNewDefault((int)session.getAttribute("userID"), country, state, city, address, address2, zipCode);
+		return "redirect:addressConfirm.html?buy="+buyType;
 	}
 }

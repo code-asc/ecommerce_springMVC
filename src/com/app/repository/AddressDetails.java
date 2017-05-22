@@ -70,4 +70,76 @@ public class AddressDetails {
 		}
 		return list;
 	}
+	
+	public void updateAddressStatusToNull(int userID)
+	{
+		Connection con = null;
+		PreparedStatement stmt = null;
+		try{
+			
+			String sql = "UPDATE Address "
+					+ "SET addressType=NULL "
+					+ "WHERE "
+					+ "userID = ? "
+					+ "AND "
+					+ "addressType = ? ";
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			con=DriverManager.getConnection(url,userName,password);
+			stmt=con.prepareStatement(sql);
+			stmt.setInt(1, userID);
+			stmt.setString(2, "default");
+			stmt.executeUpdate();
+			
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+		}catch(ClassNotFoundException e)
+		{
+			e.printStackTrace();
+		}finally{
+			try{
+				stmt.close();
+				con.close();
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void setNewDefaultAddress(int userID , String country , String state , String city , String address , String address2 , String zipCode)
+	{
+		Connection con = null;
+		PreparedStatement stmt = null;
+		try{
+			
+			String sql = "INSERT INTO Address(customerAddress1 , customerAddress2 , customerZip , customerCity , customerState , customerCountry , userID , addressType) "
+					+ "VALUES(? , ? , ? , ? , ? , ? , ? , ?) ";
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			con=DriverManager.getConnection(url,userName,password);
+			stmt=con.prepareStatement(sql);
+			stmt.setString(1, address);
+			stmt.setString(2, address2);
+			stmt.setString(3, zipCode);
+			stmt.setString(4, city);
+			stmt.setString(5, state);
+			stmt.setString(6, country);
+			stmt.setInt(7, userID);
+			stmt.setString(8, "default");
+			stmt.executeUpdate();
+			
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+		}catch(ClassNotFoundException e)
+		{
+			e.printStackTrace();
+		}finally{
+			try{
+				stmt.close();
+				con.close();
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+		}
+	}
 }

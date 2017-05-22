@@ -57,7 +57,7 @@
                        
                         <div class="row">
                             <a href=payment.html?newAddress class="btn btn-info"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp Edit</a>
-                                <a href="address.html" class="btn btn-primary">New Address</a>
+                                <a href="address.html?buy=singleBuy" class="btn btn-primary">New Address</a>
                                 <a href="payment.html?buy=singleBuy" class="btn btn-success">Proceed</a>
                         </div>
                           </c:when>
@@ -65,7 +65,7 @@
                           <c:otherwise>
                             <div class="row">
                             <a href="payment.html?addressAll" class="btn btn-info"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp Edit</a>
-                                <a href="address.html" class="btn btn-primary">New Address</a>
+                                <a href="address.html?buy=cartBuy" class="btn btn-primary">New Address</a>
                                 <a href="payment.html?buy=cartBuy" class="btn btn-success">Proceed</a>
                         </div>
                           </c:otherwise>

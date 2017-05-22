@@ -37,7 +37,7 @@
                                                     <h2>Delivery Address</h2>
 
                                                     
-																		<form:form id="cf_form_address" commandName="addressField">
+																		<form:form id="cf_form_address" method="POST" commandName="addressField">
 																		<div class="form-group">
 																		<form:input path="country" name="country" id="country" placeholder="country" class="form-control"/>
 																		</div>
