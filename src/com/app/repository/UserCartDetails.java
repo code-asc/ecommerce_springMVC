@@ -6,12 +6,15 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Repository;
 
 import com.app.model.CartDisplayList;
+import com.app.model.CartProductInfo;
 import com.app.model.OrderDetailsInfo;
 
 @Repository
@@ -299,17 +302,13 @@ public class UserCartDetails {
 	        stmt.setString(2, "addedToCart");
 		    rs = stmt.executeQuery();
 		    while(rs.next())
-		    {
-		    	System.out.println("In database sum : " + rs.getInt("sum") + "totalCount : " + rs.getInt("totalCount"));
-		    	System.out.println("UserID : " + userID);
-		   
+		    {		   
 		    	list.add(rs.getInt("totalCount"));
 		    	list.add(rs.getInt("sum"));
 		    	
 		    }
 	}catch(SQLException e)
 		{
-			System.out.println("error");
  	   		e.printStackTrace();
 		}catch(ClassNotFoundException e){
 			e.printStackTrace();
@@ -344,7 +343,7 @@ public class UserCartDetails {
 		    while(rs.next())
 		    {
 		    	OrderDetailsInfo info = new OrderDetailsInfo();
-		    	System.out.println("detail Price : " + rs.getBigDecimal("detailPrice"));
+
 		    	info.setDetailPrice(rs.getBigDecimal("detailPrice"));
 		    	info.setQuantity(rs.getInt("quantity"));
 		    	list.add(info);
@@ -417,11 +416,10 @@ public class UserCartDetails {
 	        stmt = con.prepareStatement(sql);
 	        stmt.setInt(1, userID);
 	        stmt.setString(2, "addedToCart");
-	        System.out.println("Sql : "+ sql);
 		    rs=stmt.executeQuery();
 		    
 		    while(rs.next()){
-		    	count = count + 1;
+		    	count = count + rs.getInt("quantity");
 		    }
 	}catch(SQLException e)
 		{
@@ -443,5 +441,168 @@ public class UserCartDetails {
 		}
 		
 		return count;
+	}
+	
+	public long setOrder(int userID , int addressID)
+	{
+		Connection con = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		long identityCol = 0;
+		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			con = DriverManager.getConnection(url, userName, password);
+			String sql = "INSERT INTO Orders(userID,addressID) "
+					+ "VALUES(? , ?) ";
+	        stmt = con.prepareStatement(sql , Statement.RETURN_GENERATED_KEYS);
+	        stmt.setInt(1, userID);
+	        stmt.setInt(2, addressID);
+		    stmt.executeUpdate();
+		    rs=stmt.getGeneratedKeys();
+		    while(rs.next())
+		    {
+		    	identityCol = rs.getLong(1);
+		    }
+	}catch(SQLException e)
+		{
+			System.out.println(e.getMessage());
+ 	   		e.printStackTrace();
+		}catch(ClassNotFoundException e){
+			e.printStackTrace();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+		
+			try{
+				stmt.close();
+				con.close();
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+		}
+	return identityCol;
+	}
+	
+	public void updateOrderDetailsBasedOnStatus(int userID)
+	{
+		Connection con = null;
+		PreparedStatement stmt = null;
+		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			con = DriverManager.getConnection(url, userName, password);
+			String sql ="UPDATE OrderDetails "
+					+ "SET OrderDetails.status='progress' "
+					+ "FROM OrderDetails "
+					+ "INNER JOIN Products "
+					+ "ON "
+					+ "Products.productID = OrderDetails.detailProductID "
+					+ "WHERE "
+					+ "OrderDetails.userID = ? "
+					+ "AND "
+					+ "OrderDetails.status = ? "
+					+ "AND "
+					+ "Products.unitInStock >= OrderDetails.quantity";
+	        stmt = con.prepareStatement(sql);
+	        stmt.setInt(1, userID);
+	        stmt.setString(2, "addedToCart");
+		    stmt.executeUpdate();
+		    
+	}catch(SQLException e)
+		{
+			System.out.println(e.getMessage());
+ 	   		e.printStackTrace();
+		}catch(ClassNotFoundException e){
+			e.printStackTrace();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+		
+			try{
+				stmt.close();
+				con.close();
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public List<CartProductInfo> getCartProductDetails(int userID , long orderID , String status)
+	{
+		List<CartProductInfo> list = new ArrayList<>();
+		Connection con = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		try {
+			String sql ="SELECT detailProductID , quantity  FROM OrderDetails "
+					+ "WHERE "
+					+ "userID = ? "
+					+ "AND "
+					+ "status = ? "
+					+ "AND "
+					+ "orderID = ? ";
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			con = DriverManager.getConnection(url, userName, password);
+			stmt=con.prepareStatement(sql);
+			stmt.setInt(1, userID);
+			stmt.setString(2, status);
+			stmt.setLong(3, orderID);
+			rs=stmt.executeQuery();
+			while(rs.next()){
+				
+				CartProductInfo info = new CartProductInfo();
+				info.setProductID(rs.getInt("detailProductID"));
+				info.setQuantity(rs.getInt("quantity"));
+				list.add(info);
+	                 }
+           }catch(SQLException e)
+			{
+        	   e.printStackTrace();
+			}catch(ClassNotFoundException e){
+				e.printStackTrace();
+			}finally{
+				try{
+					stmt.close();
+					con.close();
+				}catch(SQLException e){
+					e.printStackTrace();
+				}
+			}
+		
+		return list;
+	}
+	
+	
+	@Async
+	public void updateProductInCart(int productID , int quantity)
+	{
+		Connection con = null;
+		PreparedStatement stmt = null;
+		
+		try {
+			String sql = "UPDATE Products "
+					+ "SET unitInStock=unitInStock - ? "
+					+ "WHERE "
+					+ "productID = ?";
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			con = DriverManager.getConnection(url, userName, password);
+			stmt=con.prepareStatement(sql);
+			stmt.setInt(1, quantity);
+			stmt.setInt(2, productID);
+			stmt.executeQuery();
+           }catch(SQLException e)
+			{
+        	   e.printStackTrace();
+			}catch(ClassNotFoundException e){
+				e.printStackTrace();
+			}finally{
+				try{
+					stmt.close();
+					con.close();
+				}catch(SQLException e){
+					e.printStackTrace();
+				}
+			}
+		
 	}
 }

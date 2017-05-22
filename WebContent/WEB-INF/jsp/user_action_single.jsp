@@ -78,9 +78,15 @@
                                                             </c:when>
                                                             
                                                             <c:otherwise>
-                                                            <button class="btn btn-success" ><i class="fa fa-credit-card" aria-hidden="true"></i> &nbspBuy Now</button>
-
+                                                            <c:choose>
+                                                            <c:when test="${product.unitInStock < 1}">
+                                                            <h4>Out Of Stock</h4>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                            <a href="addressConfirm.html?buy=singleBuy" class="btn btn-success"><i class="fa fa-credit-card" aria-hidden="true"></i> &nbspBuy Now</a>
                                                                 <button class="btn btn-info" id="onAddCart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> &nbspAdd To Cart</button>
+                                                           </c:otherwise>
+                                                            </c:choose>
                                                             </c:otherwise>
                                                             </c:choose>
                                                         </div>

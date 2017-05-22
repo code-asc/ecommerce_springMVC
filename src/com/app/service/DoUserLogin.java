@@ -50,7 +50,7 @@ public class DoUserLogin implements UserLogin {
 			    userID = userInfo.getUserID();
 				session = request.getSession(true);
 				userFullName = userFirstName+" "+ userMiddleName+" "+userLastName;
-				session.setMaxInactiveInterval(11*60);
+				session.setMaxInactiveInterval(360*60);
 				session.setAttribute("userID", userID);
 				session.setAttribute("userFullName", userFullName);
 				session.setAttribute("isUserLoggedIn", true);

@@ -40,15 +40,12 @@ public class FilterToCheckSessionExists implements Filter {
 		HttpServletRequest requestOf =(HttpServletRequest)request;
 		HttpServletResponse responseOf=(HttpServletResponse)response;
 		
-		System.out.println(requestOf.getRequestURI().toString());
 		if(requestOf.getSession(false)==null && requestOf.getRequestURI().toString().compareTo("/ProjectDemo/signin.html")!=0)
 		{
-			System.out.println(requestOf.getRequestURI().toString());
 			responseOf.sendRedirect("/ProjectDemo/signin.html");	
 		}
 		else
 		{
-			System.out.println("infintit chain....");
 		chain.doFilter(request, response);
 		}
 			

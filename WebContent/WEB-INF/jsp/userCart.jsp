@@ -82,7 +82,7 @@
                                             <cfoutput>
                                             <h5 class="text-muted"> PRICE DETAILS:</h5>
                                             <h6 class="text-success">Bag Total : Rs.<span id="totalPriceAll"><c:out value="${total}"></c:out></span></h6>
-                                            <a class="btn btn-success" href="/view/userCart.cfm?buyAll">Place Order</a>
+                                            <a class="btn btn-success" href="addressConfirm.html?buy=cartBuy">Place Order</a>
                                               </cfoutput>
                                         </div>
 

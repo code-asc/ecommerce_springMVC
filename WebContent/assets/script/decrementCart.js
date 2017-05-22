@@ -17,7 +17,7 @@ $("#"+detailID).html(key);
 else if (index=="sum") {
 $("#totalPriceAll").text(key);
 }
-else if(index=="totalCart")
+else if(index=="totalCount")
 {
 $("#traceCount").text(key);
 }

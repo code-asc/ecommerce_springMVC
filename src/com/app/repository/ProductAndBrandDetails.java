@@ -511,5 +511,37 @@ public class ProductAndBrandDetails
 			}
 		return list;
 		}
+	
+	public void updateProductQtyOnOrder(int productID) 
+	{
+		Connection con = null;
+		PreparedStatement stmt = null;
+		try{
+			
+			String sql = "UPDATE Products "
+					+ "SET unitInStock = unitInStock-1 "
+					+ "WHERE "
+					+ "productID = ?";
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			con = DriverManager.getConnection(url , userName , password);
+			stmt = con.prepareStatement(sql);
+			stmt.setInt(1,productID);
+			stmt.executeUpdate();
+			}catch(SQLException e)
+		{
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}catch(ClassNotFoundException e)
+		{
+			e.printStackTrace();
+		}finally{
+			try{
+				stmt.close();
+				con.close();
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+			}
+	}
 	}
 
