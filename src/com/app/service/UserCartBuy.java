@@ -23,7 +23,7 @@ public class UserCartBuy implements CartBuy {
 	 * @see com.app.service.CartBuy#cartBuyProduct(int, int)
 	 */
 	@Override
-	public long cartBuyProduct(int userID , int addressID)
+	public long cartBuyProduct(int userID , long addressID)
 	{
 		long identityCol = 0;
 		String addressStatus = "default";

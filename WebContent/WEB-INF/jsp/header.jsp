@@ -121,6 +121,8 @@
 					<span id="fullName"><c:out value="${sessionScope.userFullName}"/></span>
 					</li>
 					<li class="divider"/>
+					<li><a href="orderDetails.html?page=1"><i class="fa fa-credit-card" aria-hidden="true"></i>&nbsp Purchases</a></li>
+					<li class="divider"/>
 					<li><a href="logout.html"><i class="fa fa-sign-out" aria-hidden="true"></i> &nbsp SignOut</a></li>
 					</c:when>
 					<c:otherwise>

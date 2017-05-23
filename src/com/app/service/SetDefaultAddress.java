@@ -1,4 +1,4 @@
-package com.app.controller;
+package com.app.service;
 
 public interface SetDefaultAddress {
 

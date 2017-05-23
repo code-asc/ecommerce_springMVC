@@ -1,6 +1,6 @@
 package com.app.model;
 
-public class BrandsOnly
+ public class BrandsOnly
 {
 	private String brandName;
 	private int brandID;

@@ -28,7 +28,7 @@ public class UserSingleBuy implements SingleBuy {
 	 * @see com.app.service.SingleBuy#singleBuyProduct(int, int, int)
 	 */
 	@Override
-	public void singleBuyProduct(int userID , int productID , int addressID)
+	public void singleBuyProduct(int userID , int productID , long addressID)
 	{
 		
 		BigDecimal afterDiscount;

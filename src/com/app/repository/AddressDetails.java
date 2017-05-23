@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -106,17 +107,19 @@ public class AddressDetails {
 		}
 	}
 	
-	public void setNewDefaultAddress(int userID , String country , String state , String city , String address , String address2 , String zipCode)
+	public long setNewDefaultAddress(int userID , String country , String state , String city , String address , String address2 , String zipCode)
 	{
+		long identityCol = 0;
 		Connection con = null;
 		PreparedStatement stmt = null;
+		ResultSet rs = null;
 		try{
 			
 			String sql = "INSERT INTO Address(customerAddress1 , customerAddress2 , customerZip , customerCity , customerState , customerCountry , userID , addressType) "
 					+ "VALUES(? , ? , ? , ? , ? , ? , ? , ?) ";
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			con=DriverManager.getConnection(url,userName,password);
-			stmt=con.prepareStatement(sql);
+			stmt=con.prepareStatement(sql , Statement.RETURN_GENERATED_KEYS);
 			stmt.setString(1, address);
 			stmt.setString(2, address2);
 			stmt.setString(3, zipCode);
@@ -126,9 +129,14 @@ public class AddressDetails {
 			stmt.setInt(7, userID);
 			stmt.setString(8, "default");
 			stmt.executeUpdate();
+			rs=stmt.getGeneratedKeys();
+			while(rs.next())
+			{
+				identityCol = rs.getLong(1);
+			}
 			
 		}catch(SQLException e)
-		{
+		{   System.out.println("error in setNewDefaultAddress");
 			e.printStackTrace();
 		}catch(ClassNotFoundException e)
 		{
@@ -141,5 +149,54 @@ public class AddressDetails {
 				e.printStackTrace();
 			}
 		}
+		
+		return identityCol;
+	}
+	
+	public long setTempAddress(int userID , String country , String state , String city , String address , String address2 , String zipCode)
+	{
+		long identityCol = 0;
+		Connection con = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+
+		try{
+
+			String sql = "INSERT INTO Address(customerAddress1 , customerAddress2 , customerZip , customerCity , customerState , customerCountry , userID ) "
+					+ "VALUES(? , ? , ? , ? , ? , ? , ?) ";
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			con=DriverManager.getConnection(url,userName,password);
+			stmt=con.prepareStatement(sql , Statement.RETURN_GENERATED_KEYS);
+			stmt.setString(1, address);
+			stmt.setString(2, address2);
+			stmt.setString(3, zipCode);
+			stmt.setString(4, city);
+			stmt.setString(5, state);
+			stmt.setString(6, country);
+			stmt.setInt(7, userID);
+			stmt.executeUpdate();
+			rs=stmt.getGeneratedKeys();
+			while(rs.next())
+			{
+				identityCol = rs.getLong(1);
+			}
+			
+		}catch(SQLException e)
+		{
+			System.out.println("error in setTempAddress");
+			e.printStackTrace();
+		}catch(ClassNotFoundException e)
+		{
+			e.printStackTrace();
+		}finally{
+			try{
+				stmt.close();
+				con.close();
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+		}
+		
+		return identityCol;
 	}
 }

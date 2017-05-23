@@ -443,7 +443,7 @@ public class UserCartDetails {
 		return count;
 	}
 	
-	public long setOrder(int userID , int addressID)
+	public long setOrder(int userID , long addressID)
 	{
 		Connection con = null;
 		PreparedStatement stmt = null;
@@ -456,7 +456,7 @@ public class UserCartDetails {
 					+ "VALUES(? , ?) ";
 	        stmt = con.prepareStatement(sql , Statement.RETURN_GENERATED_KEYS);
 	        stmt.setInt(1, userID);
-	        stmt.setInt(2, addressID);
+	        stmt.setLong(2, addressID);
 		    stmt.executeUpdate();
 		    rs=stmt.getGeneratedKeys();
 		    while(rs.next())
@@ -470,6 +470,7 @@ public class UserCartDetails {
 		}catch(ClassNotFoundException e){
 			e.printStackTrace();
 		}catch(Exception e){
+			System.out.println("Error occured in setOrder");
 			e.printStackTrace();
 		}finally{
 		
