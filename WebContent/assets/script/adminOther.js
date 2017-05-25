@@ -6,12 +6,12 @@ $(document).ready(function() {
         if ($("#formOtherBrand").valid()) {
 
             $.ajax({
-                url: "/Controller/adminData.cfc?method=addBrand",
+                url: "addBrand.json",
                 data: {
                     brandName: $("#brandName").val()
                 },
             }).done(function(responseText,textStatus,jqXHR){
-              if(JSON.parse(responseText)){
+              if(responseText){
               $("#formOtherData").append("<div class='alert alert-success'>New Brand added to Database</div>").delay(4000).fadeOut();
             }
             else {
@@ -31,7 +31,7 @@ $(document).ready(function() {
         if ($("#formOtherCategory").valid()) {
 
             $.ajax({
-                url: "/Controller/adminData.cfc?method=addCategory",
+                url: "addCategory.json",
                 data: {
                     categoryType: $("#category").val()
                 },

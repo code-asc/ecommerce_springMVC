@@ -8,10 +8,11 @@ var brandList=function()
   $("#brandListTable").empty();
   $("#brandListTable").append("<tr><th>Available Brand</th></tr>");
   $.ajax({
-    url:"/Controller/retriveProduct.cfc?method=getAllBrand",
+    url:"getOnlyBrand.json",
   }).done(function(responseText,textStatus,jqXHR){
-    $.each(JSON.parse(responseText),function(key,value){
+    $.each(responseText,function(key,value){
       $.each(value,function(name,val){
+     if(name  == 'brandName')
       $("#brandListTable").append("<tr><td>"+val+"</td></tr>")
       })
     })
@@ -27,10 +28,11 @@ var categoryList=function()
   $("#categoryListTable").empty();
   $("#categoryListTable").append("<tr><th>Available Category</th></tr>");
   $.ajax({
-    url:"/Controller/retriveProduct.cfc?method=getAllCategory",
+    url:"getCategoryOnly.json",
   }).done(function(responseText,textStatus,jqXHR){
-    $.each(JSON.parse(responseText),function(key,value){
+    $.each(responseText,function(key,value){
       $.each(value,function(name,val){
+    	  if(name == 'categoryType')
       $("#categoryListTable").append("<tr><td>"+val+"</td></tr>")
       })
     })

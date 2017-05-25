@@ -7,12 +7,14 @@ var subCategoryList=function()
   $("#subCategoryListTable").empty();
   $("#subCategoryListTable").append("<tr><th>Available SubCategory</th></tr>");
   $.ajax({
-    url:"/Controller/retriveProduct.cfc?method=getAllSubCategory",
+    url:"getSubCategoryOnly.json",
   }).done(function(responseText,textStatus,jqXHR){
     
-    $.each(JSON.parse(responseText),function(key,value){
+    $.each(responseText , function(key,value){
       $.each(value,function(name,val){
-      $("#subCategoryListTable").append("<tr><td>"+val+"</td></tr>")
+    	
+    	  if(name == "subCategoryType")
+    	  $("#subCategoryListTable").append("<tr><td>"+val+"</td></tr>")
       })
     })
 

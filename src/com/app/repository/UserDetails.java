@@ -317,4 +317,47 @@ public class UserDetails {
 		return check;
 	}
 
+	public boolean checkUserOnline(int userID)
+	{
+		boolean check = false;
+		Connection con = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+
+		try{
+			
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			con = DriverManager.getConnection(url, userName, password);
+			String sql = "SELECT OnlineUser.userID,OnlineUser.email FROM OnlineUser "
+					+ "WHERE "
+					+ "userID = ?";
+					
+			stmt=con.prepareStatement(sql);
+			stmt.setInt(1, userID);
+			rs=stmt.executeQuery();
+			while(rs.next())
+			{
+				check = true;
+			}
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println(e.getSQLState());
+		}catch (ClassNotFoundException e){
+			e.printStackTrace();
+		}catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		finally {
+			try{
+			con.close();
+			stmt.close();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+	
+	}
+		return check;
+	}
 }

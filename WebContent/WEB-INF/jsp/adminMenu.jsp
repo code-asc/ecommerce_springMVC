@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="/ProductDemo/assets/css/adminCSS.css">
+    <link rel="stylesheet" href="/ProjectDemo/assets/css/adminCSS.css">
     <!-- Bootstrap -->
     <!---<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -23,10 +23,10 @@
 <body>
         <div class="col-md-2 col-sm-2 sidebar">
             <ul class="nav nav-pills nav-stacked" style="border: 1px solid #337ab7 ; border-radius:8px">
-                <li class="active"><a href="/view/admin.cfm">DashBoard</a></li>
+                <li class="active"><a href="admin.html">DashBoard</a></li>
                 <li><a href="/view/adminAdd.cfm">Add Item</a></li>
-                <li><a href="/view/adminOther.cfm">Add Brand And Category</a></li>
-                <li><a href="/view/adminSubCategory.cfm">Add SubCategory</a></li>
+                <li><a href="adminOther.html">Add Brand And Category</a></li>
+                <li><a href="adminSubCategory.html">Add SubCategory</a></li>
                 <li><a href="/view/adminEdit.cfm">Edit Item</a></li>
                 <li><a href="/view/adminRemove.cfm">Remove Item</a></li>
 

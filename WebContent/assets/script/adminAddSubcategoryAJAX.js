@@ -5,13 +5,13 @@ $(document).ready(function() {
             $("#formDataStatusShow").css({"display":"block"});
         if ($("#formAddSubCategory").valid()) {
             $.ajax({
-                url: "/Controller/adminData.cfc?method=addSubCategoryToDatabase",
+                url: "addSubCategory.json",
                 data: {
-                    categoryID: $("#category").val(),
-                    subCategory:$("#subcategory").val(),
+                    categoryID : $("#category").val(),
+                    subCategoryType : $("#subcategory").val(),
                 },
             }).done(function(responseText,textStatus,jqXHR){
-              if(JSON.parse(responseText))
+              if(responseText)
               {
               $("#formDataStatusShow").append("<div class='alert alert-success'>New SubCategory added to Database</div>").delay(4000).fadeOut();
             }
