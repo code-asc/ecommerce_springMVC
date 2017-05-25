@@ -81,13 +81,14 @@ public class productDisplay {
 		if(session.getAttribute("isUserLoggedIn") != null && (boolean)session.getAttribute("isUserLoggedIn"))
 		{
 		int limitTo = start + 4;
+		model.addAttribute("page" , page);
 		model.addAttribute("total" , purchaseInfo.getTotalPurchaseList((int)session.getAttribute("userID")).size());
 		model.addAttribute("detailQuery", purchaseInfo.getPurchaseDetails((int)session.getAttribute("userID"), start , limitTo) );
 		return "orderDetails";
 		}
 		else
 		{
-			return "index";
+			return "redirect:signin.html";
 		}
 	}
 	
@@ -108,7 +109,7 @@ public class productDisplay {
 		}
 		else
 		{
-			return "index";
+			return "redirect:signin.html";
 		}
 	}
 	

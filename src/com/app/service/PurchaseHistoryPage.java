@@ -29,7 +29,6 @@ public class PurchaseHistoryPage implements PurchaseInfo {
 			}
 		}
 		
-		System.out.print(detailID);
 		
 		return purchaseInfo.getPurchaseHistory(userID, detailID.toString());
 	}

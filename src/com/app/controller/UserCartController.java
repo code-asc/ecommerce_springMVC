@@ -50,8 +50,13 @@ public class UserCartController {
 	@RequestMapping(value = "/userCart" , method = RequestMethod.GET)
 	public  String getUserCartInfo(Model model , HttpSession session)
 	{
+		if(session.getAttribute("isUserLoggedIn") != null && (boolean)session.getAttribute("isUserLoggedIn"))
+		{
 		model.addAttribute("retriveCart" , addToCartOption.getCartList("addedToCart" ,  (int)session.getAttribute("userID")));
 		return "userCart";
+		}else{
+			 return "redirect:signin.html";
+		}
 	}
 	
 	@RequestMapping(value = "/incrementQuantity" , method = RequestMethod.GET)

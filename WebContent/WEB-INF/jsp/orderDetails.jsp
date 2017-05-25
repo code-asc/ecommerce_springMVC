@@ -50,9 +50,7 @@
                             <c:forEach items="${requestScope.detailQuery }" var="detailquery">
                             <!---  <div class="row well well-sm alert well-dismissible">--->
                                 <div class="row well well-sm">
-                                <form>
-                                <input type="submit" class="close deleteFromHistory" arial-label="close" id="#detailquery.orderID#" value="X">
-                              </form>
+                               
 
 
                                         <div class="col-sm-8 col-md-8 col-xm-8 col-lg-12" style="margin-bottom:10px">
@@ -78,7 +76,7 @@
                             </c:choose>
                                         ${detailquery.customerCity}
                                         <br/> ${detailquery.customerState}
-                                        <br/> $detailquery.customerCountry}
+                                        <br/> ${detailquery.customerCountry}
                                         <br/> Ordered Date :${detailquery.orderDate}
                                         <br/> Total : Rs.<strong>${detailquery.orderAmount}</strong>
                                     </div>

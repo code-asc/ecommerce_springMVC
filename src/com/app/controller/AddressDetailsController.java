@@ -44,7 +44,7 @@ public class AddressDetailsController {
 	public String showUserDefaultAddress(Model model ,  HttpSession session , @RequestParam("buy") String option)
 	{
 	
-		if(session.getAttribute("isUserLoggedIn") != null)
+		if(session.getAttribute("isUserLoggedIn") != null && (boolean)session.getAttribute("isUserLoggedIn"))
 		{
 			model.addAttribute("addressQuery" , addressInfo.getUserDefaultAddress((int)session.getAttribute("userID"), "default"));
 
@@ -62,7 +62,7 @@ public class AddressDetailsController {
 			return "addressConfirm";
 		}
 		else{
-				return "index";
+				return "redirect:signin.html";
 		}
 	}
 	
@@ -91,7 +91,7 @@ public class AddressDetailsController {
 				
 			return "paymentProcessing";
 		}else{
-				return "index";
+				return "redirect:signin.html";
 		}
 	}
 	
@@ -116,14 +116,21 @@ public class AddressDetailsController {
 	}
 	
 	@RequestMapping(value = "newAddress" , method = RequestMethod.GET)
-	public String getEditAddress(@ModelAttribute("addressField") UpdateAddress updateAddress , @RequestParam("buy") String buyType)
+	public String getEditAddress(@ModelAttribute("addressField") UpdateAddress updateAddress , @RequestParam("buy") String buyType , HttpSession session)
 	{
+		if(session.getAttribute("isUserLoggedIn") != null && (boolean)session.getAttribute("isUserLoggedIn"))
+		{
 		return "address";
+		}else{
+			return "redirect:signin.html";
+		}
 	}
 	
 	@RequestMapping(value = "newAddress" , method = RequestMethod.POST)
 	public String postEditAddress(@ModelAttribute("addressField") UpdateAddress updateAddress , @RequestParam("buy") String buyType , HttpSession session)
 	{
+		if(session.getAttribute("isUserLoggedIn") != null && (boolean)session.getAttribute("isUserLoggedIn"))
+		{
 		String country = updateAddress.getCountry();
 		String state = updateAddress.getState();
 		String city = updateAddress.getCity();
@@ -131,7 +138,6 @@ public class AddressDetailsController {
 		String address2 = updateAddress.getAddress2();
 		String zipCode = updateAddress.getPincode();
 		long addressIdentityCol = tempAddress.setTempAddress((int)session.getAttribute("userID"), country, state, city, address, address2, zipCode);
-		System.out.println("addressIdentityCol : "+addressIdentityCol);
 		if(("singleBuy").compareTo(buyType) == 0)
 		{
 			singleBuy.singleBuyProduct((int)session.getAttribute("userID") , (int)session.getAttribute("productID") , addressIdentityCol);
@@ -139,7 +145,6 @@ public class AddressDetailsController {
 		else if(("cartBuy").compareTo(buyType) == 0) 
 		{
 			long identityCol = cartBuy.cartBuyProduct((int)session.getAttribute("userID") , addressIdentityCol);
-			System.out.println("After addressIdentityCol : "+identityCol);
 			cartBuy.setOrderID((int)session.getAttribute("userID") , identityCol);
 			session.setAttribute("cartCount", cartCount.getCartCount((int)session.getAttribute("userID")));;
 			
@@ -147,5 +152,8 @@ public class AddressDetailsController {
 
 
 		return "paymentProcessing";
+		}else{
+			return "redirect:signin.html";
+		}
 	}
 }

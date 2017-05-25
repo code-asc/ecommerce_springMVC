@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -101,12 +102,28 @@
 			
 
 			<ul class="nav navbar-nav">
-				<li><a href="#" type="button" class="dropdown-toggle" data-toggle="dropdown" data-target="loginButton"
-					style="padding-top: 10px"> <i class="fa fa-user"
-						aria-hidden="true">
-						</i>
+			<c:set var="userProfilePhoto" value="${sessionScope.userProfilePhoto}"/>
+				<li><a href="#" type="button" class="dropdown-toggle" data-toggle="dropdown" data-target="loginButton" style="padding-top: 10px"> 
+					<c:choose>
+					<c:when test="${fn:length(userProfilePhoto) > 0 && not empty sessionScope.isUserLoggedIn}">
+					<span style="float:left"><img class="img-circle img-responsive" src="${userProfilePhoto}" alt=" "></span>
+					</c:when>
+					<c:otherwise>
+					<i class="fa fa-user" aria-hidden="true"></i>
+					</c:otherwise>
+					</c:choose>
+					
 						<c:choose>
-						<c:when test="${sessionScope.isUserLoggedIn}"><span><i class="fa fa-caret-down" aria-hidden="true"></i></span></c:when>
+						<c:when test="${sessionScope.isUserLoggedIn}">
+					    <c:choose>
+					    	<c:when test="${ empty sessionScope.userProfilePhoto}">
+					    	
+					    		<span><i class="fa fa-caret-down" aria-hidden="true"></i></span>
+					    	</c:when>
+					    	
+					    </c:choose>
+						
+						</c:when>
 						<c:otherwise>&nbsp Login</c:otherwise>
 						</c:choose>
 
@@ -120,6 +137,8 @@
 					<li>
 					<span id="fullName"><c:out value="${sessionScope.userFullName}"/></span>
 					</li>
+					<li class="divider"/>
+					<li><a href="userProfileEdit.html"><i class="fa fa-pencil" aria-hidden="true"></i>&nbsp Edit Profile</a></li>
 					<li class="divider"/>
 					<li><a href="orderDetails.html?page=1"><i class="fa fa-credit-card" aria-hidden="true"></i>&nbsp Purchases</a></li>
 					<li class="divider"/>

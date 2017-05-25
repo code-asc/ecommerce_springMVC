@@ -51,10 +51,13 @@ public class UserDetails {
 				list.add(userInfo);
 			}
 
-		} catch (Exception e) {
+		}catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("error : " +e);
-		} finally {
+			System.out.println(e.getSQLState());
+		}catch (ClassNotFoundException e){
+			e.printStackTrace();
+		}
+		finally {
 			if (con != null) {
 				try {
 					con.close();
@@ -157,6 +160,161 @@ public class UserDetails {
 			e.printStackTrace();
 		}
 		return isSuccess;
+	}
+	
+	public List<LoggedInUserInfo> getUserInfo(int userID)
+	{
+		List<LoggedInUserInfo> userInfoList = new ArrayList<>();
+		Connection con = null;
+		ResultSet rs = null;
+		PreparedStatement stmt = null;
+		try{
+			
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			con = DriverManager.getConnection(url, userName, password);
+			String sql="SELECT userFirstName, userProfilePhoto, userMiddleName, userLastName, userEmail , userPhone , userID FROM Customer "
+					+ "WHERE "
+					+ "userID = ?";
+			stmt=con.prepareStatement(sql);
+			stmt.setInt(1, userID);
+			rs=stmt.executeQuery();
+			while(rs.next()){
+				
+				LoggedInUserInfo info = new LoggedInUserInfo();
+				info.setUserFirstName(rs.getString("userFirstName"));
+				info.setUserMiddleName(rs.getString("userMiddleName"));
+				info.setUserLastName(rs.getString("userLastName"));
+				info.setUserID(rs.getInt("userID"));
+				info.setUserEmail(rs.getString("userEmail"));
+				info.setUserProfilePhoto(rs.getString("userProfilePhoto"));
+				info.setUserPhone(rs.getString("userPhone"));
+				userInfoList.add(info);
+			}
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println(e.getSQLState());
+		}catch (ClassNotFoundException e){
+			e.printStackTrace();
+		}catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		finally {
+			try{
+			rs.close();
+			}catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+			
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			
+		}
+		return userInfoList;
+	}
+
+	public boolean updateUserProfileInfo(int userID , String firstName , String middleName , String lastName , String email , String phone)
+	{
+		boolean check = true;
+		Connection con = null;
+		PreparedStatement stmt = null;
+		try{
+			
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			con = DriverManager.getConnection(url, userName, password);
+			String sql = "UPDATE Customer "
+					+ "SET "
+					+ "userFirstName = ? , "
+					+ "userMiddleName = ? , "
+					+ "userLastName = ? , "
+					+ "userEmail = ? , "
+					+ "userPhone = ? "
+					+ "WHERE "
+					+ "userID = ? ";
+			stmt=con.prepareStatement(sql);
+			stmt.setString(1, firstName);
+			stmt.setString(2, middleName);
+			stmt.setString(3, lastName);
+			stmt.setString(4, email);
+			stmt.setString(5, phone);
+			stmt.setInt(6, userID);
+			stmt.executeUpdate();
+			
+		}catch (SQLException e) {
+			check = false;
+			e.printStackTrace();
+			System.out.println(e.getSQLState());
+		}catch (ClassNotFoundException e){
+			check = false;
+			e.printStackTrace();
+		}catch(Exception e)
+		{
+			check = false;
+			System.out.println(e.getMessage());
+		}
+		finally {
+			try{
+			con.close();
+			stmt.close();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+	
+	}
+		return check;
+	}
+	
+	public boolean updateUserProfilePhoto(int userID , String path)
+	{
+		boolean check = true;
+		Connection con = null;
+		PreparedStatement stmt = null;
+		try{
+			
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			con = DriverManager.getConnection(url, userName, password);
+			String sql = "UPDATE Customer "
+					+ "SET "
+					+ "userProfilePhoto = ? "
+					+ "WHERE "
+					+ "userID = ? ";
+					
+			stmt=con.prepareStatement(sql);
+			stmt.setString(1, path);
+			stmt.setInt(2, userID);
+			
+			stmt.executeUpdate();
+			
+		}catch (SQLException e) {
+			check = false;
+			e.printStackTrace();
+			System.out.println(e.getSQLState());
+		}catch (ClassNotFoundException e){
+			check = false;
+			e.printStackTrace();
+		}catch(Exception e)
+		{
+			check = false;
+			System.out.println(e.getMessage());
+		}
+		finally {
+			try{
+			con.close();
+			stmt.close();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+	
+	}
+		return check;
 	}
 
 }

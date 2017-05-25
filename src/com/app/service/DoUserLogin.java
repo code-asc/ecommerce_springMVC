@@ -54,6 +54,7 @@ public class DoUserLogin implements UserLogin {
 				session.setAttribute("userID", userID);
 				session.setAttribute("userFullName", userFullName);
 				session.setAttribute("isUserLoggedIn", true);
+				session.setAttribute("userProfilePhoto" , userProfilePhoto);
 				returnVal=true;
 			}
 		}

@@ -12,6 +12,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.app.model.BrandsOnly;
+import com.app.model.HighestSoldItem;
 import com.app.model.ProductDetails;
 
 @Repository
@@ -542,6 +543,53 @@ public class ProductAndBrandDetails
 				e.printStackTrace();
 			}
 			}
+	}
+	
+	public List<HighestSoldItem> highestSoldProduct()
+	{
+		List<HighestSoldItem> list = new ArrayList<>();
+		Connection con = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		try{
+			
+			String sql = "SELECT sum(OrderDetails.quantity) AS total ,Brands.brandName  from OrderDetails "
+					+ "INNER JOIN Products "
+					+ "ON "
+					+ "Products.productID=OrderDetails.detailProductID "
+					+ "INNER JOIN Brands "
+					+ "ON "
+					+ "Products.brandID=Brands.brandID "
+					+ "group by Brands.brandName "; 
+		    Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			con = DriverManager.getConnection(url , userName , password);
+			stmt = con.createStatement();
+			rs=stmt.executeQuery(sql);
+			while(rs.next())
+			{
+				HighestSoldItem details = new HighestSoldItem();
+				details.setBrandName(rs.getString("brandName"));
+				details.setTotal(rs.getInt("total"));
+				list.add(details);
+			}
+	
+		}catch(SQLException e)
+		{
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}catch(ClassNotFoundException e)
+		{
+			e.printStackTrace();
+		}finally{
+			try{
+				rs.close();
+				stmt.close();
+				con.close();
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+			}
+		return list;
 	}
 	}
 
