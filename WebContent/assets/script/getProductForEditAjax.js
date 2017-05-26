@@ -7,21 +7,21 @@ $(document).ready(function(){
 
   $("#products").find("option").remove();
   $("#products").append("<option selected disabled>Products</option>");
-  $.ajax({url:'/Controller/adminData.cfc?method=getProductForEdit',
-data:{subCategoryID:$(this).val()},
+  $.ajax({url : 'getProductInfoBySubCategoryID.json',
+data:{subCategoryID : $(this).val()},
 success:function(responseText)
 {
-  $.each(JSON.parse(responseText),function(index,key){
+  $.each(responseText , function(index,key){
     $.each(key,function(index,value){
-      if(index=="BRANDNAME")
+      if(index=="brandName")
       {
         brandName=value;
       }
-      else if (index=="PRODUCTID") {
+      else if (index=="productID") {
         productID=value;
         //alert(value);
       }
-      else if(index=="PRODUCTNAME")
+      else if(index=="productName")
       {
         productName=value;
       }

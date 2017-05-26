@@ -1,5 +1,6 @@
 package com.app.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,5 +39,20 @@ public class AdminOtherDetails {
 	public List<SubCategoryType> getSubCategory()
 	{
 		return edit.getSubCategory();
+	}
+	
+	public List<SubCategoryType> getSubCategory(int categoryID)
+	{
+		return edit.getSubCategory(categoryID);
+	}
+	
+	public void updateProduct(int productID , String productDesc , BigDecimal unitPrice , BigDecimal discount , int unitInStock)
+	{
+		edit.productEdit(productID, productDesc, unitPrice, discount, unitInStock);
+	}
+	
+	public void deleteProduct(int productID)
+	{
+		edit.productDelete(productID);
 	}
 }

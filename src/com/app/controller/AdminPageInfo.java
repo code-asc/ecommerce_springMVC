@@ -1,5 +1,6 @@
 package com.app.controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +15,13 @@ import com.app.model.AdminCountryCount;
 import com.app.model.BrandsOnly;
 import com.app.model.CategoryType;
 import com.app.model.HighestSoldItem;
+import com.app.model.ProductDetails;
 import com.app.model.SubCategoryType;
 import com.app.service.AdminOtherDetails;
 import com.app.service.AdminPageAllInfo;
 import com.app.service.BrandInfo;
 import com.app.service.HighestSoldInfo;
+import com.app.service.ProductInfo;
 
 
 @Controller
@@ -35,6 +38,9 @@ public class AdminPageInfo {
 	
 	@Autowired
 	BrandInfo brandInfo;
+	
+	@Autowired
+	ProductInfo productInfo;
 	
 	@RequestMapping(value = "/getHighestSoldProduct" , method = RequestMethod.GET)
 	public @ResponseBody List<HighestSoldItem> getProductHighest()
@@ -107,5 +113,53 @@ public class AdminPageInfo {
 	{
 		model.addAttribute("category" , otherDetails.getCategory());
 		return "adminSubCategory";
+	}
+	
+	@RequestMapping(value = "/adminEditForm" , method = RequestMethod.GET)
+	public String getAdminEditForm(Model model)
+	{
+		model.addAttribute("category" , otherDetails.getCategory());
+		return "adminEdit";
+	}
+	
+	@RequestMapping(value = "/adminRemoveForm" , method = RequestMethod.GET)
+	public String getAdminRemoveForm(Model model)
+	{
+		model.addAttribute("category" , otherDetails.getCategory());
+		return "adminRemove";
+	}
+	
+	@RequestMapping(value = "/adminRemoveForm" , method = RequestMethod.POST)
+	public String postAdminRemoveForm(Model model , @RequestParam("products") int productID)
+	{
+		otherDetails.deleteProduct(productID);
+		model.addAttribute("category" , otherDetails.getCategory());
+		return "adminRemove";
+	}
+	
+	@RequestMapping(value = "/adminEditForm" , method = RequestMethod.POST)
+	public String postAdminEditForm(Model model , @RequestParam("products") int productID ,@RequestParam("productDesc") String productDesc , @RequestParam("unitPrice") BigDecimal unitPrice , @RequestParam("unitInStock") int unitInStock , @RequestParam("discount") BigDecimal discount , @RequestParam("thumbNailPhoto") String thumbNailPhoto , @RequestParam("largePhoto") String largePhoto)
+	{
+		otherDetails.updateProduct(productID, productDesc, unitPrice, discount, unitInStock);
+		model.addAttribute("category" , otherDetails.getCategory());
+		return "adminEdit";
+	}
+	
+	@RequestMapping(value = "/getSubCategoryBasedOnCategoryID")
+	public @ResponseBody List<SubCategoryType> getSubCategoryBasedOnCategoryID(@RequestParam("categoryID") int categoryID)
+	{
+		return otherDetails.getSubCategory(categoryID);
+	}
+	
+	@RequestMapping(value = "getProductInfoBySubCategoryID" , method = RequestMethod.GET)
+	public @ResponseBody List<ProductDetails> getProductInfoBySubCategoryID(@RequestParam("subCategoryID") int subCategoryID)
+	{
+		return productInfo.getOnlyProductDetails(subCategoryID);
+	}
+	
+	@RequestMapping(value = "getProductInfoByProductID" , method = RequestMethod.GET)
+	public @ResponseBody List<ProductDetails> getProductInfoByProductID(@RequestParam("productID") int productID)
+	{
+		return productInfo.getOnlyProductDetailsByProductID(productID);
 	}
 }

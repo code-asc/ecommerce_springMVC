@@ -27,8 +27,8 @@
                 <li><a href="/view/adminAdd.cfm">Add Item</a></li>
                 <li><a href="adminOther.html">Add Brand And Category</a></li>
                 <li><a href="adminSubCategory.html">Add SubCategory</a></li>
-                <li><a href="/view/adminEdit.cfm">Edit Item</a></li>
-                <li><a href="/view/adminRemove.cfm">Remove Item</a></li>
+                <li><a href="adminEditForm.html">Edit Item</a></li>
+                <li><a href="adminRemoveForm.html">Remove Item</a></li>
 
             </ul>
         </div>

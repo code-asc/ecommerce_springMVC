@@ -6,17 +6,17 @@ $(document).ready(function(){
     var subCategoryType;
     $("#subcategory").find("option").remove();
     $("#subcategory").append("<option selected disabled>SubCategory</option>");
-    $.ajax({url:'/Controller/adminData.cfc?method=getSubCategory',
-      data:{categoryID:$(this).val()},
+    $.ajax({url:'getSubCategoryBasedOnCategoryID.json',
+      data:{categoryID : $(this).val()},
       success:function(responseText){
         //alert(responseText);
-        $.each(JSON.parse(responseText),function(index,key){
-          $.each(key,function(index,value){
-            if(index=="SUBCATEGORYTYPE")
+        $.each(responseText,function(index , key){
+          $.each(key,function(index , value){
+            if(index=="subCategoryType")
             {
               subCategoryType=value;
             }
-            else if (index=="SUBCATEGORYID"){
+            else if (index=="subCategoryID"){
               subCategoryID=value;
             }
           })

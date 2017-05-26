@@ -1,5 +1,6 @@
 package com.app.repository;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -195,6 +196,49 @@ public class AdminEdit {
 	}
 	
 	
+	public List<SubCategoryType> getSubCategory(int categoryID)
+	{
+		List<SubCategoryType> list = new ArrayList<>();
+		Connection con = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		try{
+			
+			String sql = "SELECT subCategoryID , subCategoryType FROM SubCategory "
+					+ "where "
+					+ "categoryID = ? ";
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			con=DriverManager.getConnection(url,userName,password);
+			stmt=con.prepareStatement(sql);
+			stmt.setInt(1,categoryID);
+			rs = stmt.executeQuery();
+			while(rs.next())
+			{
+				SubCategoryType info = new SubCategoryType();
+				info.setSubCategoryType(rs.getString("subCategoryType"));
+				info.setSubCategoryID(rs.getInt("subCategoryID"));
+				list.add(info);
+			}
+		}catch(SQLException e)
+		{
+			
+			e.printStackTrace();
+		}catch(ClassNotFoundException e)
+		{
+			
+			e.printStackTrace();
+		}finally{
+			try{
+				rs.close();
+				stmt.close();
+				con.close();
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+		}
+		return list;
+	}
+	
 	public int addSubCategoryToDatabase(int categoryID , String subCategoryType)
 	{
 		int i = 1;
@@ -243,5 +287,83 @@ public class AdminEdit {
 		}
 		return i;
 	}
+
+
+
+
+public void productEdit(int productID , String productDesc , BigDecimal unitPrice , BigDecimal discount , int unitInStock)
+{
+	Connection con = null;
+	PreparedStatement stmt = null;
+	try{
+		
+		String sql = "UPDATE Products "
+				+ "SET productDesc = ? ,"
+				+ "unitPrice = ? ,"
+				+ "unitInStock = ? ,"
+				+ "discount = ? "
+				+ "WHERE "
+				+ "productID = ?";
+		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+		con=DriverManager.getConnection(url,userName,password);
+		stmt=con.prepareStatement(sql);
+		stmt.setString(1, productDesc);
+		stmt.setBigDecimal(2, unitPrice);
+		stmt.setInt(3, unitInStock);
+		stmt.setBigDecimal(4, discount);
+		stmt.setInt(5,productID);
+		stmt.executeUpdate();
+		
+	}catch(SQLException e)
+	{
+		
+		e.printStackTrace();
+	}catch(ClassNotFoundException e)
+	{
+		
+		e.printStackTrace();
+	}finally{
+		try{
+			stmt.close();
+			con.close();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+	}
+}
+
+public void productDelete(int productID )
+{
+	Connection con = null;
+	PreparedStatement stmt = null;
+	try{
+		
+		String sql = "UPDATE Products "
+				+ "SET status='removed' "
+				+ "WHERE "
+				+ "productID = ?";
+		Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+		con=DriverManager.getConnection(url,userName,password);
+		stmt=con.prepareStatement(sql);
+		stmt.setInt(1,productID);
+		stmt.executeUpdate();
+		
+	}catch(SQLException e)
+	{
+		
+		e.printStackTrace();
+	}catch(ClassNotFoundException e)
+	{
+		
+		e.printStackTrace();
+	}finally{
+		try{
+			stmt.close();
+			con.close();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+	}
+}
 
 }
