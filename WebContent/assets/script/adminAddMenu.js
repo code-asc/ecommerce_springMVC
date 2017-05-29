@@ -26,7 +26,7 @@ function ajaxAddCall() {
     var largePhotoType = $("#largePhotoType").val();
 
     $.ajax({
-        url: "/Controller/adminData.cfc?method=addToDatabase",
+        url: "addToDatabase.json",
         data: {
             productName: productName,
             productDesc: productDesc,
@@ -43,13 +43,13 @@ function ajaxAddCall() {
             brandID: brandID
         },
     }).done(function(responseText,textStatus,jsXHR){
-      if(JSON.parse(responseText)=="success")
+    	
+      if(responseText["stringList"] == 'success')
       {
     //  alert(responseText);
       $("#formData").append("<div class='alert alert-success'>New Product added to Database</div>").delay(4000).fadeOut();
     }
       else {
-        alert(responseText)
         $("#formData").append("<div class='alert alert-success'>Something went wrong :-(</div>").delay(4000).fadeOut();
       }
     }).fail(function(jsXHR,textStatus,errorThrown){

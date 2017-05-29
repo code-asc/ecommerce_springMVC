@@ -1,7 +1,10 @@
 package com.app.controller;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -55,8 +58,10 @@ public class AdminPageInfo {
 	}
 	
 	@RequestMapping(value = "/admin" , method = RequestMethod.GET)
-	public String getAdminPage(Model model)
+	public String getAdminPage(Model model , HttpSession session)
 	{
+		if(session.getAttribute("role").toString().compareTo("admin")==0)
+		{
 		model.addAttribute("customer" , allInfo.customerCountList().get(0).getTotal());
 		model.addAttribute("product" , allInfo.productCountList().get(0).getTotal());
 		model.addAttribute("shipping" , allInfo.shippingCountList().get(0).getTotal());
@@ -64,12 +69,20 @@ public class AdminPageInfo {
 		model.addAttribute("category", allInfo.supplierCountList().get(0).getTotal());
 		model.addAttribute("subCategory" , allInfo.categorySubCountList().get(0).getTotal());
 		return "admin";
+		}else{
+			return "redirect:signin.html";
+		}
 	}
 	
 	@RequestMapping(value = "/adminOther" , method = RequestMethod.GET)
-	public String getAdminOther()
+	public String getAdminOther(HttpSession session)
 	{
+		if(session.getAttribute("role").toString().compareTo("admin")==0)
+		{
 		return "adminOther";
+		}else{
+			return "redirect:signin.html";
+		}
 	}
 	
 	@RequestMapping(value = "/addBrand")
@@ -109,40 +122,65 @@ public class AdminPageInfo {
 	}
 	
 	@RequestMapping(value = "/adminSubCategory"  , method = RequestMethod.GET)
-	public String getAdminSubCategory(Model model)
+	public String getAdminSubCategory(Model model , HttpSession session)
 	{
+		if(session.getAttribute("role").toString().compareTo("admin")==0)
+		{
 		model.addAttribute("category" , otherDetails.getCategory());
 		return "adminSubCategory";
+		}else{
+			return "redirect:signin.html";
+		}
 	}
 	
 	@RequestMapping(value = "/adminEditForm" , method = RequestMethod.GET)
-	public String getAdminEditForm(Model model)
+	public String getAdminEditForm(Model model , HttpSession session)
 	{
+		if(session.getAttribute("role").toString().compareTo("admin")==0)
+		{
 		model.addAttribute("category" , otherDetails.getCategory());
 		return "adminEdit";
+		}else{
+			return "redirect:signin.html";
+		}
 	}
 	
 	@RequestMapping(value = "/adminRemoveForm" , method = RequestMethod.GET)
-	public String getAdminRemoveForm(Model model)
+	public String getAdminRemoveForm(Model model , HttpSession session)
 	{
+		if(session.getAttribute("role").toString().compareTo("admin")==0)
+		{
 		model.addAttribute("category" , otherDetails.getCategory());
 		return "adminRemove";
+		}else{
+			return "redirect:signin.html";
+		}
 	}
 	
 	@RequestMapping(value = "/adminRemoveForm" , method = RequestMethod.POST)
-	public String postAdminRemoveForm(Model model , @RequestParam("products") int productID)
+	public String postAdminRemoveForm(Model model , @RequestParam("products") int productID , HttpSession session)
 	{
+		if(session.getAttribute("role").toString().compareTo("admin")==0)
+		{
 		otherDetails.deleteProduct(productID);
 		model.addAttribute("category" , otherDetails.getCategory());
 		return "adminRemove";
+		}else{
+			return "redirect:signin.html";
+		}
 	}
 	
 	@RequestMapping(value = "/adminEditForm" , method = RequestMethod.POST)
-	public String postAdminEditForm(Model model , @RequestParam("products") int productID ,@RequestParam("productDesc") String productDesc , @RequestParam("unitPrice") BigDecimal unitPrice , @RequestParam("unitInStock") int unitInStock , @RequestParam("discount") BigDecimal discount , @RequestParam("thumbNailPhoto") String thumbNailPhoto , @RequestParam("largePhoto") String largePhoto)
+	public String postAdminEditForm(Model model , HttpSession session , @RequestParam("products") int productID ,@RequestParam("productDesc") String productDesc , @RequestParam("unitPrice") BigDecimal unitPrice , @RequestParam("unitInStock") int unitInStock , @RequestParam("discount") BigDecimal discount , @RequestParam("thumbNailPhoto") String thumbNailPhoto , @RequestParam("largePhoto") String largePhoto)
 	{
+		if(session.getAttribute("role").toString().compareTo("admin")==0)
+		{
 		otherDetails.updateProduct(productID, productDesc, unitPrice, discount, unitInStock);
 		model.addAttribute("category" , otherDetails.getCategory());
 		return "adminEdit";
+		}else{
+			return "redirect:signin.html";
+		}
 	}
 	
 	@RequestMapping(value = "/getSubCategoryBasedOnCategoryID")
@@ -161,5 +199,81 @@ public class AdminPageInfo {
 	public @ResponseBody List<ProductDetails> getProductInfoByProductID(@RequestParam("productID") int productID)
 	{
 		return productInfo.getOnlyProductDetailsByProductID(productID);
+	}
+	
+	@RequestMapping(value = "adminAdd" , method = RequestMethod.GET)
+	public String getAdminAdd(Model model , HttpSession session)
+	{
+		if(session.getAttribute("role").toString().compareTo("admin")==0)
+		{
+		model.addAttribute("category" , otherDetails.getCategory());
+		model.addAttribute("brand", brandInfo.onlyBrands());
+		model.addAttribute("shipping", allInfo.shippingCountList());
+		model.addAttribute("supplier", allInfo.supplierCountList());
+		return "adminAdd";
+		}
+		else
+		{
+			return "redirect:signin.html";
+		}
+	}
+	
+	@RequestMapping(value = "/addToDatabase" , method = RequestMethod.GET)
+	public List<String> addProductToDB(@RequestParam("productName") String productName , @RequestParam("productDesc") String productDesc , @RequestParam("supplierID") int supplierID , @RequestParam("subCategoryID") int subcategoryID , @RequestParam("unitPrice") BigDecimal unitPrice , @RequestParam("thumbNail") String thumbNail , @RequestParam("thumbNailType") String thumbNailType , @RequestParam("largePhotoType") String largePhotoType , @RequestParam("largePhoto") String largePhoto , @RequestParam("quantity") int quantity , @RequestParam("discount") BigDecimal discount , @RequestParam("rating") int rating , @RequestParam("brandID") int brandID)
+	{
+		int temp = otherDetails.addProduct(productName, productDesc, supplierID, subcategoryID, unitPrice, thumbNail, thumbNailType, largePhotoType, largePhoto, quantity, discount, rating, brandID);	
+		List<String> list = new ArrayList<>();
+		if(temp > 0)
+		{
+			list.add("success");
+			return list;
+		}
+		else
+		{
+			list.add("fail");
+			return list;
+		}
+	}
+	
+	@RequestMapping(value = "/adminProductEdit" , method = RequestMethod.GET)
+	public String getAdminProductEdit(@RequestParam("productID") int productID , Model model , HttpSession session)
+	{
+		if(session.getAttribute("role").toString().compareTo("admin")==0)
+		{
+			model.addAttribute("productInfo" , productInfo.getOnlyProductDetailsByProductID(productID));
+		return "adminProductEdit";
+		}else{
+			return "redirect:signin.html";
+		}
+	}
+	
+	@RequestMapping(value = "/editProductDirect" , method = RequestMethod.GET)
+	public List<String> editProductDirect(@RequestParam("productID") int productID, @RequestParam("productDesc") String productDesc , @RequestParam("unitPrice") BigDecimal unitPrice , @RequestParam("thumbNailPhoto") String thumbNail ,  @RequestParam("largePhoto") String largePhoto , @RequestParam("unitInStock") int stock , @RequestParam("discount") BigDecimal discount )
+	{
+		int temp = otherDetails.editProductSinglePage(productID, productDesc, unitPrice, stock, discount, thumbNail, largePhoto);
+		List<String> list = new ArrayList<>();
+		if(temp > 0)
+		{
+			list.add("success");
+			return list;
+		}
+		else
+		{
+			list.add("fail");
+			return list;
+		}
+	}
+	
+	@RequestMapping(value = "/user_action_single_delete" , method = RequestMethod.GET)
+	public String deleteFromUserPage(@RequestParam("removeProduct") int productID , HttpSession session)
+	{
+		if(session.getAttribute("role").toString().compareTo("admin")==0)
+		{
+			System.out.println(session.getAttribute("tempPath").toString());
+			otherDetails.deleteProduct(productID);
+			return "redirect:"+session.getAttribute("tempPath").toString();
+		}else{
+			return "signin.html";
+		}
 	}
 }

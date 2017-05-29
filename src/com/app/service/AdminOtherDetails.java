@@ -9,12 +9,16 @@ import org.springframework.stereotype.Service;
 import com.app.model.CategoryType;
 import com.app.model.SubCategoryType;
 import com.app.repository.AdminEdit;
+import com.app.repository.AdminPageQuery;
 
 @Service
 public class AdminOtherDetails {
 	
 	@Autowired
 	AdminEdit edit;
+	
+	@Autowired
+	AdminPageQuery _edit;
 	
 	public int addBrand(String brandName)
 	{
@@ -54,5 +58,15 @@ public class AdminOtherDetails {
 	public void deleteProduct(int productID)
 	{
 		edit.productDelete(productID);
+	}
+	
+	public int addProduct(String productName , String productDesc , int supplierID , int subcategoryID , BigDecimal unitPrice , String thumbNail , String thumbNailType , String largePhotoType , String largePhoto , int quantity , BigDecimal discount , int rating , int brandID)
+	{
+		return _edit.addNewProduct(productName, productDesc, supplierID, subcategoryID, unitPrice, thumbNail, thumbNailType, largePhotoType, largePhoto, quantity, discount, rating, brandID);
+	}
+	
+	public int editProductSinglePage(int productID , String productDesc , BigDecimal unitPrice , int unitInStock , BigDecimal discount , String thumbNailPhoto , String largePhoto)
+	{
+		return edit.editProductFromUserSinglePage(productID, productDesc, unitPrice, unitInStock, discount, thumbNailPhoto, largePhoto);
 	}
 }

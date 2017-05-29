@@ -56,7 +56,14 @@ public class SignIn {
 				System.out.println(e.getMessage());
 				e.printStackTrace();
 			}
-			return "redirect:index.html";
+			System.out.println("The current path : " + session.getAttribute("previousPath").toString());
+			if(session.getAttribute("tempPath") != null)
+			{
+			return "redirect:"+session.getAttribute("tempPath").toString();
+			}else
+			{
+				return "redirect:"+session.getAttribute("previousPath").toString();
+			}
 		}else
 		{
 			model.addAttribute("showMessage", true);

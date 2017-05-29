@@ -24,7 +24,7 @@
         <div class="col-md-2 col-sm-2 sidebar">
             <ul class="nav nav-pills nav-stacked" style="border: 1px solid #337ab7 ; border-radius:8px">
                 <li class="active"><a href="admin.html">DashBoard</a></li>
-                <li><a href="/view/adminAdd.cfm">Add Item</a></li>
+                <li><a href="adminAdd.html">Add Item</a></li>
                 <li><a href="adminOther.html">Add Brand And Category</a></li>
                 <li><a href="adminSubCategory.html">Add SubCategory</a></li>
                 <li><a href="adminEditForm.html">Edit Item</a></li>
@@ -36,8 +36,8 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <!---  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    
+<!--     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+ -->    
 
 </body>
 </html>

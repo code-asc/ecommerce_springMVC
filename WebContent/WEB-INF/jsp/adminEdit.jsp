@@ -26,13 +26,7 @@
 
 <body>
 
-    <cfif structKeyExists(SESSION, "stLoggedInUser") AND SESSION.stLoggedInUser.userRole EQ "admin">
-      <cfset LOCAL.productAddOption=createObject("component","Controller.getProductIDList")>
-        <cfif structKeyExists(form, "submitEdit") AND StructKeyExists(form, "products")>
-            <cfinvoke component="Controller.adminData" method="editProduct" productID=#form.products# productDesc="#form.productDesc#" unitPrice=#form.unitPrice# unitInStock=#form.unitInStock# discount=#form.discount# thumbNailPhoto="#form.thumbNailPhoto#" largePhoto="#form.largePhoto#" />
-        </cfif>
-        <cfset LOCAL.categoryOption=LOCAL.productAddOption.getOnlyCategory()>
-
+    
         <body>
         <%@ include file="/WEB-INF/jsp/header.jsp" %>
                 <div class="container-fluid">

@@ -40,6 +40,28 @@ public class FilterToCheckSessionExists implements Filter {
 		HttpServletRequest requestOf =(HttpServletRequest)request;
 		HttpServletResponse responseOf=(HttpServletResponse)response;
 		
+		if(requestOf.getSession().getAttribute("previousPath") != null)
+		{
+			String tempPath = requestOf.getSession().getAttribute("previousPath").toString();
+			requestOf.getSession().setAttribute("tempPath", tempPath);
+		}
+		
+		if(requestOf.getSession().getAttribute("currentPath") != null)
+		{
+			String previousPath = requestOf.getSession().getAttribute("currentPath").toString();
+			requestOf.getSession().setAttribute("previousPath", previousPath);
+		}
+		
+		String currentPath = requestOf.getServletPath().replace("/", "");
+		if(requestOf.getQueryString() != null)
+		{
+			currentPath = currentPath.concat("?" + requestOf.getQueryString());
+			
+		}
+		
+	
+		requestOf.getSession().setAttribute("currentPath", currentPath);
+		
 		if(requestOf.getSession(false)==null && requestOf.getRequestURI().toString().compareTo("/ProjectDemo/signin.html")!=0)
 		{
 			responseOf.sendRedirect("/ProjectDemo/signin.html");	

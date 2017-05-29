@@ -366,4 +366,71 @@ public void productDelete(int productID )
 	}
 }
 
+	public int editProductFromUserSinglePage(int productID , String productDesc , BigDecimal unitPrice , int unitInStock , BigDecimal discount , String thumbNailPhoto , String largePhoto)
+	{
+		int check = 1;
+		Connection con = null;
+		PreparedStatement stmt = null;
+		PreparedStatement _stmt = null;
+		try{
+			
+			String sqlForProduct = "UPDATE Products "
+					+ "SET productDesc = ? ,"
+					+ "unitPrice = ? ,"
+					+ "unitInStock = ? ,"
+					+ "discount = ? "
+					+ "WHERE "
+					+ "productID = ? ";
+					
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			con=DriverManager.getConnection(url,userName,password);
+			con.setAutoCommit(false);
+			stmt=con.prepareStatement(sqlForProduct);
+			stmt.setString(1, productDesc);
+			stmt.setBigDecimal(2, unitPrice);
+			stmt.setInt(3, unitInStock);
+			stmt.setBigDecimal(4, discount);
+			stmt.setInt(5, productID);
+			stmt.executeUpdate();
+			
+			
+			String sqlForPhoto = "UPDATE ProductPhoto "
+					+ "SET thumbNailPhoto = ?  ,"
+					+ "largePhoto = ? "
+					+ "from ProductPhoto "
+					+ "INNER JOIN Products "
+					+ "ON "
+					+ "Products.photoID=ProductPhoto.photoID "
+					+ "WHERE "
+					+ "productID = ? ";
+			_stmt = con.prepareStatement(sqlForPhoto);
+			_stmt.setString(1, thumbNailPhoto);
+			_stmt.setString(2, largePhoto);
+			_stmt.setInt(3, productID);
+			_stmt.executeUpdate();
+			
+			con.commit();
+		}catch(SQLException e)
+		{
+			check = 0;
+			e.printStackTrace();
+		}catch(ClassNotFoundException e)
+		{
+			check = 0;
+			e.printStackTrace();
+		}catch(Exception e){
+			check = 0;
+			e.printStackTrace();
+		}
+			finally{
+		
+			try{
+				stmt.close();
+				con.close();
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+			}
+		return check;
+	}
 }

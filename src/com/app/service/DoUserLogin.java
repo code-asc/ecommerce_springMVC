@@ -22,7 +22,6 @@ public class DoUserLogin implements UserLogin {
 	 */
 	@Override
 	public boolean isUserValid(String email, String password , HttpSession session , HttpServletRequest request) {
-		System.out.print("waiting....works");
 		String userFirstName = "";
 		String userLastName = "";
 		String userMiddleName = "";
@@ -55,6 +54,9 @@ public class DoUserLogin implements UserLogin {
 				session.setAttribute("userFullName", userFullName);
 				session.setAttribute("isUserLoggedIn", true);
 				session.setAttribute("userProfilePhoto" , userProfilePhoto);
+				session.setAttribute("userEmail", userEmail);
+				session.setAttribute("role", role);
+				session.setAttribute("userInfo", userInfo);
 				returnVal=true;
 			}
 		}

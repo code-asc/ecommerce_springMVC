@@ -16,7 +16,7 @@ function submitEditProductAJAXCall()
 
   var productID=$("#productID").val();
   var categoryID=$("#category").val();
-  var subcategoryID=$("#subcategory").val();
+  //var subcategoryID=$("#subcategory").val();
   var unitPrice=$("#unitPrice").val();
   var stock=$("#stock").val();
   var discount=$("#discount").val();
@@ -25,10 +25,11 @@ function submitEditProductAJAXCall()
   var productDesc=$("#productDesc").val();
 
   $.ajax({
-    url:"/Controller/adminData.cfc?method=editProductRemote",
+    url:"editProductDirect.json",
     data:{productID:productID,productDesc:productDesc,unitPrice:unitPrice,unitInStock:stock,discount:discount,thumbNailPhoto:thumbNail,largePhoto:largePhoto},
+    
   }).done(function(responseText,textStatus,jsXHR){
-    if(responseText==1){
+    if(responseText["stringList"] == 'success'){
     $("#infoAboutEdit").append("<div class='alert alert-success'>Change Saved</div>").delay(4000).fadeOut();
   }
 

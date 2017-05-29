@@ -42,7 +42,6 @@ public class UserDetails {
 				LoggedInUserInfo userInfo = new LoggedInUserInfo();
 				userInfo.setRole(rs.getString("roles"));
 				userInfo.setUserEmail(rs.getString("userEmail"));
-				System.out.println(rs.getString("userEmail"));
 				userInfo.setUserFirstName(rs.getString("userFirstName"));
 				userInfo.setUserMiddleName(rs.getString("userMiddleName"));
 				userInfo.setUserLastName(rs.getString("userLastName"));

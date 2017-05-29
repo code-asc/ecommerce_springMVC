@@ -20,6 +20,8 @@
 <link
 	href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css"
 	rel="Stylesheet"></link>
+	
+	<script src="/ProjectDemo/assets/script/headerMenuData.js"></script>
 
 </head>
 
@@ -131,7 +133,19 @@
 
 					<ul class="dropdown-menu" id="loginButton" style="margin-left: 20px; width: 280px;">
 					
-					
+					<c:choose>
+					<c:when test="${sessionScope.isUserLoggedIn &&  sessionScope.role == 'admin'}">
+						<li>
+							<span id="fullName"><c:out value="${sessionScope.userFullName}"/></span>
+						</li>
+						<li class="divider"/>
+						
+						<li><a href="admin.html"><span>Admin Edit</span></a></li>
+						
+						<li class="divider"/>
+						<li><a href="logout.html"><i class="fa fa-sign-out" aria-hidden="true"></i> &nbsp SignOut</a></li>
+					</c:when>
+					<c:otherwise>
 					<c:choose>
 					<c:when test="${sessionScope.isUserLoggedIn}">
 					<li>
@@ -153,10 +167,13 @@
 						</li>
 						</c:otherwise>
 						</c:choose>
+						</c:otherwise>
+						
+					</c:choose>
 					</ul>
 				
 				<c:choose>
-				<c:when test="${sessionScope.isUserLoggedIn}">
+				<c:when test="${sessionScope.isUserLoggedIn && sessionScope.role != 'admin'}">
 				<li>
 				<a href="userCart.html"><i class="fa fa-shopping-cart" aria-hidden="true"></i>&nbsp Cart&nbsp
 				<c:choose>
@@ -185,7 +202,7 @@
         <script src="/ProjectDemo/assets/script/onWindowClose.js"></script>
         <script src="/ProjectDemo/assets/script/onNotificationClick.js"></script>
 -->
-<script src="/ProjectDemo/assets/script/headerMenuData.js"></script>
+
 </body>
 
 </html>

@@ -62,6 +62,12 @@
                                                                 <h4>(Left :#LOCAL.retriveProduct.unitInStock#)</h4></cfif>
                                                                 
                                                                  -->
+                                                                 
+                                                                 <c:choose>
+                                                                 <c:when test="${ sessionScope.role == 'admin'}">
+                                                                  <h4>(Left :${product.unitInStock})</h4>
+                                                                 </c:when>
+                                                                 </c:choose>
                                                             <br/>
                                                         </div>
 
@@ -78,6 +84,18 @@
                                                             </c:when>
                                                             
                                                             <c:otherwise>
+                                                            
+                                                            <c:choose>
+                                                            <c:when test="${sessionScope.isUserLoggedIn  && sessionScope.role == 'admin' }">
+                                                            	
+                                                            	<a class="btn btn-primary" href="adminProductEdit.html?productID=${productID}"><i class="fa fa-pencil" aria-hidden="true"></i> &nbspEdit</a>
+                                                                <a class="btn btn-danger" href="user_action_single_delete.html?removeProduct=${productID}"><i class="fa fa-trash" aria-hidden="true"></i> &nbspRemove</a>
+                                                            	
+                                                            </c:when>
+                                                            
+                                                            <c:otherwise>
+                                                            
+                                                            
                                                             <c:choose>
                                                             <c:when test="${product.unitInStock < 1}">
                                                             <h4>Out Of Stock</h4>
@@ -87,6 +105,10 @@
                                                                 <button class="btn btn-info" id="onAddCart"><i class="fa fa-shopping-cart" aria-hidden="true"></i> &nbspAdd To Cart</button>
                                                            </c:otherwise>
                                                             </c:choose>
+                                                            
+                                                            </c:otherwise>
+                                                            </c:choose>
+                                                            
                                                             </c:otherwise>
                                                             </c:choose>
                                                         </div>

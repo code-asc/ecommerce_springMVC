@@ -1,6 +1,15 @@
 package com.app.model;
 
-public class LoggedInUserInfo {
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionBindingEvent;
+import javax.servlet.http.HttpSessionBindingListener;
+
+public class LoggedInUserInfo implements HttpSessionBindingListener {
+	
+	private static Map<String , HttpSession> logins = new ConcurrentHashMap<>();
 	
 	private int userID;
 	private String userFirstName;
@@ -73,6 +82,23 @@ public class LoggedInUserInfo {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	@Override
+	public void valueBound(HttpSessionBindingEvent event) {
+		
+		HttpSession session = logins.remove(this.userEmail);
+		if(session != null)
+		{
+			session.invalidate();
+		}
+		logins.put(this.userEmail, event.getSession());
+	}
+
+	@Override
+	public void valueUnbound(HttpSessionBindingEvent arg0) {
+		
+		logins.remove(this.userEmail);
 	}
 
 }
