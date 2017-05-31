@@ -25,5 +25,10 @@ public interface AdminPageAllInfo {
 	public abstract List<AdminSupplierCount> supplierCountList();
 
 	public abstract List<AdminShippingCount> shippingCountList();
-
+	
+	public abstract int onlineUsers();
+	
+	public void changeUserStatusToOffline(int userID);
+	
+	public void removeUserOnline(int userID);
 }

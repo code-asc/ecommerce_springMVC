@@ -359,4 +359,218 @@ public class UserDetails {
 	}
 		return check;
 	}
+	
+	
+	public void updateUserToOffline(int userID)
+	{
+		Connection con = null;
+		PreparedStatement stmt = null;
+		
+		try{
+			
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			con = DriverManager.getConnection(url, userName, password);
+			String sql = "UPDATE OnlineUser "
+					+ "SET status='offline' "
+					+ "WHERE "
+					+ "userID = ?";
+					
+			stmt=con.prepareStatement(sql);
+			stmt.setInt(1, userID);
+			stmt.executeUpdate();
+			
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println(e.getSQLState());
+		}catch (ClassNotFoundException e){
+			e.printStackTrace();
+		}catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		finally {
+			try{
+			con.close();
+			stmt.close();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+	
+	}
+
+	}
+	
+	public void updateUserToOnline(int userID)
+	{
+		Connection con = null;
+		PreparedStatement stmt = null;
+		
+		try{
+			
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			con = DriverManager.getConnection(url, userName, password);
+			String sql = "UPDATE OnlineUser "
+					+ "SET status='online' "
+					+ "WHERE "
+					+ "userID = ?";
+					
+			stmt=con.prepareStatement(sql);
+			stmt.setInt(1, userID);
+			stmt.executeUpdate();
+			
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println(e.getSQLState());
+		}catch (ClassNotFoundException e){
+			e.printStackTrace();
+		}catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		finally {
+			try{
+			con.close();
+			stmt.close();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+	
+	}
+
+	}
+	
+
+	
+	public void changeUserStatusOnline(int userID , String userEmail)
+	{
+		Connection con = null;
+		PreparedStatement stmt = null;
+		
+		try{
+			
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			con = DriverManager.getConnection(url, userName, password);
+			String sql = "INSERT INTO OnlineUser(userID , status , email) "
+					+ "VALUES(? , ? , ?) ";
+				
+					
+			stmt=con.prepareStatement(sql);
+			stmt.setInt(1, userID);
+			stmt.setString(2, "online");
+			stmt.setString(3, userEmail);
+			stmt.executeUpdate();
+			
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println(e.getSQLState());
+		}catch (ClassNotFoundException e){
+			e.printStackTrace();
+		}catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		finally {
+			try{
+			con.close();
+			stmt.close();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+	
+	}
+
+	}
+	
+	
+	public void removeUserStatus(int userID)
+	{
+		Connection con = null;
+		PreparedStatement stmt = null;
+		
+		try{
+			
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			con = DriverManager.getConnection(url, userName, password);
+			String sql = "DELETE FROM onlineUser "
+					+ "WHERE "
+					+ "userID = ?";
+				
+					
+			stmt=con.prepareStatement(sql);
+			stmt.setInt(1, userID);
+			stmt.executeUpdate();
+			
+			
+		}catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println(e.getSQLState());
+		}catch (ClassNotFoundException e){
+			e.printStackTrace();
+		}catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		finally {
+			try{
+			con.close();
+			stmt.close();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+	
+	}
+
+	}
+	
+	public int countOnlineUsers()
+	{
+		int count = 0;
+		Connection con = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		try{
+			
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			con = DriverManager.getConnection(url, userName, password);
+			String sql = "SELECT count(userID) AS totalUsers FROM OnlineUser "
+					+ "WHERE "
+					+ "status = ? ";
+				
+					
+			stmt=con.prepareStatement(sql);
+			stmt.setString(1, "online");
+			rs=stmt.executeQuery();
+			while(rs.next())
+			{
+				count = rs.getInt("totalUsers");
+			}
+		
+		}catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println(e.getSQLState());
+		}catch (ClassNotFoundException e){
+			e.printStackTrace();
+		}catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		finally {
+			try{
+			rs.close();
+			con.close();
+			stmt.close();
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+	
+	}
+		
+		return count;
+	}
+
+	
 }

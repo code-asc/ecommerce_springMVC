@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-//var onlineUserCount=setInterval("ajaxCallForOnlineUser()",4000);
+var onlineUserCount=setInterval("ajaxCallForOnlineUser()",4000);
   $("select[name='products']").on("change",function()
 {
   if($("#formEdit").valid())
@@ -52,10 +52,10 @@ $.ajax({
 })
 }
 
-/*function ajaxCallForOnlineUser()
+function ajaxCallForOnlineUser()
 {
   $.ajax({
-    url:'/Controller/adminData.cfc?method=onlineUsers',
+    url:'onlineUsers.json',
     success:function(responseText){
 
       $("#getOnlineUserCount").empty();
@@ -66,4 +66,3 @@ $.ajax({
     }
   });
 }
-*/

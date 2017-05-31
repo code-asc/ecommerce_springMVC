@@ -6,7 +6,7 @@ window.onbeforeunload = function (event) {
     }
     if (event || window.event.clientX<0 || window.event.clientY<0) {
       $.ajax({
-        url:"/Controller/removeSession.cfc?method=onWindowClose",
+        url:"onWindowClose.json",
       })
     }
 

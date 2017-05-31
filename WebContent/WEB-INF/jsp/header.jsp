@@ -22,6 +22,7 @@
 	rel="Stylesheet"></link>
 	
 	<script src="/ProjectDemo/assets/script/headerMenuData.js"></script>
+	
 
 </head>
 
@@ -105,7 +106,8 @@
 
 			<ul class="nav navbar-nav">
 			<c:set var="userProfilePhoto" value="${sessionScope.userProfilePhoto}"/>
-				<li><a href="#" type="button" class="dropdown-toggle" data-toggle="dropdown" data-target="loginButton" style="padding-top: 10px"> 
+				<li>
+				<a href="#" type="button" class="dropdown-toggle" data-toggle="dropdown" data-target="loginButton" style="padding-top: 10px"> 
 					<c:choose>
 					<c:when test="${fn:length(userProfilePhoto) > 0 && not empty sessionScope.isUserLoggedIn}">
 					<span style="float:left"><img class="img-circle img-responsive" src="${userProfilePhoto}" alt=" "></span>
@@ -171,6 +173,37 @@
 						
 					</c:choose>
 					</ul>
+					</li>
+					
+					<!--Notifications-->
+					<c:choose>
+					<c:when test="${sessionScope.isUserLoggedIn &&  sessionScope.role != 'admin'}">
+					
+				                        <li>
+
+                                <a id="dLabel" role="button" data-toggle="dropdown" data-target="#">
+                                    <i class="glyphicon glyphicon-bell" style="padding-top : 4px"></i>&nbsp
+                                   
+                                </a>
+
+                                <ul class="dropdown-menu notifications" role="menu" aria-labelledby="dLabel">
+
+                                    <div class="notification-heading">
+                                        <h4 class="menu-title">Notifications</h4>
+
+                                    </div>
+                                    <li class="divider"></li>
+                                    <div class="notifications-wrapper" id="addNotification">
+
+                                     
+                                    </div>
+                                    <li class="divider"></li>
+
+                                </ul>
+
+                        </li>
+                        </c:when>
+					</c:choose>
 				
 				<c:choose>
 				<c:when test="${sessionScope.isUserLoggedIn && sessionScope.role != 'admin'}">
@@ -187,6 +220,7 @@
 				</li>
 				</c:when>
 				</c:choose>
+				
 			</ul>
 
 		</div>
@@ -199,9 +233,14 @@
 
 	<!--  <script src="/ProjectDemo/script/autoSuggestion.js"></script>
       <script src="/ProjectDemo/assets/script/userSocketAjax.js"></script>
+      
+      -->
         <script src="/ProjectDemo/assets/script/onWindowClose.js"></script>
+        <script src="/ProjectDemo/assets/script/notificationHeader.js"></script>
+        
         <script src="/ProjectDemo/assets/script/onNotificationClick.js"></script>
--->
+        <script src="/ProjectDemo/assets/script/headerNotification_user.js"></script>
+
 
 </body>
 

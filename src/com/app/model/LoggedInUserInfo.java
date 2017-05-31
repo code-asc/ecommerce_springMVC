@@ -7,7 +7,15 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionBindingEvent;
 import javax.servlet.http.HttpSessionBindingListener;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.app.repository.UserDetails;
+
+
 public class LoggedInUserInfo implements HttpSessionBindingListener {
+	
+	
 	
 	private static Map<String , HttpSession> logins = new ConcurrentHashMap<>();
 	
@@ -87,11 +95,16 @@ public class LoggedInUserInfo implements HttpSessionBindingListener {
 	@Override
 	public void valueBound(HttpSessionBindingEvent event) {
 		
+		UserDetails info = new UserDetails();
 		HttpSession session = logins.remove(this.userEmail);
 		if(session != null)
 		{
 			session.invalidate();
+			
+			info.removeUserStatus(this.userID);
 		}
+		
+		info.changeUserStatusOnline(this.userID, this.userEmail);
 		logins.put(this.userEmail, event.getSession());
 	}
 

@@ -60,13 +60,13 @@ public class AdminPageInfo {
 	@RequestMapping(value = "/admin" , method = RequestMethod.GET)
 	public String getAdminPage(Model model , HttpSession session)
 	{
-		if(session.getAttribute("role").toString().compareTo("admin")==0)
+		if(session.getAttribute("isUserLoggedIn") != null && session.getAttribute("role").toString().compareTo("admin")==0)
 		{
 		model.addAttribute("customer" , allInfo.customerCountList().get(0).getTotal());
 		model.addAttribute("product" , allInfo.productCountList().get(0).getTotal());
 		model.addAttribute("shipping" , allInfo.shippingCountList().get(0).getTotal());
 		model.addAttribute("supplier" , allInfo.supplierCountList().get(0).getTotal());
-		model.addAttribute("category", allInfo.supplierCountList().get(0).getTotal());
+		model.addAttribute("category", allInfo.categoryCountList().get(0).getTotal());
 		model.addAttribute("subCategory" , allInfo.categorySubCountList().get(0).getTotal());
 		return "admin";
 		}else{
@@ -204,7 +204,7 @@ public class AdminPageInfo {
 	@RequestMapping(value = "adminAdd" , method = RequestMethod.GET)
 	public String getAdminAdd(Model model , HttpSession session)
 	{
-		if(session.getAttribute("role").toString().compareTo("admin")==0)
+		if(session.getAttribute("isUserLoggedIn") != null && session.getAttribute("role").toString().compareTo("admin")==0)
 		{
 		model.addAttribute("category" , otherDetails.getCategory());
 		model.addAttribute("brand", brandInfo.onlyBrands());
@@ -275,5 +275,18 @@ public class AdminPageInfo {
 		}else{
 			return "signin.html";
 		}
+	}
+	
+	
+	@RequestMapping(value = "/onlineUsers" , method = RequestMethod.GET)
+	public @ResponseBody int getAllOnlineUsers()
+	{
+		return allInfo.onlineUsers();
+	}
+	
+	@RequestMapping(value = "/onWindowClose" , method = RequestMethod.GET)
+	public @ResponseBody void getUserOffline(HttpSession session)
+	{
+		 allInfo.changeUserStatusToOffline((int)session.getAttribute("userID"));;
 	}
 }

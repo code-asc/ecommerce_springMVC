@@ -13,6 +13,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.app.model.CategoryType;
+import com.app.model.NotificationModel;
 import com.app.model.SubCategoryType;
 
 
@@ -432,5 +433,130 @@ public void productDelete(int productID )
 			}
 			}
 		return check;
+	}
+	
+	public List<NotificationModel> notificationQuery()
+	{
+		List<NotificationModel> list = new ArrayList<>();
+		Connection con = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		try
+		{
+			String sql = "SELECT TOP 3 content , "
+					+ "(SELECT count(case when markAs='unread' then 1 else null end) from Notification l "
+					+ "where x.nid=l.nid) as totalRead , "
+					+ "replace(convert(nvarchar,postTime,105),' ','/') as postTime "
+					+ "FROM "
+					+ "Notification x "
+					+ "ORDER BY nid DESC ";
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			con=DriverManager.getConnection(url,userName,password);
+			stmt=con.prepareStatement(sql);
+			rs = stmt.executeQuery();
+			while(rs.next())
+			{
+				NotificationModel info = new NotificationModel();
+				info.setContent(rs.getString("content"));
+				info.setPostTime(rs.getString("postTime"));
+				info.setCount(rs.getInt("totalRead"));
+				list.add(info);
+			}
+		
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+		}catch(ClassNotFoundException e)
+		{
+			e.printStackTrace();
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}finally{
+		
+			try{
+				rs.close();
+				stmt.close();
+				con.close();
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+			}
+		return list;
+	}
+	
+	
+	public void insertNotificationDataQuery(String content)
+	{
+		Connection con = null;
+		PreparedStatement stmt = null;
+		try
+		{
+			String sql = "INSERT INTO Notification(content , postTime , markAs) "
+					+ "VALUES(? , CONVERT (time, CURRENT_TIMESTAMP ) , ?)";
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			con=DriverManager.getConnection(url,userName,password);
+			stmt=con.prepareStatement(sql);
+			stmt.setString(1, content);
+			stmt.setString(2, "unread");
+			stmt.executeUpdate();
+			
+		
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+		}catch(ClassNotFoundException e)
+		{
+			e.printStackTrace();
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}finally{
+		
+			try{
+				stmt.close();
+				con.close();
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+			}
+	
+	}
+
+	public void markAsReadNotificationQuery()
+	{
+		Connection con = null;
+		PreparedStatement stmt = null;
+		try
+		{
+			String sql = "UPDATE Notification "
+					+ "SET "
+					+ "markAs='read' "
+					+ "WHERE "
+					+ "nid IN (SELECT TOP 3 nid FROM Notification ORDER BY nid DESC) ";
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			con=DriverManager.getConnection(url,userName,password);
+			stmt=con.prepareStatement(sql);
+			stmt.executeUpdate();
+			
+		
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+		}catch(ClassNotFoundException e)
+		{
+			e.printStackTrace();
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}finally{
+		
+			try{
+				stmt.close();
+				con.close();
+			}catch(SQLException e){
+				e.printStackTrace();
+			}
+			}
 	}
 }

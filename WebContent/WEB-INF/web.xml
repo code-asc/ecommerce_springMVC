@@ -15,12 +15,16 @@
 	<servlet>
 		<servlet-name>dispatcherServlet</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+		<async-supported>true</async-supported>
+	
 	</servlet>
 	
 	
 	<servlet-mapping>
 		<servlet-name>dispatcherServlet</servlet-name>
 		<url-pattern>*.html</url-pattern>
+		<url-pattern>*.htm</url-pattern>
 	</servlet-mapping>
 	
 	
@@ -40,6 +44,7 @@
 	<filter>
 		<filter-name>RedirectFilter</filter-name>
 		<filter-class>com.app.filter.FilterToCheckSessionExists</filter-class>
+		<async-supported>true</async-supported>
 	</filter>
 	
 	<filter-mapping>

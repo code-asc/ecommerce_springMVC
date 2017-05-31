@@ -13,12 +13,16 @@ import com.app.model.AdminShippingCount;
 import com.app.model.AdminSubCategoryCount;
 import com.app.model.AdminSupplierCount;
 import com.app.repository.AdminPageQuery;
+import com.app.repository.UserDetails;
 
 @Service
 public class AdminPageAllDetails implements AdminPageAllInfo {
 	
 	@Autowired
 	AdminPageQuery query;
+	
+	@Autowired
+	UserDetails info;
 	
 	/* (non-Javadoc)
 	 * @see com.app.service.AdminPageAllInfo#countryCountList()
@@ -83,4 +87,21 @@ public class AdminPageAllDetails implements AdminPageAllInfo {
 		return query.countShipping();
 	}
 	
+	@Override
+	public int onlineUsers()
+	{
+		return info.countOnlineUsers();
+	}
+	
+	@Override
+	public void changeUserStatusToOffline(int userID)
+	{
+		 info.updateUserToOffline(userID);
+	}
+	
+	@Override
+	public void removeUserOnline(int userID)
+	{
+		info.removeUserStatus(userID);
+	}
 }

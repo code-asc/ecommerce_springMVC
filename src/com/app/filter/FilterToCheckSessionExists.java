@@ -2,6 +2,7 @@ package com.app.filter;
 
 import java.io.IOException;
 
+import javax.servlet.AsyncContext;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -11,6 +12,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.app.repository.UserDetails;
 
 /**
  * Servlet Filter implementation class FilterToCheckSessionExists
@@ -39,6 +42,30 @@ public class FilterToCheckSessionExists implements Filter {
 
 		HttpServletRequest requestOf =(HttpServletRequest)request;
 		HttpServletResponse responseOf=(HttpServletResponse)response;
+		
+		
+		/*The following 'if' condition creates a  thread for the request and makes LoggedIn user online*/
+		 
+		if(requestOf.getSession().getAttribute("isUserLoggedIn") != null && (boolean)requestOf.getSession().getAttribute("isUserLoggedIn"))
+		{	
+			AsyncContext async = requestOf.startAsync();
+			//async.setTimeout(900000000);
+			/*async.start(new Runnable(){ 
+				public void run()
+				{
+					
+					UserDetails info = new UserDetails();
+					info.updateUserToOnline((int)requestOf.getSession().getAttribute("userID"));
+					async.complete();
+				}
+			});*/
+			async.start(() -> {
+				
+				UserDetails info = new UserDetails();
+				info.updateUserToOnline((int)requestOf.getSession().getAttribute("userID"));
+				async.complete();
+			});
+		}
 		
 		if(requestOf.getSession().getAttribute("previousPath") != null)
 		{

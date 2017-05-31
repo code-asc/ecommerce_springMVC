@@ -1,3 +1,4 @@
+<%@ page buffer="64kb" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -5,6 +6,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
+<%-- <%@ page buffer="8192kb" %>
+ --%>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -165,35 +169,13 @@
                                                 <div class="row">
                                                     <div class="col-md-12 col-sm-12">
                                                         <div class="well well-lg">
-                                                            <cfwebsocket name="myworld" onmessage="msgHandler" onopen="openHandler" subscribeTo="world" />
-                                                            <script>
-                                                            var msgHandler=function(message)
-                                                            {
-                                                              
-                                                            }
-                                                              var sendMessageTo = function() {
-                                                                $("#postedDetail").empty();
-                                                                $("#postedDetail").css({"display":"block"});
-                                                                  var message = document.getElementById("updateForAll").value;
-                                                                  $("#updateForAll").val(" ");
-                                                                  if(message.trim())
-                                                                  {
-                                                                  myworld.authenticate("admin", "admin");
-                                                                  if(myworld.publish("world", message))
-                                                                  {
-                                                                    $("#postedDetail").append("<div class='alert alert-success'>Posted....</div>").delay(5000).fadeOut();
-                                                                  }
-                                                                }
-
-                                                              }
-                                                          </script>
-
+                                                            
                                                             <h3 style="margin-top:0px ; margin-bottom:20px">Post Notifications</h3>
                                                             <div class='form-group'>
                                                                 <textarea class='form-control' name='updateForAll' id='updateForAll' rows='5' cols='42'></textarea>
                                                             </div>
 
-                                                            <input id="postForAll" class="btn btn-success" type="button" onclick="sendMessageTo()" value="Post It">
+                                                            <input id="postForAll" class="btn btn-success" type="button" onClick="sendMessage()" value="Post It">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -296,10 +278,11 @@
     </script>
     
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
+    
     <script src="/ProjectDemo/assets/script/adminEditAjax.js"></script>
     <script src="/ProjectDemo/assets/script/autoSuggestion.js"></script>
-
-    </body>
+    <script src="/ProjectDemo/assets/script/adminEmitter.js"></script>
+<%--     <% out.println("<p>bufferSize: " + out.getBufferSize() + " remaining: " + out.getRemaining() + " used: " + (out.getBufferSize() - out.getRemaining()) + " autoFlush: " + out.isAutoFlush() + "</p><br>"); %>
+ --%>    </body>
 
 </html>
