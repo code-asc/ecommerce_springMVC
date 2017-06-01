@@ -9,7 +9,7 @@ source.addEventListener('spring' , function(event){
 
 var sendMessage = function()
 	{
-		$("#postedDetail").empty();
+		
 		$("#postedDetail").css({ "display" : "block" });
 		var message = document.getElementById("updateForAll").value;
 		if(message.trim().length > 0)
@@ -23,6 +23,7 @@ var sendMessage = function()
 					if(responseText)
 						{
 							getAllNotification();
+							$("#updateForAll").val('');
 							$("#postedDetail").append("<div class='alert alert-success'>Notification Posted....</div>").delay(5000).fadeOut();
 						}
 				})

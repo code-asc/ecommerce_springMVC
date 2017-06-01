@@ -287,6 +287,9 @@ public class AdminPageInfo {
 	@RequestMapping(value = "/onWindowClose" , method = RequestMethod.GET)
 	public @ResponseBody void getUserOffline(HttpSession session)
 	{
+		if(session.getAttribute("isLoggedInUser")!=null && (boolean)session.getAttribute("isLoggedInUser"))
+		{
 		 allInfo.changeUserStatusToOffline((int)session.getAttribute("userID"));;
+		}
 	}
 }

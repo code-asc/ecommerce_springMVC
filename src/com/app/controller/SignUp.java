@@ -30,7 +30,7 @@ public class SignUp {
 		}
 		else
 		{
-			return "index";
+			return "redirect:index.html";
 		}
 	}
 	

@@ -493,7 +493,7 @@ public void productDelete(int productID )
 		try
 		{
 			String sql = "INSERT INTO Notification(content , postTime , markAs) "
-					+ "VALUES(? , CONVERT (time, CURRENT_TIMESTAMP ) , ?)";
+					+ "VALUES(? , CURRENT_TIMESTAMP , ?)";
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			con=DriverManager.getConnection(url,userName,password);
 			stmt=con.prepareStatement(sql);

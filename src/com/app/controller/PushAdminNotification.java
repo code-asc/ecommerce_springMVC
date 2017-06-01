@@ -1,5 +1,7 @@
 package com.app.controller;
 
+import java.io.IOException;
+import java.net.SocketException;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -46,10 +48,16 @@ public class PushAdminNotification {
 				emitter.complete();
 				
 			}
-			catch(Exception e)
+			catch(SocketException e)
 			{
-				check = 0;
 				e.printStackTrace();
+			}catch(IOException e)
+			{
+				e.printStackTrace();
+			}catch(Exception e)
+			{
+				e.printStackTrace();
+				check = 0;
 			}
 		}
 		return check;
