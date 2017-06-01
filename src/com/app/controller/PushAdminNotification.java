@@ -16,7 +16,11 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import com.app.model.NotificationModel;
 import com.app.service.NotificationService;
 
+
 @Controller
+/**
+ * The PushAdminNotification class is used to push notifications to the customer pages using server sent events
+ */
 public class PushAdminNotification {
 	
 	@Autowired
@@ -25,6 +29,10 @@ public class PushAdminNotification {
 	
 	List<SseEmitter> emitters = new CopyOnWriteArrayList<>();
 	
+	
+	/**
+	 *  adminPostHandler method will return an SseEmitter object.
+	 */
 	@RequestMapping(value = "/emitterMapping" )
 	public SseEmitter adminPostHandler()
 	{
@@ -34,6 +42,11 @@ public class PushAdminNotification {
 		emitter.onCompletion(() -> emitters.remove(emitter));
 		return emitter;
 	}
+	
+	/**
+	 *  adminPost method provides admin to post the notifications.
+	 * @param notification of type String
+	 */
 	
 	@RequestMapping(value = "/adminPost" , method = RequestMethod.GET)
 	public @ResponseBody int adminPost(@RequestParam("notification") String notification)
@@ -64,12 +77,19 @@ public class PushAdminNotification {
 	}
 	
 	
+	/**
+	 *  getNotificationInHeader method returns all the notifications.
+	 */
 	@RequestMapping(value = "/getNotification" , method = RequestMethod.GET)
 	public @ResponseBody List<NotificationModel> getNotificationInHeader()
 	{
 		return services.getNotificationService();
 	}
 	
+	
+	/**
+	 *  getMarkAsRead method changes the notification status as read.
+	 */
 	@RequestMapping(value = "/markAsRead" , method = RequestMethod.GET)
 	public @ResponseBody void getMarkAsRead()
 	{

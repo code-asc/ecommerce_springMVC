@@ -19,6 +19,9 @@ import com.app.service.DeleteCart;
 
 
 @Controller
+/**
+ * The UserCartController class allows the user to check all the cart details
+ */
 public class UserCartController {
 	
 	@Autowired
@@ -30,6 +33,11 @@ public class UserCartController {
 	@Autowired
 	CartCount cartCount;
 	
+	
+	/**
+	 * addProductToCart method allows the user to add products to cart.
+	 * @param session of type HttpSession
+	 */
 	@RequestMapping(value = "/addToCart" , method = RequestMethod.GET)
 	public @ResponseBody void addProductToCart( HttpSession session)
 	{
@@ -47,6 +55,12 @@ public class UserCartController {
 		
 	}
 	
+	
+	/**
+	 * getUserCartInfo method allows the user to get products information from cart.
+	 * @param model of type Model
+	 * @param session of type HttpSession
+	 */
 	@RequestMapping(value = "/userCart" , method = RequestMethod.GET)
 	public  String getUserCartInfo(Model model , HttpSession session)
 	{
@@ -59,6 +73,12 @@ public class UserCartController {
 		}
 	}
 	
+	
+	/**
+	 * incrementQuantity method allows the user to increment products in cart.
+	 * @param detailID of type integer
+	 * @param session of type HttpSession
+	 */
 	@RequestMapping(value = "/incrementQuantity" , method = RequestMethod.GET)
 	public @ResponseBody List<OrderDetailsInfo> incrementQuantity(@RequestParam("detailID") int detailID , HttpSession session)
 	{
@@ -76,6 +96,11 @@ public class UserCartController {
 		return addToCartOption.getOrderDetailsInfo(detailID , (int)session.getAttribute("userID"));
 	}
 	
+	/**
+	 * decrementQuantity method allows the user to decrement products in cart.
+	 * @param detailID of type integer
+	 * @param session of type HttpSession
+	 */
 	@RequestMapping(value = "/decrementQuantity" , method = RequestMethod.GET)
 	public @ResponseBody List<OrderDetailsInfo> decrementQuantity(@RequestParam("detailID") int detailID , HttpSession session)
 	{
@@ -92,6 +117,11 @@ public class UserCartController {
 		return addToCartOption.getOrderDetailsInfo(detailID , (int)session.getAttribute("userID"));
 	}
 	
+	/**
+	 * deleteCartItems method allows the user to delete products in cart.
+	 * @param detailID of type integer
+	 * @param session of type HttpSession
+	 */
 	@RequestMapping(value="deleteFromCart" , method = RequestMethod.GET)
 	public String deleteCartItems(@RequestParam("removeFromCart") int detailID , HttpSession session)
 	{

@@ -23,6 +23,10 @@ import com.app.service.PurchaseInfo;
 
 @Controller
 @SessionAttributes({"productID" , "subCategoryID"})
+
+/**
+ * The productDisplay class provides the product details based on filter , category and subcategory
+ */
 public class productDisplay {
 	
 	@Autowired
@@ -40,6 +44,13 @@ public class productDisplay {
 	@Autowired
 	PurchaseHistory purchase;
 	
+	
+	/**
+	 *  getProductDisplayPage method provides user the product details in userAction page .
+	 * @param model of type Model. It is used to modify the view accordingly.
+	 * @param session of type HttpSession. It is used to provide all the required session scope variables
+	 * @param subCategoryID of type integer. It is provided by the URL
+	 */
 	@RequestMapping(value = "/user_action" , method = RequestMethod.GET)
 	public String getProductDisplayPage(@RequestParam("subCategoryID") int subCategoryID , Model model , HttpSession session )
 	{
@@ -50,6 +61,12 @@ public class productDisplay {
 	}
 	
 	
+	/**
+	 * getProductDisplayPageByProductID method provides user the product details in userAction page .
+	 * @param model of type Model. It is used to modify the view accordingly.
+	 * @param session of type HttpSession. It is used to provide all the required session scope variables
+	 * @param productID of type integer. It is provided by the URL
+	 */
 	@RequestMapping(value="/user_action_single" , method=RequestMethod.GET)
 	public String getProductDisplayPageByProductID(@RequestParam("productID") int productID , Model model , HttpSession session)
 	{
@@ -61,6 +78,12 @@ public class productDisplay {
 	}
 	
 	
+	/**
+	 * returnFilteredProducts method provides user the product details based on filters .
+	 * @param brandID of type integer. It is used to modify the view accordingly.
+	 * @param session of type HttpSession. It is used to provide all the required session scope variables
+	 * @param discount of type BigDecimal. It is provided by the URL
+	 */
 	@RequestMapping(value="/filterProducts" , method=RequestMethod.GET)
 	public @ResponseBody List<ProductDetails> returnFilteredProducts(@RequestParam("brandID") String brandID , @RequestParam("discount") String discount , HttpSession session)
 	{
@@ -68,6 +91,10 @@ public class productDisplay {
 	}
 	
 	
+	/**
+	 * returnBrands method provides user the brand details.
+	 * @param productID of type integer.
+	 */
 	@RequestMapping(value="/getProductsByProductID" , method=RequestMethod.GET)
 	public @ResponseBody List<ProductDetails> returnBrands(@RequestParam("productID") int productID)
 	{
@@ -75,6 +102,13 @@ public class productDisplay {
 	}
 	
 	
+	/**
+	 * getOrderDetails method provides user the previously purchased details along with pagenation.
+	 * @param start of type integer.
+	 * @param page of type integer.
+	 * @param model of type Model.
+	 * @param session of type HttpSession.
+	 */
 	@RequestMapping(value="/orderDetails" , method = RequestMethod.GET , params={"start" , "page"})
 	public String getOrderDetails(@RequestParam("start") int start , @RequestParam("page") int page , Model model , HttpSession session)
 	{
@@ -93,6 +127,12 @@ public class productDisplay {
 	}
 	
 	
+	/**
+	 * orderDetails method provides user the previously purchased details.
+	 * @param page of type integer.
+	 * @param model of type Model.
+	 * @param session of type HttpSession.
+	 */
 	@RequestMapping(value="/orderDetails" , method = RequestMethod.GET , params={"page"})
 	public String getOrderDetails(@RequestParam("page") int page , Model model , HttpSession session)
 	{

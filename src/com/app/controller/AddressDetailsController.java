@@ -20,6 +20,12 @@ import com.app.service.TempAddress;
 
 
 @Controller
+
+/**
+ * The AddressDetailsController class all the user Address Details.
+ * User can edit the Address, update the address.
+ * It is also used to map the previous purchases with the particular address
+ */
 public class AddressDetailsController {
 	
 	@Autowired
@@ -40,6 +46,14 @@ public class AddressDetailsController {
 	@Autowired
 	TempAddress tempAddress;
 	
+	
+	
+	/**
+	 *  showUserDefaultAddress method provides user to see his default address.
+	 * @param model of type Model. It is used to modify the view accordingly.
+	 * @param session of type HttpSession. It is used to provide all the required session scope variables
+	 * @param option of type String. It is provided by the URL
+	 */
 	@RequestMapping(value = "/addressConfirm" , method = RequestMethod.GET)
 	public String showUserDefaultAddress(Model model ,  HttpSession session , @RequestParam("buy") String option)
 	{
@@ -66,6 +80,13 @@ public class AddressDetailsController {
 		}
 	}
 	
+	
+	/**
+	 *  showPayment method is used to check whether the payment is single buy or cart buy.
+	 * @param model of type Model. It is used to modify the view accordingly.
+	 * @param session of type HttpSession. It is used to provide all the required session scope variables
+	 * @param option of type String. It is provided by the URL
+	 */
 	@RequestMapping(value = "/payment" , method = RequestMethod.GET)
 	public String showPayment(Model model ,  HttpSession session , @RequestParam("buy") String option)
 	{
@@ -96,12 +117,25 @@ public class AddressDetailsController {
 	}
 	
 	
+	
+	/**
+	 *  getNewAddress method is used to allow the user to update Address.
+	 * @param updateAddress of type UpdateAddress.
+	 * @param buyType of type String. It is provided by the URL
+	 */
 	@RequestMapping(value = "address" , method = RequestMethod.GET)
 	public String getNewAddress(@ModelAttribute("addressField") UpdateAddress updateAddress , @RequestParam("buy") String buyType)
 	{
 		return "address";
 	}
 	
+	
+	/**
+	 *  postNewAddress method is used to allow the user to change default Address.
+	 * @param updateAddress of type UpdateAddress.
+	 * @param buyType of type String. It is provided by the URL
+	 * @param session of type HttpSession.
+	 */
 	@RequestMapping(value = "address" , method = RequestMethod.POST)
 	public String postNewAddress(@ModelAttribute("addressField") UpdateAddress updateAddress ,  @RequestParam("buy") String buyType , HttpSession session)
 	{
@@ -115,6 +149,13 @@ public class AddressDetailsController {
 		return "redirect:addressConfirm.html?buy="+buyType;
 	}
 	
+	
+	/**
+	 *  getEditAddress method is used to allow the user to update default Address.
+	 * @param updateAddress of type UpdateAddress.
+	 * @param buyType of type String. It is provided by the URL
+	 * @param session of type HttpSession.
+	 */
 	@RequestMapping(value = "newAddress" , method = RequestMethod.GET)
 	public String getEditAddress(@ModelAttribute("addressField") UpdateAddress updateAddress , @RequestParam("buy") String buyType , HttpSession session)
 	{
@@ -126,6 +167,14 @@ public class AddressDetailsController {
 		}
 	}
 	
+	
+	
+	/**
+	 *  postEditAddress method is used to allow the user to update default Address.
+	 * @param updateAddress of type UpdateAddress.
+	 * @param buyType of type String. It is provided by the URL
+	 * @param session of type HttpSession.
+	 */
 	@RequestMapping(value = "newAddress" , method = RequestMethod.POST)
 	public String postEditAddress(@ModelAttribute("addressField") UpdateAddress updateAddress , @RequestParam("buy") String buyType , HttpSession session)
 	{

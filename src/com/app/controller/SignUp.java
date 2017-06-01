@@ -16,11 +16,21 @@ import com.app.service.RegisterUser;
 
 
 @Controller
+/**
+ * The SignUp class allows the user register new account
+ */
 public class SignUp {
 	
 	@Autowired
 	RegisterUser registerNewUser;
 
+	/**
+	 * onGetForSignUp method redirects the user to signUp page.
+	 * @param model of type Model. It is used to modify the view accordingly.
+	 * @param signUpModel of type SignUpModel.
+	 * @param session of type HttpSession
+	 * @param request of type HttpRequest
+	 */
 	@RequestMapping(value="/signup" , method=RequestMethod.GET)
 	public String onGetForSignUp(@ModelAttribute("signUpDetails") SignUpModel signUpModel , HttpSession session)
 	{
@@ -34,6 +44,14 @@ public class SignUp {
 		}
 	}
 	
+	
+	/**
+	 * onPostForSignUp method get the input fields from signUp page.
+	 * @param model of type Model. It is used to modify the view accordingly.
+	 * @param signUpModel of type SignUpModel.
+	 * @param session of type HttpSession
+	 * @param request of type HttpRequest
+	 */
 	@RequestMapping(value="/signup" , method=RequestMethod.POST)
 	public String onPostForSignUp(@ModelAttribute("signUpDetails") SignUpModel signUpModel , Model model)
 	{

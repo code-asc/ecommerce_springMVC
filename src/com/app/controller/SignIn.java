@@ -18,6 +18,10 @@ import com.app.service.UserLogin;
 
 @SessionAttributes("name")
 @Controller
+
+/**
+ * The SignIn class allows the user to authenticate and signIn
+ */
 public class SignIn {
 
 	@Autowired
@@ -26,6 +30,13 @@ public class SignIn {
 	@Autowired
 	CartCount cartCount;
 	
+	/**
+	 *  onGetForSignIn method redirects the user to signIn page.
+	 * @param model of type Model. It is used to modify the view accordingly.
+	 * @param signInModel of type SignInModel.
+	 * @param session of type HttpSession
+	 * @param request of type HttpRequest
+	 */
 	@RequestMapping(value = "/signin" , method = RequestMethod.GET)
 	public String onGetForSignIn(@ModelAttribute("loginForm") SignInModel signInModel, HttpServletRequest request , HttpSession session , Model model)
 	{
@@ -42,6 +53,13 @@ public class SignIn {
 	}
 	
 	
+	/**
+	 * onPostForSignIn method get the input fields from signIn page.
+	 * @param model of type Model. It is used to modify the view accordingly.
+	 * @param signInModel of type SignInModel.
+	 * @param session of type HttpSession
+	 * @param request of type HttpRequest
+	 */
 	@RequestMapping(value = "/signin" , method = RequestMethod.POST)
 	public String onPostForSignIn(@ModelAttribute("loginForm") SignInModel signInModel , Model model , HttpSession session , HttpServletRequest request)
 	{

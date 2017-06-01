@@ -16,6 +16,9 @@ import com.app.service.SearchOptionInfo;
 
 @Controller
 @SessionAttributes({"subCategoryID"})
+/**
+ * The SearchController class provides the search results
+ */
 public class SearchController {
 	
 	@Autowired
@@ -24,6 +27,11 @@ public class SearchController {
 	@Autowired
 	BrandInfo brands;
 	
+	/**
+	 *  postSearchPage method provides user the product details based on brandName .
+	 * @param model of type Model. It is used to modify the view accordingly.
+	 * @param searchVal of type String.
+	 */
 	@RequestMapping(value="/search" , method=RequestMethod.GET)
 	public String postSearchPage(@RequestParam("searchVal") String searchVal , Model model)
 	{

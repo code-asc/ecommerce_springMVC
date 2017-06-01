@@ -20,6 +20,9 @@ import com.app.service.UpdateUserDetails;
 import com.app.service.UserInfo;
 
 @Controller
+/**
+ * The ProfileEdit class provides the customerto edit his profile
+ */
 public class ProfileEdit {
 	
 	@Autowired
@@ -28,6 +31,13 @@ public class ProfileEdit {
 	@Autowired
 	UpdateUserDetails editUser;
 	
+	
+	/**
+	 *  onGetUserProfile method redirect the Customer to editProfile page on get request.
+	 * @param model of type Model. It is used to modify the view accordingly.
+	 * @param session of type HttpSession. It is used to provide all the required session scope variables
+	 * @param editProfile1 of type EditUserProfile. It is provided by the URL
+	 */
 	@RequestMapping(value = "/userProfileEdit" , method = RequestMethod.GET)
 	public String onGetUserProfile(Model model , HttpSession session , @ModelAttribute("editProfile1") EditUserProfile editProfile1)
 	{
@@ -35,6 +45,13 @@ public class ProfileEdit {
 		return "userProfileEdit";
 	}
 	
+	
+	/**
+	 *  onPostUserProfile method get the input fields from the editProfile page on post request.
+	 * @param model of type Model. It is used to modify the view accordingly.
+	 * @param session of type HttpSession. It is used to provide all the required session scope variables
+	 * @param editProfile1 of type EditUserProfile. It is provided by the URL
+	 */
 	@RequestMapping(value="/userProfileEdit" , method = RequestMethod.POST)
 	public String onPostUserProfile(@ModelAttribute("editProfile1") EditUserProfile editProfile1 , @RequestPart(value = "profilePhoto", required = false) MultipartFile file , Model model , HttpSession session)
 	{

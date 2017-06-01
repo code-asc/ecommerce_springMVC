@@ -19,6 +19,9 @@ import com.app.service.HomePageInfo;
 
 
 @Controller
+/**
+ * The HomePageDataController class provides index page and header details.
+ */
 public class HomePageDataController {
 
 	@Autowired
@@ -30,30 +33,53 @@ public class HomePageDataController {
 	@Autowired
 	CategoryAndSubInfo categoryAndSubCategoryDetails ; 
 	
+	
+	/**
+	 *  pageData method provides images and details for carousal.
+	 */
 	@RequestMapping(value="/getHomePageLargeContent" , method=RequestMethod.GET)
 	public @ResponseBody List<HomePageLargeImage> pageData()
 	{
 		return pageDisplay.homePageDisplay();
 	}
 	
+	
+	/**
+	 *  pageDataThumNail method provides thumbNail images and details for carousal.
+	 */
 	@RequestMapping(value="/getHomePageThumbNailContent" , method=RequestMethod.GET)
 	public @ResponseBody List<HomePageThumbNail> pageDataThumNail()
 	{
 		return pageDisplay.homePageDisplayThumbNail();
 	}
 	
+	/**
+	 *  getBrands method provides all the brand details for header.
+	 */
 	@RequestMapping(value="/getOnlybrands" , method=RequestMethod.GET)
 	public @ResponseBody List<BrandsOnly> getBrands()
 	{
 		return onlyBrands.onlyBrands();
 	}
 	
+	
+	
+	/**
+	 *  getCategoryAndSubCategoryDetails method provides all the category and subCategory details for header.
+	 *  @param categoryID_1 of type integer
+	 *  @param categoryID_2 of type integer
+	 */
 	@RequestMapping(value="/getCategoryType" , method=RequestMethod.GET)
 	public @ResponseBody List<HeaderSubcategoryDetails> getCategoryAndSubCategoryDetails(@RequestParam("categoryID_1") int categoryID_1 , @RequestParam("categoryID_2") int categoryID_2)
 	{
 		return categoryAndSubCategoryDetails.getDetails(categoryID_1, categoryID_2);
 	}
 	
+	
+	/**
+	 *  getCategoryAndSubCategoryDetails method provides all the category and subCategory details for header.
+	 *  @param categoryID_1 of type integer
+	 */
 	@RequestMapping(value="/getCategoryOfOnlyOneType" , method=RequestMethod.GET)
 	public @ResponseBody List<HeaderSubcategoryDetails> getCategoryAndSubCategoryDetails(@RequestParam("categoryID_1") int categoryID_1)
 	{
