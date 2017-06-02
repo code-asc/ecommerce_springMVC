@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
 import com.app.model.HeaderSubcategoryDetails;
@@ -19,6 +20,7 @@ public class CategoryAndSubCategoryDetails {
 	private String url = "jdbc:sqlserver://MINDFIRE-PC;DatabaseName=onlineShoppingSpring;";
 	private String userName = "sa";
 	private String password = "mindfire";
+	final static Logger log = Logger.getLogger(CategoryAndSubCategoryDetails.class);
 	
 	public List<HeaderSubcategoryDetails> subCategoryDetails(int categoryID_1)
 	{
@@ -50,11 +52,22 @@ public class CategoryAndSubCategoryDetails {
 		}
 		catch(SQLException e)
 		{
+			log.error("subCategoryDetails argument method : "+ e.getMessage());
 			e.printStackTrace();
 		}
 		catch(ClassNotFoundException e)
 		{
+			log.error("subCategoryDetails argument method : "+ e.getMessage());
 			e.printStackTrace();
+		}finally{
+			try{
+				rs.close();
+				stmt.close();
+				con.close();
+			}catch(SQLException e){
+				log.error("subCategoryDetails argument method : "+ e.getMessage());
+				e.printStackTrace();
+			}
 		}
 		
 		return list;
@@ -93,11 +106,22 @@ public class CategoryAndSubCategoryDetails {
 		}
 		catch(SQLException e)
 		{
+			log.error("subCategoryDetails argument method : "+ e.getMessage());
 			e.printStackTrace();
 		}
 		catch(ClassNotFoundException e)
 		{
+			log.error("subCategoryDetails argument method : "+ e.getMessage());
 			e.printStackTrace();
+		}finally{
+			try{
+				rs.close();
+				stmt.close();
+				con.close();
+			}catch(SQLException e){
+				log.error("subCategoryDetails argument method : "+ e.getMessage());
+				e.printStackTrace();
+			}
 		}
 		
 		return list;
@@ -135,11 +159,22 @@ public class CategoryAndSubCategoryDetails {
 		}
 		catch(SQLException e)
 		{
+			log.error("subCategoryDetails argument method : "+ e.getMessage());
 			e.printStackTrace();
 		}
 		catch(ClassNotFoundException e)
 		{
+			log.error("subCategoryDetails argument method : "+ e.getMessage());
 			e.printStackTrace();
+		}finally{
+			try{
+				rs.close();
+				stmt.close();
+				con.close();
+			}catch(SQLException e){
+				log.error("subCategoryDetails argument method : "+ e.getMessage());
+				e.printStackTrace();
+			}
 		}
 		
 		return list;

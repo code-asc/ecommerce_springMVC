@@ -10,6 +10,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
 import com.app.model.AdminCategoryCount;
@@ -26,6 +27,7 @@ public class AdminPageQuery {
 	private String url = "jdbc:sqlserver://MINDFIRE-PC;DatabaseName=onlineShoppingSpring;";
 	private String userName = "sa";
 	private String password = "mindfire";
+	final static Logger log = Logger.getLogger(AdminPageQuery.class);
 	
 	public List<AdminCountryCount> countCountry()
 	{
@@ -51,9 +53,11 @@ public class AdminPageQuery {
 			}
 		}catch(SQLException e)
 		{
+			log.error("countCountry  method : "+ e.getMessage());
 			e.printStackTrace();
 		}catch(ClassNotFoundException e)
 		{
+			log.error("countCountry  method : "+ e.getMessage());
 			e.printStackTrace();
 		}finally{
 			try{
@@ -61,6 +65,7 @@ public class AdminPageQuery {
 				stmt.close();
 				con.close();
 			}catch(SQLException e){
+				log.error("countCountry  method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 		}
@@ -92,9 +97,11 @@ public class AdminPageQuery {
 			}
 		}catch(SQLException e)
 		{
+			log.error("countProduct  method : "+ e.getMessage());
 			e.printStackTrace();
 		}catch(ClassNotFoundException e)
 		{
+			log.error("countProduct  method : "+ e.getMessage());
 			e.printStackTrace();
 		}finally{
 			try{
@@ -102,6 +109,7 @@ public class AdminPageQuery {
 				stmt.close();
 				con.close();
 			}catch(SQLException e){
+				log.error("countProduct  method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 		}
@@ -131,9 +139,11 @@ public class AdminPageQuery {
 			}
 		}catch(SQLException e)
 		{
+			log.error("countCustomer  method : "+ e.getMessage());
 			e.printStackTrace();
 		}catch(ClassNotFoundException e)
 		{
+			log.error("countCustomer  method : "+ e.getMessage());
 			e.printStackTrace();
 		}finally{
 			try{
@@ -141,6 +151,7 @@ public class AdminPageQuery {
 				stmt.close();
 				con.close();
 			}catch(SQLException e){
+				log.error("countCustomer  method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 		}
@@ -170,9 +181,11 @@ public class AdminPageQuery {
 			}
 		}catch(SQLException e)
 		{
+			log.error("countCategory  method : "+ e.getMessage());
 			e.printStackTrace();
 		}catch(ClassNotFoundException e)
 		{
+			log.error("countCategory  method : "+ e.getMessage());
 			e.printStackTrace();
 		}finally{
 			try{
@@ -180,6 +193,7 @@ public class AdminPageQuery {
 				stmt.close();
 				con.close();
 			}catch(SQLException e){
+				log.error("countCategory  method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 		}
@@ -209,9 +223,11 @@ public class AdminPageQuery {
 			}
 		}catch(SQLException e)
 		{
+			log.error("countSubCategory  method : "+ e.getMessage());
 			e.printStackTrace();
 		}catch(ClassNotFoundException e)
 		{
+			log.error("countSubCategory  method : "+ e.getMessage());
 			e.printStackTrace();
 		}finally{
 			try{
@@ -219,6 +235,7 @@ public class AdminPageQuery {
 				stmt.close();
 				con.close();
 			}catch(SQLException e){
+				log.error("countSubCategory  method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 		}
@@ -251,9 +268,11 @@ public class AdminPageQuery {
 			}
 		}catch(SQLException e)
 		{
+			log.error("countSupplier  method : "+ e.getMessage());
 			e.printStackTrace();
 		}catch(ClassNotFoundException e)
 		{
+			log.error("countSupplier  method : "+ e.getMessage());
 			e.printStackTrace();
 		}finally{
 			try{
@@ -261,6 +280,7 @@ public class AdminPageQuery {
 				stmt.close();
 				con.close();
 			}catch(SQLException e){
+				log.error("countSupplier  method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 		}
@@ -293,9 +313,11 @@ public class AdminPageQuery {
 			}
 		}catch(SQLException e)
 		{
+			log.error("countShipping  method : "+ e.getMessage());
 			e.printStackTrace();
 		}catch(ClassNotFoundException e)
 		{
+			log.error("countShipping  method : "+ e.getMessage());
 			e.printStackTrace();
 		}finally{
 			try{
@@ -303,6 +325,7 @@ public class AdminPageQuery {
 				stmt.close();
 				con.close();
 			}catch(SQLException e){
+				log.error("countShipping  method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 		}
@@ -368,13 +391,16 @@ public class AdminPageQuery {
 		}catch(SQLException e)
 		{
 			check = 0;
+			log.error("addNewProduct  method : "+ e.getMessage());
 			e.printStackTrace();
 		}catch(ClassNotFoundException e)
 		{
 			check = 0;
+			log.error("addNewProduct  method : "+ e.getMessage());
 			e.printStackTrace();
 		}catch(Exception e){
 			check = 0;
+			log.error("addNewProduct  method : "+ e.getMessage());
 			e.printStackTrace();
 		}
 			finally{
@@ -384,6 +410,7 @@ public class AdminPageQuery {
 				stmt.close();
 				con.close();
 			}catch(SQLException e){
+				log.error("addNewProduct  method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 			}

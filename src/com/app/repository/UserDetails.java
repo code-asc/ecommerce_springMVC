@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
 import com.app.model.LoggedInUserInfo;
@@ -20,6 +21,7 @@ public class UserDetails {
 	private String url = "jdbc:sqlserver://MINDFIRE-PC;DatabaseName=onlineShoppingSpring;";
 	private String userName = "sa";
 	private String password = "mindfire";
+	final static Logger log = Logger.getLogger(UserDetails.class);
 	
 	public List<LoggedInUserInfo> doLogin(String userEmail, String userPassword) {
 		Connection con = null;
@@ -51,9 +53,11 @@ public class UserDetails {
 			}
 
 		}catch (SQLException e) {
+			log.error("doLogin method : "+ e.getMessage());
 			e.printStackTrace();
 			System.out.println(e.getSQLState());
 		}catch (ClassNotFoundException e){
+			log.error("doLogin method : "+ e.getMessage());
 			e.printStackTrace();
 		}
 		finally {
@@ -61,6 +65,7 @@ public class UserDetails {
 				try {
 					con.close();
 				} catch (SQLException e) {
+					log.error("doLogin method : "+ e.getMessage());
 					e.printStackTrace();
 				}
 			}
@@ -69,6 +74,7 @@ public class UserDetails {
 				try {
 					rs.close();
 				} catch (SQLException e) {
+					log.error("doLogin method : "+ e.getMessage());
 					e.printStackTrace();
 				}
 			}
@@ -77,6 +83,7 @@ public class UserDetails {
 				try {
 					stmt.close();
 				} catch (SQLException e) {
+					log.error("doLogin method : "+ e.getMessage());
 					e.printStackTrace();
 				}
 			}
@@ -115,14 +122,15 @@ public class UserDetails {
 		}
 		catch(SQLException e)
 		{
-		e.printStackTrace();	
+			log.error("checkUserEmailAlreadyExists method : "+ e.getMessage());
+			e.printStackTrace();	
 		}
 		catch(ClassNotFoundException e)
 		{
+			log.error("checkUserEmailAlreadyExists method : "+ e.getMessage());
 			e.printStackTrace();
 		}
 		
-		System.out.println(isSuccess+"....loop");
 		return isSuccess;
 	}
 	
@@ -152,10 +160,13 @@ public class UserDetails {
 		}
 		catch(SQLException e)
 		{
+			log.error("isUserRegistrationSuccess method : "+ e.getMessage());
 			e.printStackTrace();
+			
 		}
 		catch(ClassNotFoundException e)
 		{
+			log.error("isUserRegistrationSuccess method : "+ e.getMessage());
 			e.printStackTrace();
 		}
 		return isSuccess;
@@ -191,12 +202,15 @@ public class UserDetails {
 			}
 			
 		}catch (SQLException e) {
+			log.error("getUserInfo method : "+ e.getMessage());
 			e.printStackTrace();
 			System.out.println(e.getSQLState());
 		}catch (ClassNotFoundException e){
+			log.error("getUserInfo method : "+ e.getMessage());
 			e.printStackTrace();
 		}catch(Exception e)
 		{
+			log.error("getUserInfo method : "+ e.getMessage());
 			System.out.println(e.getMessage());
 		}
 		finally {
@@ -204,6 +218,7 @@ public class UserDetails {
 			rs.close();
 			}catch(Exception e)
 			{
+				log.error("getUserInfo method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 			
@@ -211,6 +226,7 @@ public class UserDetails {
 				try {
 					stmt.close();
 				} catch (SQLException e) {
+					log.error("getUserInfo method : "+ e.getMessage());
 					e.printStackTrace();
 				}
 			}
@@ -249,14 +265,17 @@ public class UserDetails {
 			
 		}catch (SQLException e) {
 			check = false;
+			log.error("updateUserProfileInfo method : "+ e.getMessage());
 			e.printStackTrace();
 			System.out.println(e.getSQLState());
 		}catch (ClassNotFoundException e){
 			check = false;
+			log.error("updateUserProfileInfo method : "+ e.getMessage());
 			e.printStackTrace();
 		}catch(Exception e)
 		{
 			check = false;
+			log.error("updateUserProfileInfo method : "+ e.getMessage());
 			System.out.println(e.getMessage());
 		}
 		finally {
@@ -264,6 +283,7 @@ public class UserDetails {
 			con.close();
 			stmt.close();
 			}catch(Exception e){
+				log.error("updateUserProfileInfo method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 	
@@ -294,14 +314,17 @@ public class UserDetails {
 			
 		}catch (SQLException e) {
 			check = false;
+			log.error("updateUserProfilePhoto method : "+ e.getMessage());
 			e.printStackTrace();
 			System.out.println(e.getSQLState());
 		}catch (ClassNotFoundException e){
 			check = false;
+			log.error("updateUserProfilePhoto method : "+ e.getMessage());
 			e.printStackTrace();
 		}catch(Exception e)
 		{
 			check = false;
+			log.error("updateUserProfilePhoto method : "+ e.getMessage());
 			System.out.println(e.getMessage());
 		}
 		finally {
@@ -309,6 +332,7 @@ public class UserDetails {
 			con.close();
 			stmt.close();
 			}catch(Exception e){
+				log.error("updateUserProfilePhoto method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 	
@@ -340,12 +364,15 @@ public class UserDetails {
 			}
 			
 		}catch (SQLException e) {
+			log.error("checkUserOnline method : "+ e.getMessage());
 			e.printStackTrace();
 			System.out.println(e.getSQLState());
 		}catch (ClassNotFoundException e){
+			log.error("checkUserOnline method : "+ e.getMessage());
 			e.printStackTrace();
 		}catch(Exception e)
 		{
+			log.error("checkUserOnline method : "+ e.getMessage());
 			System.out.println(e.getMessage());
 		}
 		finally {
@@ -353,6 +380,7 @@ public class UserDetails {
 			con.close();
 			stmt.close();
 			}catch(Exception e){
+				log.error("checkUserOnline method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 	
@@ -381,12 +409,15 @@ public class UserDetails {
 			
 			
 		}catch (SQLException e) {
+			log.error("updateUserToOffline method : "+ e.getMessage());
 			e.printStackTrace();
 			System.out.println(e.getSQLState());
 		}catch (ClassNotFoundException e){
+			log.error("updateUserToOffline method : "+ e.getMessage());
 			e.printStackTrace();
 		}catch(Exception e)
 		{
+			log.error("updateUserToOffline method : "+ e.getMessage());
 			System.out.println(e.getMessage());
 		}
 		finally {
@@ -394,6 +425,7 @@ public class UserDetails {
 			con.close();
 			stmt.close();
 			}catch(Exception e){
+				log.error("updateUserToOffline method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 	
@@ -421,12 +453,16 @@ public class UserDetails {
 			
 			
 		}catch (SQLException e) {
+			log.error("updateUserToOnline method : "+ e.getMessage());
 			e.printStackTrace();
 			System.out.println(e.getSQLState());
 		}catch (ClassNotFoundException e){
+			
+			log.error("updateUserToOnline method : "+ e.getMessage());
 			e.printStackTrace();
 		}catch(Exception e)
 		{
+			log.error("updateUserToOnline method : "+ e.getMessage());
 			System.out.println(e.getMessage());
 		}
 		finally {
@@ -434,6 +470,7 @@ public class UserDetails {
 			con.close();
 			stmt.close();
 			}catch(Exception e){
+				log.error("updateUserToOnline method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 	
@@ -464,12 +501,15 @@ public class UserDetails {
 			
 			
 		}catch (SQLException e) {
+			log.error("changeUserStatusOnline method : "+ e.getMessage());
 			e.printStackTrace();
 			System.out.println(e.getSQLState());
 		}catch (ClassNotFoundException e){
+			log.error("changeUserStatusOnline method : "+ e.getMessage());
 			e.printStackTrace();
 		}catch(Exception e)
 		{
+			log.error("changeUserStatusOnline method : "+ e.getMessage());
 			System.out.println(e.getMessage());
 		}
 		finally {
@@ -477,6 +517,7 @@ public class UserDetails {
 			con.close();
 			stmt.close();
 			}catch(Exception e){
+				log.error("changeUserStatusOnline method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 	
@@ -505,12 +546,15 @@ public class UserDetails {
 			
 			
 		}catch (SQLException e) {
+			log.error("removeUserStatus method : "+ e.getMessage());
 			e.printStackTrace();
 			System.out.println(e.getSQLState());
 		}catch (ClassNotFoundException e){
+			log.error("removeUserStatus method : "+ e.getMessage());
 			e.printStackTrace();
 		}catch(Exception e)
 		{
+			log.error("removeUserStatus method : "+ e.getMessage());
 			System.out.println(e.getMessage());
 		}
 		finally {
@@ -518,6 +562,7 @@ public class UserDetails {
 			con.close();
 			stmt.close();
 			}catch(Exception e){
+				log.error("removeUserStatus method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 	
@@ -550,12 +595,15 @@ public class UserDetails {
 			}
 		
 		}catch (SQLException e) {
+			log.error("countOnlineUsers method : "+ e.getMessage());
 			e.printStackTrace();
 			System.out.println(e.getSQLState());
 		}catch (ClassNotFoundException e){
+			log.error("countOnlineUsers method : "+ e.getMessage());
 			e.printStackTrace();
 		}catch(Exception e)
 		{
+			log.error("countOnlineUsers method : "+ e.getMessage());
 			System.out.println(e.getMessage());
 		}
 		finally {
@@ -564,6 +612,7 @@ public class UserDetails {
 			con.close();
 			stmt.close();
 			}catch(Exception e){
+				log.error("countOnlineUsers method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 	

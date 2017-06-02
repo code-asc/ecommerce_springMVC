@@ -10,6 +10,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Repository;
 
@@ -23,7 +24,7 @@ public class UserCartDetails {
 	private String url = "jdbc:sqlserver://MINDFIRE-PC;DatabaseName=onlineShoppingSpring;";
 	private String userName = "sa";
 	private String password = "mindfire";
-	
+	final static Logger log = Logger.getLogger(UserCartDetails.class);
 	
 	public int getDetailID(String status , int userID , int productID)
 	{
@@ -52,10 +53,12 @@ public class UserCartDetails {
 				detailID=rs.getInt("detailID");
 			}
 		}catch(SQLException e)
-		{
+		{	
+			log.error("getDetailID method : "+ e.getMessage());
 			e.printStackTrace();
 		}catch(ClassNotFoundException e)
 		{
+			log.error("getDetailID method : "+ e.getMessage());
 			e.printStackTrace();
 		}finally{
 			try{
@@ -63,6 +66,7 @@ public class UserCartDetails {
 				stmt.close();
 				con.close();
 			}catch(SQLException e){
+				log.error("getDetailID method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 		}
@@ -90,15 +94,18 @@ public class UserCartDetails {
 			stmt.executeUpdate();
 		}catch(SQLException e)
 		{
+			log.error("setOrderDetails method : "+ e.getMessage());
 			e.printStackTrace();
 		}catch(ClassNotFoundException e)
 		{
+			log.error("setOrderDetails method : "+ e.getMessage());
 			e.printStackTrace();
 		}finally{
 			try{
 				stmt.close();
 				con.close();
 			}catch(SQLException e){
+				log.error("setOrderDetails method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 		}
@@ -124,9 +131,11 @@ public class UserCartDetails {
 			stmt.executeUpdate();
 		}catch(SQLException e)
 		{
+			log.error("updateOrderDetails method : "+ e.getMessage());
 			e.printStackTrace();
 		}catch(ClassNotFoundException e)
 		{
+			log.error("updateOrderDetails method : "+ e.getMessage());
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}finally{
@@ -134,6 +143,7 @@ public class UserCartDetails {
 				stmt.close();
 				con.close();
 			}catch(SQLException e){
+				log.error("updateOrderDetails method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 		}
@@ -189,14 +199,17 @@ public class UserCartDetails {
 	                 }
            }catch(SQLException e)
 			{
+        	   log.error("cartDisplayList method : "+ e.getMessage());
         	   e.printStackTrace();
 			}catch(ClassNotFoundException e){
+				log.error("cartDisplayList method : "+ e.getMessage());
 				e.printStackTrace();
 			}finally{
 				try{
 					stmt.close();
 					con.close();
 				}catch(SQLException e){
+					log.error("cartDisplayList method : "+ e.getMessage());
 					e.printStackTrace();
 				}
 			}
@@ -228,15 +241,18 @@ public class UserCartDetails {
 		
 	}catch(SQLException e)
 		{
+			log.error("incrementQuantityInDatabase method : "+ e.getMessage());
 			System.out.println(e.getMessage());
  	   		e.printStackTrace();
 		}catch(ClassNotFoundException e){
+			log.error("incrementQuantityInDatabase method : "+ e.getMessage());
 			e.printStackTrace();
 		}finally{
 			try{
 				stmt.close();
 				con.close();
 			}catch(SQLException e){
+				log.error("incrementQuantityInDatabase method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 		}
@@ -267,15 +283,18 @@ public class UserCartDetails {
 		
 	}catch(SQLException e)
 		{
+			log.error("decrementQuantityInDatabase method : "+ e.getMessage());
 			System.out.println(e.getMessage());
  	   		e.printStackTrace();
 		}catch(ClassNotFoundException e){
+			log.error("decrementQuantityInDatabase method : "+ e.getMessage());
 			e.printStackTrace();
 		}finally{
 			try{
 				stmt.close();
 				con.close();
 			}catch(SQLException e){
+				log.error("decrementQuantityInDatabase method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 		}
@@ -309,14 +328,17 @@ public class UserCartDetails {
 		    }
 	}catch(SQLException e)
 		{
+			log.error("getOrderPriceAndQty method : "+ e.getMessage());
  	   		e.printStackTrace();
 		}catch(ClassNotFoundException e){
+			log.error("getOrderPriceAndQty method : "+ e.getMessage());
 			e.printStackTrace();
 		}finally{
 			try{
 				stmt.close();
 				con.close();
 			}catch(SQLException e){
+				log.error("getOrderPriceAndQty method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 		}
@@ -350,15 +372,18 @@ public class UserCartDetails {
 		    }
 	}catch(SQLException e)
 		{
+			log.error("orderDetailsInfo method : "+ e.getMessage());
 			System.out.println(e.getMessage());
  	   		e.printStackTrace();
 		}catch(ClassNotFoundException e){
+			log.error("orderDetailsInfo method : "+ e.getMessage());
 			e.printStackTrace();
 		}finally{
 			try{
 				stmt.close();
 				con.close();
 			}catch(SQLException e){
+				log.error("orderDetailsInfo method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 		}
@@ -385,15 +410,18 @@ public class UserCartDetails {
 		   
 	}catch(SQLException e)
 		{
+			log.error("deleteProductFromCart method : "+ e.getMessage());
 			System.out.println(e.getMessage());
  	   		e.printStackTrace();
 		}catch(ClassNotFoundException e){
+			log.error("deleteProductFromCart method : "+ e.getMessage());
 			e.printStackTrace();
 		}finally{
 			try{
 				stmt.close();
 				con.close();
 			}catch(SQLException e){
+				log.error("deleteProductFromCart method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 		}
@@ -423,11 +451,14 @@ public class UserCartDetails {
 		    }
 	}catch(SQLException e)
 		{
+			log.error("updateCartCount method : "+ e.getMessage());
 			System.out.println(e.getMessage());
  	   		e.printStackTrace();
 		}catch(ClassNotFoundException e){
+			log.error("updateCartCount method : "+ e.getMessage());
 			e.printStackTrace();
 		}catch(Exception e){
+			log.error("updateCartCount method : "+ e.getMessage());
 			e.printStackTrace();
 		}finally{
 		
@@ -436,6 +467,7 @@ public class UserCartDetails {
 				stmt.close();
 				con.close();
 			}catch(SQLException e){
+				log.error("updateCartCount method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 		}
@@ -465,12 +497,14 @@ public class UserCartDetails {
 		    }
 	}catch(SQLException e)
 		{
+			log.error("setOrder method : "+ e.getMessage());
 			System.out.println(e.getMessage());
  	   		e.printStackTrace();
 		}catch(ClassNotFoundException e){
+			log.error("setOrder method : "+ e.getMessage());
 			e.printStackTrace();
 		}catch(Exception e){
-			System.out.println("Error occured in setOrder");
+			log.error("setOrder method : "+ e.getMessage());
 			e.printStackTrace();
 		}finally{
 		
@@ -478,6 +512,7 @@ public class UserCartDetails {
 				stmt.close();
 				con.close();
 			}catch(SQLException e){
+				log.error("setOrder method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 		}
@@ -510,11 +545,14 @@ public class UserCartDetails {
 		    
 	}catch(SQLException e)
 		{
+			log.error("updateOrderDetailsBasedOnStatus method : "+ e.getMessage());
 			System.out.println(e.getMessage());
  	   		e.printStackTrace();
 		}catch(ClassNotFoundException e){
+			log.error("updateOrderDetailsBasedOnStatus method : "+ e.getMessage());
 			e.printStackTrace();
 		}catch(Exception e){
+			log.error("updateOrderDetailsBasedOnStatus method : "+ e.getMessage());
 			e.printStackTrace();
 		}finally{
 		
@@ -522,6 +560,7 @@ public class UserCartDetails {
 				stmt.close();
 				con.close();
 			}catch(SQLException e){
+				log.error("setOrder method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 		}
@@ -558,14 +597,17 @@ public class UserCartDetails {
 	                 }
            }catch(SQLException e)
 			{
+        	   log.error("getCartProductDetails method : "+ e.getMessage());
         	   e.printStackTrace();
 			}catch(ClassNotFoundException e){
+				log.error("getCartProductDetails method : "+ e.getMessage());
 				e.printStackTrace();
 			}finally{
 				try{
 					stmt.close();
 					con.close();
 				}catch(SQLException e){
+					log.error("getCartProductDetails method : "+ e.getMessage());
 					e.printStackTrace();
 				}
 			}
@@ -593,14 +635,17 @@ public class UserCartDetails {
 			stmt.executeQuery();
            }catch(SQLException e)
 			{
+        	   log.error("updateProductInCart method : "+ e.getMessage());
         	   e.printStackTrace();
 			}catch(ClassNotFoundException e){
+				log.error("updateProductInCart method : "+ e.getMessage());
 				e.printStackTrace();
 			}finally{
 				try{
 					stmt.close();
 					con.close();
 				}catch(SQLException e){
+					log.error("updateProductInCart method : "+ e.getMessage());
 					e.printStackTrace();
 				}
 			}

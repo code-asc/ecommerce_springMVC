@@ -22,6 +22,7 @@ public class SessionManagement implements HttpSessionListener
 	public void sessionDestroyed(HttpSessionEvent event)
 	{ 
 		UserDetails info = new UserDetails();
+		System.out.println((int)event.getSession().getAttribute("userID"));
 		info.removeUserStatus((int)event.getSession().getAttribute("userID"));
 	}
 	

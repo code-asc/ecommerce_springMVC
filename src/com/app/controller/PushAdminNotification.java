@@ -16,7 +16,6 @@ import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 import com.app.model.NotificationModel;
 import com.app.service.NotificationService;
 
-
 @Controller
 /**
  * The PushAdminNotification class is used to push notifications to the customer pages using server sent events

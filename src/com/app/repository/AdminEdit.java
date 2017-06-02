@@ -10,6 +10,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
 import com.app.model.CategoryType;
@@ -23,6 +24,7 @@ public class AdminEdit {
 	private String url = "jdbc:sqlserver://MINDFIRE-PC;DatabaseName=onlineShoppingSpring;";
 	private String userName = "sa";
 	private String password = "mindfire";
+	final static Logger log = Logger.getLogger(AdminEdit.class);
 	
 	public int addBrandToDatabase(String brandName)
 	{
@@ -56,12 +58,14 @@ public class AdminEdit {
 		}catch(ClassNotFoundException e)
 		{
 			i=0;
+			log.error("addBrandToDatabase method : "+ e.getMessage());
 			e.printStackTrace();
 		}finally{
 			try{
 				stmt.close();
 				con.close();
 			}catch(SQLException e){
+				log.error("addBrandToDatabase method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 		}
@@ -98,16 +102,19 @@ public class AdminEdit {
 		}catch(SQLException e)
 		{
 			i=0;
+			log.error("addCategoryToDatabase method : "+ e.getMessage());
 			e.printStackTrace();
 		}catch(ClassNotFoundException e)
 		{
 			i=0;
+			log.error("addCategoryToDatabase method : "+ e.getMessage());
 			e.printStackTrace();
 		}finally{
 			try{
 				stmt.close();
 				con.close();
 			}catch(SQLException e){
+				log.error("addCategoryToDatabase method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 		}
@@ -137,11 +144,11 @@ public class AdminEdit {
 			}
 		}catch(SQLException e)
 		{
-			
+			log.error("getCategory method : "+ e.getMessage());
 			e.printStackTrace();
 		}catch(ClassNotFoundException e)
 		{
-			
+			log.error("getCategory method : "+ e.getMessage());
 			e.printStackTrace();
 		}finally{
 			try{
@@ -149,6 +156,7 @@ public class AdminEdit {
 				stmt.close();
 				con.close();
 			}catch(SQLException e){
+				log.error("getCategory method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 		}
@@ -178,11 +186,11 @@ public class AdminEdit {
 			}
 		}catch(SQLException e)
 		{
-			
+			log.error("getSubCategory method : "+ e.getMessage());
 			e.printStackTrace();
 		}catch(ClassNotFoundException e)
 		{
-			
+			log.error("getSubCategory method : "+ e.getMessage());
 			e.printStackTrace();
 		}finally{
 			try{
@@ -190,6 +198,7 @@ public class AdminEdit {
 				stmt.close();
 				con.close();
 			}catch(SQLException e){
+				log.error("getSubCategory method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 		}
@@ -222,11 +231,11 @@ public class AdminEdit {
 			}
 		}catch(SQLException e)
 		{
-			
+			log.error("getSubCategory with integer argument method : "+ e.getMessage());
 			e.printStackTrace();
 		}catch(ClassNotFoundException e)
 		{
-			
+			log.error("getSubCategory with integer argument method : "+ e.getMessage());
 			e.printStackTrace();
 		}finally{
 			try{
@@ -234,6 +243,7 @@ public class AdminEdit {
 				stmt.close();
 				con.close();
 			}catch(SQLException e){
+				log.error("getSubCategory with integer argument method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 		}
@@ -273,16 +283,19 @@ public class AdminEdit {
 		}catch(SQLException e)
 		{
 			i=0;
+			log.error("addSubCategoryToDatabase argument method : "+ e.getMessage());
 			e.printStackTrace();
 		}catch(ClassNotFoundException e)
 		{
 			i=0;
+			log.error("addSubCategoryToDatabase argument method : "+ e.getMessage());
 			e.printStackTrace();
 		}finally{
 			try{
 				stmt.close();
 				con.close();
 			}catch(SQLException e){
+				log.error("addSubCategoryToDatabase argument method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 		}
@@ -317,17 +330,18 @@ public void productEdit(int productID , String productDesc , BigDecimal unitPric
 		
 	}catch(SQLException e)
 	{
-		
+		log.error("productEdit argument method : "+ e.getMessage());
 		e.printStackTrace();
 	}catch(ClassNotFoundException e)
 	{
-		
+		log.error("productEdit argument method : "+ e.getMessage());
 		e.printStackTrace();
 	}finally{
 		try{
 			stmt.close();
 			con.close();
 		}catch(SQLException e){
+			log.error("productEdit argument method : "+ e.getMessage());
 			e.printStackTrace();
 		}
 	}
@@ -351,17 +365,18 @@ public void productDelete(int productID )
 		
 	}catch(SQLException e)
 	{
-		
+		log.error("productDelete argument method : "+ e.getMessage());
 		e.printStackTrace();
 	}catch(ClassNotFoundException e)
 	{
-		
+		log.error("productDelete argument method : "+ e.getMessage());
 		e.printStackTrace();
 	}finally{
 		try{
 			stmt.close();
 			con.close();
 		}catch(SQLException e){
+			log.error("productDelete argument method : "+ e.getMessage());
 			e.printStackTrace();
 		}
 	}
@@ -414,13 +429,16 @@ public void productDelete(int productID )
 		}catch(SQLException e)
 		{
 			check = 0;
+			log.error("editProductFromUserSinglePage argument method : "+ e.getMessage());
 			e.printStackTrace();
 		}catch(ClassNotFoundException e)
 		{
 			check = 0;
+			log.error("editProductFromUserSinglePage argument method : "+ e.getMessage());
 			e.printStackTrace();
 		}catch(Exception e){
 			check = 0;
+			log.error("editProductFromUserSinglePage argument method : "+ e.getMessage());
 			e.printStackTrace();
 		}
 			finally{
@@ -429,6 +447,7 @@ public void productDelete(int productID )
 				stmt.close();
 				con.close();
 			}catch(SQLException e){
+				log.error("editProductFromUserSinglePage argument method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 			}
@@ -465,12 +484,15 @@ public void productDelete(int productID )
 		
 		}catch(SQLException e)
 		{
+			log.error("notificationQuery argument method : "+ e.getMessage());
 			e.printStackTrace();
 		}catch(ClassNotFoundException e)
 		{
+			log.error("notificationQuery argument method : "+ e.getMessage());
 			e.printStackTrace();
 		}catch(Exception e)
 		{
+			log.error("notificationQuery argument method : "+ e.getMessage());
 			e.printStackTrace();
 		}finally{
 		
@@ -479,6 +501,7 @@ public void productDelete(int productID )
 				stmt.close();
 				con.close();
 			}catch(SQLException e){
+				log.error("notificationQuery argument method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 			}
@@ -504,12 +527,15 @@ public void productDelete(int productID )
 		
 		}catch(SQLException e)
 		{
+			log.error("insertNotificationDataQuery argument method : "+ e.getMessage());
 			e.printStackTrace();
 		}catch(ClassNotFoundException e)
 		{
+			log.error("insertNotificationDataQuery argument method : "+ e.getMessage());
 			e.printStackTrace();
 		}catch(Exception e)
 		{
+			log.error("insertNotificationDataQuery argument method : "+ e.getMessage());
 			e.printStackTrace();
 		}finally{
 		
@@ -517,6 +543,7 @@ public void productDelete(int productID )
 				stmt.close();
 				con.close();
 			}catch(SQLException e){
+				log.error("insertNotificationDataQuery argument method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 			}
@@ -542,12 +569,15 @@ public void productDelete(int productID )
 		
 		}catch(SQLException e)
 		{
+			log.error("markAsReadNotificationQuery argument method : "+ e.getMessage());
 			e.printStackTrace();
 		}catch(ClassNotFoundException e)
 		{
+			log.error("markAsReadNotificationQuery argument method : "+ e.getMessage());
 			e.printStackTrace();
 		}catch(Exception e)
 		{
+			log.error("markAsReadNotificationQuery argument method : "+ e.getMessage());
 			e.printStackTrace();
 		}finally{
 		
@@ -555,6 +585,7 @@ public void productDelete(int productID )
 				stmt.close();
 				con.close();
 			}catch(SQLException e){
+				log.error("markAsReadNotificationQuery argument method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 			}

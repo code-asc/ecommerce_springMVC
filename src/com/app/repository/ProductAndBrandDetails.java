@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
 import com.app.model.BrandsOnly;
@@ -21,6 +22,7 @@ public class ProductAndBrandDetails
 	private String url = "jdbc:sqlserver://MINDFIRE-PC;DatabaseName=onlineShoppingSpring;";
 	private String userName = "sa";
 	private String password = "mindfire";
+	final static Logger log = Logger.getLogger(ProductAndBrandDetails.class);
 	
 	public List<BrandsOnly> brandOnly()
 	{
@@ -45,9 +47,11 @@ public class ProductAndBrandDetails
 			}
 		}catch(SQLException e)
 		{
+			log.error("brandOnly method : "+ e.getMessage());
 			e.printStackTrace();
 		}catch(ClassNotFoundException e)
 		{
+			log.error("brandOnly method : "+ e.getMessage());
 			e.printStackTrace();
 		}finally{
 			try{
@@ -55,6 +59,7 @@ public class ProductAndBrandDetails
 				stmt.close();
 				con.close();
 			}catch(SQLException e){
+				log.error("brandOnly method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 		}
@@ -93,9 +98,11 @@ public class ProductAndBrandDetails
 			}
 		}catch(SQLException e)
 		{
+			log.error("getBrandBySubCategory method : "+ e.getMessage());
 			e.printStackTrace();
 		}catch(ClassNotFoundException e)
 		{
+			log.error("getBrandBySubCategory method : "+ e.getMessage());
 			e.printStackTrace();
 		}finally{
 		try{
@@ -103,6 +110,7 @@ public class ProductAndBrandDetails
 			stmt.close();
 			con.close();
 		}catch(SQLException e){
+			log.error("getBrandBySubCategory method : "+ e.getMessage());
 			e.printStackTrace();
 		}
 		}
@@ -148,10 +156,12 @@ public class ProductAndBrandDetails
 			}
 	}
 	catch(SQLException e){
+		log.error("productDetailsUsingSubCategoryID method : "+ e.getMessage());
 		e.printStackTrace();
 	}
     catch(ClassNotFoundException e)
 		{
+    		log.error("productDetailsUsingSubCategoryID method : "+ e.getMessage());
 			e.printStackTrace();
 		}
 		finally{
@@ -161,6 +171,7 @@ public class ProductAndBrandDetails
 				con.close();
 			}
 			catch(SQLException e){
+				log.error("productDetailsUsingSubCategoryID method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 			}
@@ -223,9 +234,11 @@ public class ProductAndBrandDetails
 		}
 		catch(SQLException e)
 		{
+			log.error("productDetailsUsingProductID method : "+ e.getMessage());
 			e.printStackTrace();
 		}catch(ClassNotFoundException e)
 		{
+			log.error("productDetailsUsingProductID method : "+ e.getMessage());
 			e.printStackTrace();
 		}finally{
 			try{
@@ -233,6 +246,7 @@ public class ProductAndBrandDetails
 				stmt.close();
 				con.close();
 			}catch(SQLException e){
+				log.error("productDetailsUsingProductID method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 			}
@@ -291,7 +305,6 @@ public class ProductAndBrandDetails
 				
 			}
 			
-			System.out.println(sql);
 			rs = stmt.executeQuery(sql);
 			while(rs.next())
 			{
@@ -308,10 +321,12 @@ public class ProductAndBrandDetails
 			
 		}catch(SQLException e)
 		{
+			log.error("filteredProducts method : "+ e.getMessage());
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}catch(ClassNotFoundException e)
 		{
+			log.error("filteredProducts method : "+ e.getMessage());
 			e.printStackTrace();
 		}finally{
 			try{
@@ -319,6 +334,7 @@ public class ProductAndBrandDetails
 				stmt.close();
 				con.close();
 			}catch(SQLException e){
+				log.error("filteredProducts method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 			}
@@ -366,10 +382,12 @@ public class ProductAndBrandDetails
 			
 		}catch(SQLException e)
 		{
+			log.error("productInfoForSearchPage method : "+ e.getMessage());
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}catch(ClassNotFoundException e)
 		{
+			log.error("productInfoForSearchPage method : "+ e.getMessage());
 			e.printStackTrace();
 		}finally{
 			try{
@@ -377,6 +395,7 @@ public class ProductAndBrandDetails
 				stmt.close();
 				con.close();
 			}catch(SQLException e){
+				log.error("productInfoForSearchPage method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 			}
@@ -429,10 +448,12 @@ public class ProductAndBrandDetails
 			
 		}catch(SQLException e)
 		{
+			log.error("productInfoForSearchPage with String argument method : "+ e.getMessage());
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}catch(ClassNotFoundException e)
 		{
+			log.error("productInfoForSearchPage with String argument method : "+ e.getMessage());
 			e.printStackTrace();
 		}finally{
 			try{
@@ -440,6 +461,7 @@ public class ProductAndBrandDetails
 				stmt.close();
 				con.close();
 			}catch(SQLException e){
+				log.error("productInfoForSearchPage with String argument method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 			}
@@ -496,10 +518,12 @@ public class ProductAndBrandDetails
 			}
 		}catch(SQLException e)
 		{
+			log.error("SimilarProducts method : "+ e.getMessage());
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}catch(ClassNotFoundException e)
 		{
+			log.error("SimilarProducts method : "+ e.getMessage());
 			e.printStackTrace();
 		}finally{
 			try{
@@ -507,6 +531,7 @@ public class ProductAndBrandDetails
 				stmt.close();
 				con.close();
 			}catch(SQLException e){
+				log.error("SimilarProducts method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 			}
@@ -529,22 +554,25 @@ public class ProductAndBrandDetails
 			stmt.setInt(1,productID);
 			stmt.executeUpdate();
 			}catch(SQLException e)
-		{
-			System.out.println(e.getMessage());
-			e.printStackTrace();
-		}catch(ClassNotFoundException e)
-		{
-			e.printStackTrace();
-		}finally{
-			try{
-				stmt.close();
-				con.close();
-			}catch(SQLException e){
-				e.printStackTrace();
-			}
-			}
-	}
-	
+				{
+					log.error("updateProductQtyOnOrder method : "+ e.getMessage());
+					System.out.println(e.getMessage());
+					e.printStackTrace();
+				}catch(ClassNotFoundException e)
+					{
+						log.error("updateProductQtyOnOrder method : "+ e.getMessage());
+						e.printStackTrace();
+					}finally{
+								try{
+									stmt.close();
+									con.close();
+									}catch(SQLException e){
+												log.error("updateProductQtyOnOrder method : "+ e.getMessage());
+												e.printStackTrace();
+															}
+													}
+											}
+											
 	public List<HighestSoldItem> highestSoldProduct()
 	{
 		List<HighestSoldItem> list = new ArrayList<>();
@@ -575,10 +603,12 @@ public class ProductAndBrandDetails
 	
 		}catch(SQLException e)
 		{
+			log.error("highestSoldProduct method : "+ e.getMessage());
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}catch(ClassNotFoundException e)
 		{
+			log.error("highestSoldProduct method : "+ e.getMessage());
 			e.printStackTrace();
 		}finally{
 			try{
@@ -586,6 +616,7 @@ public class ProductAndBrandDetails
 				stmt.close();
 				con.close();
 			}catch(SQLException e){
+				log.error("highestSoldProduct method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 			}

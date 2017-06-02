@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
 import com.app.model.UserAddress;
@@ -19,7 +20,7 @@ public class AddressDetails {
 	private String url = "jdbc:sqlserver://MINDFIRE-PC;DatabaseName=onlineShoppingSpring;";
 	private String userName = "sa";
 	private String password = "mindfire";
-	
+	final static Logger log = Logger.getLogger(AddressDetails.class);
 	
 	public List<UserAddress> userAddressDetails(int userID , String type)
 	{
@@ -56,9 +57,11 @@ public class AddressDetails {
 			}
 		}catch(SQLException e)
 		{
+			log.error("userAddressDetails method : "+ e.getMessage());
 			e.printStackTrace();
 		}catch(ClassNotFoundException e)
 		{
+			log.error("userAddressDetails method : "+ e.getMessage());
 			e.printStackTrace();
 		}finally{
 			try{
@@ -66,6 +69,7 @@ public class AddressDetails {
 				stmt.close();
 				con.close();
 			}catch(SQLException e){
+				log.error("userAddressDetails method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 		}
@@ -93,15 +97,18 @@ public class AddressDetails {
 			
 		}catch(SQLException e)
 		{
+			log.error("updateAddressStatusToNull method : "+ e.getMessage());
 			e.printStackTrace();
 		}catch(ClassNotFoundException e)
 		{
+			log.error("updateAddressStatusToNull method : "+ e.getMessage());
 			e.printStackTrace();
 		}finally{
 			try{
 				stmt.close();
 				con.close();
 			}catch(SQLException e){
+				log.error("updateAddressStatusToNull method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 		}
@@ -136,10 +143,13 @@ public class AddressDetails {
 			}
 			
 		}catch(SQLException e)
-		{   System.out.println("error in setNewDefaultAddress");
+		{   
+			System.out.println("error in setNewDefaultAddress");
+		    log.error("setNewDefaultAddress method : "+ e.getMessage());
 			e.printStackTrace();
 		}catch(ClassNotFoundException e)
 		{
+			log.error("setNewDefaultAddress method : "+ e.getMessage());
 			e.printStackTrace();
 		}finally{
 			try{
@@ -184,15 +194,19 @@ public class AddressDetails {
 		}catch(SQLException e)
 		{
 			System.out.println("error in setTempAddress");
+			log.error("setTempAddress method : "+ e.getMessage());
 			e.printStackTrace();
 		}catch(ClassNotFoundException e)
 		{
+			log.error("setTempAddress method : "+ e.getMessage());
 			e.printStackTrace();
 		}finally{
 			try{
 				stmt.close();
 				con.close();
 			}catch(SQLException e){
+				
+				log.error("setTempAddress method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 		}

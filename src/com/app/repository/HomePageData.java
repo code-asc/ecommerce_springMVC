@@ -7,7 +7,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
+
 import com.app.model.HomePageLargeImage;
 import com.app.model.HomePageThumbNail;
 
@@ -17,7 +20,7 @@ public class HomePageData
 	private String url = "jdbc:sqlserver://MINDFIRE-PC;DatabaseName=onlineShoppingSpring;";
 	private String userName = "sa";
 	private String password = "mindfire";
-	
+	final static Logger log = Logger.getLogger(HomePageData.class);
 	
 	public  List<HomePageLargeImage> homePageContent()
 	{
@@ -42,10 +45,12 @@ public class HomePageData
 		}
 		catch(SQLException e)
 		{
+			log.error("homePageContent argument method : "+ e.getMessage());
 			e.printStackTrace();
 		}
 		catch(ClassNotFoundException e)
 		{
+			log.error("homePageContent argument method : "+ e.getMessage());
 			e.printStackTrace();
 		}
 		finally{
@@ -56,6 +61,7 @@ public class HomePageData
 			}
 			catch(SQLException e)
 			{
+				log.error("homePageContent argument method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 		}
@@ -89,10 +95,12 @@ public class HomePageData
 		}
 		catch(SQLException e)
 		{
+			log.error("homePageContentThumbNail argument method : "+ e.getMessage());
 			e.printStackTrace();
 		}
 		catch(ClassNotFoundException e)
 		{
+			log.error("homePageContentThumbNail argument method : "+ e.getMessage());
 			e.printStackTrace();
 		}
 		finally{
@@ -103,6 +111,7 @@ public class HomePageData
 			}
 			catch(SQLException e)
 			{
+				log.error("homePageContentThumbNail argument method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 		}

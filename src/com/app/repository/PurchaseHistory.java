@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
 import com.app.model.PurchaseHistoryModel;
@@ -19,6 +20,7 @@ public class PurchaseHistory {
 	private String url = "jdbc:sqlserver://MINDFIRE-PC;DatabaseName=onlineShoppingSpring;";
 	private String userName = "sa";
 	private String password = "mindfire";
+	final static Logger log = Logger.getLogger(PurchaseHistory.class);
 	
 	public List<Integer> getPurchaseHistoryID(int userID , int start , int end)
 	{
@@ -66,9 +68,11 @@ public class PurchaseHistory {
 			
 		}catch(SQLException e)
 		{
+			log.error("getPurchaseHistoryID with 3 parameters method : "+ e.getMessage());
 			e.printStackTrace();
 		}catch(ClassNotFoundException e)
 		{
+			log.error("getPurchaseHistoryID with 3 parameters  method : "+ e.getMessage());
 			e.printStackTrace();
 		}finally{
 			try{
@@ -76,6 +80,7 @@ public class PurchaseHistory {
 				stmt.close();
 				con.close();
 			}catch(SQLException e){
+				log.error("getPurchaseHistoryID with 3 parameters  method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 		}
@@ -150,9 +155,11 @@ public class PurchaseHistory {
 			}
 		}catch(SQLException e)
 		{
+			log.error("getPurchaseHistoryID with 2 parameters  method : "+ e.getMessage());
 			e.printStackTrace();
 		}catch(ClassNotFoundException e)
 		{
+			log.error("getPurchaseHistoryID with 2 parameters  method : "+ e.getMessage());
 			e.printStackTrace();
 		}finally{
 			try{
@@ -160,6 +167,7 @@ public class PurchaseHistory {
 				stmt.close();
 				con.close();
 			}catch(SQLException e){
+				log.error("getPurchaseHistoryID with 2 parameters  method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 		}
@@ -243,11 +251,11 @@ public class PurchaseHistory {
 			}
 		}catch(SQLException e)
 		{
-			System.out.println("error handled here....1");
-
+			log.error("getCustomerPurchaseHistory method : "+ e.getMessage());
 			e.printStackTrace();
 		}catch(ClassNotFoundException e)
 		{
+			log.error("getCustomerPurchaseHistory method : "+ e.getMessage());
 			e.printStackTrace();
 		}finally{
 			try{
@@ -255,7 +263,7 @@ public class PurchaseHistory {
 				stmt.close();
 				con.close();
 			}catch(Exception e){
-				System.out.println("error handled here....");
+				log.error("getCustomerPurchaseHistory method : "+ e.getMessage());
 				e.printStackTrace();
 			}
 		}
