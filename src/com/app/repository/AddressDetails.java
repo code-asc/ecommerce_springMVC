@@ -10,16 +10,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 import com.app.model.UserAddress;
 
 @Repository
 public class AddressDetails {
+	@Value("${jdbc.url}")
+	private String url;
 	
-	private String url = "jdbc:sqlserver://MINDFIRE-PC;DatabaseName=onlineShoppingSpring;";
-	private String userName = "sa";
-	private String password = "mindfire";
+	@Value("${jdbc.userName}")
+	private String userName;
+	
+	@Value("${jdbc.password}")
+	private String password;
+	
+	
 	final static Logger log = Logger.getLogger(AddressDetails.class);
 	
 	public List<UserAddress> userAddressDetails(int userID , String type)

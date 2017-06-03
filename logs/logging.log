@@ -1,0 +1,23 @@
+02-06-2017 23:03:57 ERROR UserDetails:549 - removeUserStatus method : Cannot open database "onlineShoppingSpring" requested by the login. The login failed. ClientConnectionId:4685a3fe-3287-4940-a84d-84600a0e6988
+02-06-2017 23:03:58 ERROR UserDetails:565 - removeUserStatus method : null
+04-06-2017 00:51:25 ERROR UserDetails:67 - doLogin method : Login failed for user 'sa'. ClientConnectionId:2c22f5f4-b7dd-48c8-8c3b-d702a227599d
+04-06-2017 00:51:34 ERROR UserDetails:67 - doLogin method : Login failed for user 'sa'. ClientConnectionId:a3ad51a5-244d-4e17-9c12-4a7b3bf1b529
+04-06-2017 00:54:01 ERROR UserDetails:67 - doLogin method : Login failed for user 'sa'. ClientConnectionId:d02a2e6c-dd5c-4a35-ada7-3972203ac3d3
+04-06-2017 00:55:14 ERROR UserDetails:67 - doLogin method : Login failed for user 'sa'. ClientConnectionId:ac9699a3-e60a-46f3-9fd2-70e5ab008ee7
+04-06-2017 00:58:10 ERROR UserDetails:67 - doLogin method : Login failed for user 'sa'. ClientConnectionId:060c3cbf-4070-4773-a13f-9c859c0e7663
+04-06-2017 00:59:50 ERROR UserDetails:515 - changeUserStatusOnline method : The url cannot be null
+04-06-2017 00:59:50 ERROR UserDetails:531 - changeUserStatusOnline method : null
+04-06-2017 00:59:51 ERROR UserDetails:467 - updateUserToOnline method : The url cannot be null
+04-06-2017 00:59:51 ERROR UserDetails:484 - updateUserToOnline method : null
+04-06-2017 00:59:51 ERROR UserDetails:467 - updateUserToOnline method : The url cannot be null
+04-06-2017 00:59:51 ERROR UserDetails:484 - updateUserToOnline method : null
+04-06-2017 01:02:13 ERROR UserDetails:462 - updateUserToOnline method : The url cannot be null
+04-06-2017 01:02:13 ERROR UserDetails:479 - updateUserToOnline method : null
+04-06-2017 01:02:20 ERROR UserDetails:462 - updateUserToOnline method : The url cannot be null
+04-06-2017 01:02:20 ERROR UserDetails:479 - updateUserToOnline method : null
+04-06-2017 01:02:21 ERROR UserDetails:555 - removeUserStatus method : The url cannot be null
+04-06-2017 01:02:21 ERROR UserDetails:571 - removeUserStatus method : null
+04-06-2017 01:03:24 ERROR UserDetails:510 - changeUserStatusOnline method : The url cannot be null
+04-06-2017 01:03:24 ERROR UserDetails:526 - changeUserStatusOnline method : null
+04-06-2017 01:03:25 ERROR UserDetails:462 - updateUserToOnline method : The url cannot be null
+04-06-2017 01:03:25 ERROR UserDetails:479 - updateUserToOnline method : null

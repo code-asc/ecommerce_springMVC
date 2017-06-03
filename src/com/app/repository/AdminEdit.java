@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 import com.app.model.CategoryType;
@@ -21,9 +22,15 @@ import com.app.model.SubCategoryType;
 @Repository
 public class AdminEdit {
 	
-	private String url = "jdbc:sqlserver://MINDFIRE-PC;DatabaseName=onlineShoppingSpring;";
-	private String userName = "sa";
-	private String password = "mindfire";
+	@Value("${jdbc.url}")
+	private String url;
+	
+	@Value("${jdbc.userName}")
+	private String userName;
+	
+	@Value("${jdbc.password}")
+	private String password;
+	
 	final static Logger log = Logger.getLogger(AdminEdit.class);
 	
 	public int addBrandToDatabase(String brandName)

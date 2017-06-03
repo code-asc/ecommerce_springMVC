@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 import com.app.model.LoggedInUserInfo;
@@ -17,10 +18,15 @@ import com.app.model.LoggedInUserInfo;
 @Repository
 public class UserDetails {
 	
+	@Value("${jdbc.url}")
+	private String url;
 	
-	private String url = "jdbc:sqlserver://MINDFIRE-PC;DatabaseName=onlineShoppingSpring;";
-	private String userName = "sa";
-	private String password = "mindfire";
+	@Value("${jdbc.userName}")
+	private String userName;
+	
+	@Value("${jdbc.password}")
+	private String password;
+	
 	final static Logger log = Logger.getLogger(UserDetails.class);
 	
 	public List<LoggedInUserInfo> doLogin(String userEmail, String userPassword) {
@@ -28,7 +34,7 @@ public class UserDetails {
 		ResultSet rs = null;
 		PreparedStatement stmt = null;
 		List<LoggedInUserInfo> list = new ArrayList<>();
-		
+		System.out.println(userName);
 		//int userCount = 0;
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
