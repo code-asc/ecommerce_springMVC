@@ -21,3 +21,7 @@
 04-06-2017 01:03:24 ERROR UserDetails:526 - changeUserStatusOnline method : null
 04-06-2017 01:03:25 ERROR UserDetails:462 - updateUserToOnline method : The url cannot be null
 04-06-2017 01:03:25 ERROR UserDetails:479 - updateUserToOnline method : null
+04-06-2017 01:06:13 ERROR UserDetails:462 - updateUserToOnline method : The url cannot be null
+04-06-2017 01:06:13 ERROR UserDetails:479 - updateUserToOnline method : null
+04-06-2017 01:06:13 ERROR UserDetails:555 - removeUserStatus method : The url cannot be null
+04-06-2017 01:06:13 ERROR UserDetails:571 - removeUserStatus method : null
