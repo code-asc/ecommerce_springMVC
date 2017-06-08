@@ -21,7 +21,7 @@ import com.app.service.UserInfo;
 
 @Controller
 /**
- * The ProfileEdit class provides the customerto edit his profile
+ * The ProfileEdit class provides the customer to edit his profile
  */
 public class ProfileEdit {
 	
@@ -96,13 +96,7 @@ public class ProfileEdit {
 						stream.close();
 						
 						if(fileName != null && fileName != "")
-						{
-							System.out.println(completePath);
-							
-							
-					/*		completePath = completePath.replace("C:/Users/mindfire/workspace", "");
-							completePath = completePath.replace("/WebContent", "");*/
-							
+						{	
 							completePath = completePath.replace("C:/Users/mindfire/workspace/ProfileImage", "resources");
 							editUser.setUserProfilePhoto(userID, completePath , session);
 						}
