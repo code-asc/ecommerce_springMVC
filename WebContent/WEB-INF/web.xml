@@ -85,7 +85,7 @@
 	
 	<filter-mapping>
 		<filter-name>RedirectFilter</filter-name>
-		<url-pattern>/</url-pattern>
+		<url-pattern>*.html</url-pattern>
 	</filter-mapping>
 
 </web-app>

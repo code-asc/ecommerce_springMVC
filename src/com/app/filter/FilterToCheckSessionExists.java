@@ -43,7 +43,6 @@ public class FilterToCheckSessionExists implements Filter {
 		HttpServletRequest requestOf =(HttpServletRequest)request;
 		HttpServletResponse responseOf=(HttpServletResponse)response;
 		
-		
 		/*The following 'if' condition creates a  thread for the request and makes LoggedIn user online*/
 		 
 		if(requestOf.getSession().getAttribute("isUserLoggedIn") != null && (boolean)requestOf.getSession().getAttribute("isUserLoggedIn"))
@@ -83,7 +82,6 @@ public class FilterToCheckSessionExists implements Filter {
 		if(requestOf.getQueryString() != null)
 		{
 			currentPath = currentPath.concat("?" + requestOf.getQueryString());
-			
 		}
 		
 	
@@ -99,7 +97,7 @@ public class FilterToCheckSessionExists implements Filter {
 		}
 		*/	
 			
-			
+		chain.doFilter(request, response);	
 		
 	}
 
