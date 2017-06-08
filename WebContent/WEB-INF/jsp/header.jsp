@@ -242,6 +242,7 @@
         <script src="/ProjectDemo/assets/script/onNotificationClick.js"></script>
         <script src="/ProjectDemo/assets/script/headerNotification_user.js"></script> -->
         
+        <script src="<c:url value="/resources/script/onWindowClose.js"/>"></script>
         <script src="<c:url value="/resources/script/notificationHeader.js"/>"></script>
         <script src="<c:url value="/resources/script/onNotificationClick.js"/>"></script>
         <script src="<c:url value="/resources/script/headerNotification_user.js"/>"></script>
