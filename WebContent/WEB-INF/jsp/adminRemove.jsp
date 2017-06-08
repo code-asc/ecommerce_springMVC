@@ -86,12 +86,24 @@
 
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script src="/ProjectDemo/assets/script/adminAddMenu.js"></script>
+
+
+<!-- <script src="/ProjectDemo/assets/script/adminAddMenu.js"></script>
 <script src="/ProjectDemo/assets/script/getSubCategoryAjax.js"></script>
-<script src="/ProjectDemo/assets/script/getProductAjax.js"></script>
+<script src="/ProjectDemo/assets/script/getProductAjax.js"></script> -->
+
+<script src="<c:url value="/resources/script/getSubCategoryAjax.js"/>"></script>
+<script src="<c:url value="/resources/script/getProductAjax.js"/>"></script>
+
+
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/additional-methods.min.js"></script>
-<script src="/ProjectDemo/assets/script/adminValidate.js"></script>
+
+
+<!-- <script src="/ProjectDemo/assets/script/adminValidate.js"></script> -->
+
+<script src="<c:url value="/resources/script/adminValidate.js"/>"></script>
+
 </body>
 
 </html>

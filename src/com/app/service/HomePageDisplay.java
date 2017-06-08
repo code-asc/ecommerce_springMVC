@@ -33,7 +33,7 @@ public class HomePageDisplay implements HomePageInfo {
 	 * @see com.app.service.HomePageInfo#homePageDisplayThumbNail()
 	 */
 	@Override
-	@Cacheable(value="homePageImageThumNail")
+	@Cacheable(value="homePageImageThumbNail")
 	public List<HomePageThumbNail> homePageDisplayThumbNail()
 	{
 		return homePageData.homePageContentThumbNail();

@@ -123,10 +123,18 @@ Functionality : It will show sign up page
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-    <script src="/ProjectDemo/assets/script/autoSuggestion.js"></script>
+    
+    <!-- <script src="/ProjectDemo/assets/script/autoSuggestion.js"></script> -->
+    
+    <script src="<c:url value="/resources/script/autoSuggestion.js"/>"></script>
+    
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/additional-methods.min.js"></script>
-    <script src="/ProjectDemo/assets/script/validateClientTest.js"></script>
+    
+    <!-- <script src="/ProjectDemo/assets/script/validateClientTest.js"></script> -->
+    
+    <script src="<c:url value="/resources/script/validateClientTest.js"/>"></script>
+    
 </body>
 </html>
     

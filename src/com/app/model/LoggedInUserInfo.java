@@ -99,9 +99,8 @@ public class LoggedInUserInfo implements HttpSessionBindingListener {
 		HttpSession session = logins.remove(this.userEmail);
 		if(session != null)
 		{
-			session.invalidate();
-			
 			info.removeUserStatus(this.userID);
+			session.invalidate();
 		}
 		
 		info.changeUserStatusOnline(this.userID, this.userEmail);

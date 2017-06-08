@@ -17,15 +17,12 @@ import com.app.model.HeaderSubcategoryDetails;
 
 @Repository
 public class CategoryAndSubCategoryDetails {
-
-	@Value("${jdbc.url}")
-	private String url;
 	
-	@Value("${jdbc.userName}")
-	private String userName;
+	private String url = "jdbc:sqlserver://MINDFIRE-PC;DatabaseName=onlineShoppingSpring;";
 	
-	@Value("${jdbc.password}")
-	private String password;
+	private String userName = "sa";
+	
+	private String password = "mindfire";
 	
 	final static Logger log = Logger.getLogger(CategoryAndSubCategoryDetails.class);
 	

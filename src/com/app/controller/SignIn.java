@@ -78,7 +78,7 @@ public class SignIn {
 				e.printStackTrace();
 				log.error("onPostForSignIn method : "+e);
 			}
-			System.out.println("The current path : " + session.getAttribute("previousPath").toString());
+			//System.out.println("The current path : " + session.getAttribute("previousPath").toString());
 			if(session.getAttribute("tempPath") != null)
 			{
 			return "redirect:"+session.getAttribute("tempPath").toString();

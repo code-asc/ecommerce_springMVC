@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 import com.app.model.LoggedInUserInfo;
@@ -18,14 +17,11 @@ import com.app.model.LoggedInUserInfo;
 @Repository
 public class UserDetails {
 	
-	@Value("${jdbc.url}")
-	private String url;
+	private String url = "jdbc:sqlserver://MINDFIRE-PC;DatabaseName=onlineShoppingSpring;";
 	
-	@Value("${jdbc.userName}")
-	private String userName;
+	private String userName = "sa";
 	
-	@Value("${jdbc.password}")
-	private String password;
+	private String password = "mindfire";
 	
 	final static Logger log = Logger.getLogger(UserDetails.class);
 	
@@ -34,8 +30,6 @@ public class UserDetails {
 		ResultSet rs = null;
 		PreparedStatement stmt = null;
 		List<LoggedInUserInfo> list = new ArrayList<>();
-		System.out.println(userName);
-		//int userCount = 0;
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			con = DriverManager.getConnection(url, userName, password);
@@ -110,6 +104,7 @@ public class UserDetails {
 		int count=0;
 		try
 		{
+			System.out.println("In checkUserEmailAlreadyExists : \n"+url);
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			con = DriverManager.getConnection(url, userName, password);
 			String sql="SELECT userID , userEmail from Customer where userEmail=?";
@@ -447,7 +442,9 @@ public class UserDetails {
 		try{
 			
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			System.out.println("url : "+url+"\n userName : "+userName+"\n password : "+password);
 			con = DriverManager.getConnection(url, userName, password);
+			
 			String sql = "UPDATE OnlineUser "
 					+ "SET status='online' "
 					+ "WHERE "
@@ -565,8 +562,15 @@ public class UserDetails {
 		}
 		finally {
 			try{
-			con.close();
-			stmt.close();
+				if(stmt != null)
+				{
+					stmt.close();
+				}
+				if(con != null)
+				{
+					con.close();
+				}
+
 			}catch(Exception e){
 				log.error("removeUserStatus method : "+ e.getMessage());
 				e.printStackTrace();

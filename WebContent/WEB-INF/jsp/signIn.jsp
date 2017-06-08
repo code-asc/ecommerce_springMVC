@@ -8,6 +8,7 @@ Functionality : It is used for sign In purpose
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -99,6 +100,11 @@ Functionality : It is used for sign In purpose
     <!-- <script src="/ProjectDemo/assets/script/autoSuggestion.js"></script> -->
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/additional-methods.min.js"></script>
-    <script src="/ProjectDemo/assets/script/validateClientSignIn.js"></script>
+    <script src="<c:url value="/resources/script/validateClientSignIn.js"/>"></script>
+    
+    
+   <!--  <script src="/ProjectDemo/assets/script/validateClientSignIn.js"></script> -->
+    
+    
 </body>
 </html>

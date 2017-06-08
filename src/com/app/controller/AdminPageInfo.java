@@ -424,7 +424,7 @@ public class AdminPageInfo {
 	{
 		if(session.getAttribute("role").toString().compareTo("admin")==0)
 		{
-			System.out.println(session.getAttribute("tempPath").toString());
+			//System.out.println(session.getAttribute("tempPath").toString());
 			otherDetails.deleteProduct(productID);
 			return "redirect:"+session.getAttribute("tempPath").toString();
 		}else{
@@ -450,9 +450,15 @@ public class AdminPageInfo {
 	@RequestMapping(value = "/onWindowClose" , method = RequestMethod.GET)
 	public @ResponseBody void getUserOffline(HttpSession session)
 	{
-		if(session.getAttribute("isLoggedInUser")!=null && (boolean)session.getAttribute("isLoggedInUser"))
+		try
 		{
-		 allInfo.changeUserStatusToOffline((int)session.getAttribute("userID"));;
+			System.out.println(session.getAttribute("isUserLoggedIn"));
+			System.out.println(session.getAttribute("isUserLoggedIn"));
+		 allInfo.changeUserStatusToOffline((int)session.getAttribute("userID"));
+		}catch(Exception e)
+		{
+			e.printStackTrace();
 		}
+		
 	}
 }

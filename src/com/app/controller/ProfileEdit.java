@@ -72,7 +72,8 @@ public class ProfileEdit {
               try{
             	  
             	        BufferedOutputStream stream = null;
-						String path = "C:/Users/mindfire/workspace/ProjectDemo/WebContent/assets/usersInfo/ProfileImage/"+session.getAttribute("userID").toString();
+            	        String path = "C:/Users/mindfire/workspace/ProfileImage/"+session.getAttribute("userID").toString();
+						//String path = "C:/Users/mindfire/workspace/ProjectDemo/WebContent/assets/usersInfo/ProfileImage/"+session.getAttribute("userID").toString();
 						String completePath = path+"/"+fileName;
 						byte[] photo = editProfile1.getUserProfilePhoto().getBytes();
 						dir = new File(path);
@@ -96,8 +97,13 @@ public class ProfileEdit {
 						
 						if(fileName != null && fileName != "")
 						{
-							completePath = completePath.replace("C:/Users/mindfire/workspace", "");
-							completePath = completePath.replace("/WebContent", "");
+							System.out.println(completePath);
+							
+							
+					/*		completePath = completePath.replace("C:/Users/mindfire/workspace", "");
+							completePath = completePath.replace("/WebContent", "");*/
+							
+							completePath = completePath.replace("C:/Users/mindfire/workspace/ProfileImage", "resources");
 							editUser.setUserProfilePhoto(userID, completePath , session);
 						}
 						

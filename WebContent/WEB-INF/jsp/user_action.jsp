@@ -12,8 +12,14 @@
         <!-- Bootstrap -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="/ProjectDemo/assets/css/panel.css">
-        <link rel="stylesheet" href="/ProjectDemo/assets/css/transformEffect.css">
+        
+        
+<!--    <link rel="stylesheet" href="/ProjectDemo/assets/css/panel.css">
+        <link rel="stylesheet" href="/ProjectDemo/assets/css/transformEffect.css"> -->
+        
+        <link rel="stylesheet" href="<c:url value ="/resources/css/panel.css"/>" >
+        <link rel="stylesheet" href="<c:url value ="/resources/css/transformEffect.css"/>" >
+        
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -104,7 +110,7 @@
 <div class="col-sm-3 col-md-3 col-xm-3 col-lg-3" style="float : left ; margin-bottom:30px">
 
                 <a href="user_action_single.html?productID=${retriveProduct.productID}">
-                    <div class="itemthumb"> <img src="${retriveProduct.thumbNailPhoto}" class="img-responsive img-rounded"></div>
+                    <div class="itemthumb"> <img src="<c:url value='${retriveProduct.thumbNailPhoto}'/>" class="img-responsive img-rounded"></div>
                 </a>
                        <br/>
                 <strong>${retriveProduct.brandName}</strong>
@@ -139,8 +145,13 @@
 
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <!---<script src="./script/singleSelectOption.js"></script>--->
-    <script src="/ProjectDemo/assets/script/categoryAjax.js"></script>
-    <script src="/ProjectDemo/assets/script/autoSuggestion.js"></script>
+
+<!--<script src="/ProjectDemo/assets/script/categoryAjax.js"></script>
+    <script src="/ProjectDemo/assets/script/autoSuggestion.js"></script> -->
+    
+    
+    <script src="<c:url value="/resources/script/categoryAjax.js"/>"></script>
+    <script src="<c:url value="/resources/script/autoSuggestion.js"/>"></script>
+    
   </body>
 </html>

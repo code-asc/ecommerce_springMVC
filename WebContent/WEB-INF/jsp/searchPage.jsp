@@ -12,8 +12,14 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/ProjectDemo/assets/css/panel.css">
-    <link rel="stylesheet" href="/ProjectDemo/assets/css/transformEffect.css">
+    
+    
+<!--<link rel="stylesheet" href="/ProjectDemo/assets/css/panel.css">
+    <link rel="stylesheet" href="/ProjectDemo/assets/css/transformEffect.css"> -->
+    
+    <link rel="stylesheet" href="<c:url value ="/resources/css/panel.css"/>" >
+    <link rel="stylesheet" href="<c:url value ="/resources/css/transformEffect.css"/>" >
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -147,7 +153,13 @@
 
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-    <script src="/ProjectDemo/assets/script/categorySearchAjax.js"></script>
-    <script src="/ProjectDemo/assets/script/autoSuggestion.js"></script>
+    
+    
+<!--<script src="/ProjectDemo/assets/script/categorySearchAjax.js"></script>
+    <script src="/ProjectDemo/assets/script/autoSuggestion.js"></script> -->
+    
+    <script src="<c:url value="/resources/script/categorySearchAjax.js"/>"></script>
+    <script src="<c:url value="/resources/script/autoSuggestion.js"/>"></script>
+    
 </body>
 </html>

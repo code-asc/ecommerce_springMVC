@@ -12,8 +12,8 @@ var addImageToCarousel = function() {
 	var JSONdata = data;
 	$.each(JSONdata, function(key, val) {
 		$.each(val, function(key, val) {
-			// alert(val);
-			$('<div class="item"><img src="' + val + '"></div>').appendTo(
+			//alert(val);
+			$('<div class="item"><img src="'+val+'"></div>').appendTo(
 					'.carousel-inner');
 			$('<li data-target="#slider" data-slide-to="' + i + '"></li>')
 					.appendTo('.carousel-indicators');

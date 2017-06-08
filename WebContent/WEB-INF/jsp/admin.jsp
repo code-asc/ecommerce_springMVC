@@ -25,7 +25,10 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <link rel="stylesheet" href="/ProjectDemo/assets/css/adminCSS.css">
+    
+    <!-- <link rel="stylesheet" href="/ProjectDemo/assets/css/adminCSS.css"> -->
+    
+    <link rel="stylesheet" href="<c:url value ="/resources/css/adminCSS.css"/>" >
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
@@ -279,10 +282,13 @@
     
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     
-    <script src="/ProjectDemo/assets/script/adminEditAjax.js"></script>
+<!--     <script src="/ProjectDemo/assets/script/adminEditAjax.js"></script>
     <script src="/ProjectDemo/assets/script/autoSuggestion.js"></script>
-    <script src="/ProjectDemo/assets/script/adminEmitter.js"></script>
-<%--     <% out.println("<p>bufferSize: " + out.getBufferSize() + " remaining: " + out.getRemaining() + " used: " + (out.getBufferSize() - out.getRemaining()) + " autoFlush: " + out.isAutoFlush() + "</p><br>"); %>
- --%>    </body>
+    <script src="/ProjectDemo/assets/script/adminEmitter.js"></script> -->
+    
+    <script src="<c:url value="/resources/script/adminEditAjax.js"/>"></script>
+    <script src="<c:url value="/resources/script/autoSuggestion.js"/>"></script>
+    <script src="<c:url value="/resources/script/adminEmitter.js"/>"></script>
+    </body>
 
 </html>

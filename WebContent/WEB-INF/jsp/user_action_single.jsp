@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
     <head>
@@ -11,7 +12,10 @@
         <!-- Bootstrap -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="/ProjectDemo/assets/css/transformEffect.css">
+        
+        <!-- <link rel="stylesheet" href="/ProjectDemo/assets/css/transformEffect.css"> -->
+        
+        <link rel="stylesheet" href="<c:url value ="/resources/css/transformEffect.css"/>" >
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
@@ -35,7 +39,7 @@
                                                     
                                                     <c:forEach items="${retriveProduct}" var="product">
                                                         <div class="col-md-4 col-sm-4 col-xm-4 col-lg-6" style="float:left">
-                                                            <img src="${product.largePhoto}" alt="image not found" class="img-responsive">
+                                                            <img src="<c:url value="${product.largePhoto}"/>" alt="image not found" class="img-responsive">
                                                         </div>
 
                                                         <div class="col-md-4 col-sm-4 col-xm-4 col-lg-4">
@@ -128,7 +132,7 @@
                                                         <c:forEach items="${requestScope.suggestProduct}" var="suggestProduct">
                                                             <div class="col-sm-3 col-md-3 col-xs-2">
                                                                  <a href="user_action_single.html?productID=${suggestProduct.productID}">
-                                                                     <div class="itemthumb"> <img src="${suggestProduct.thumbNailPhoto}" class="img-responsive"></div>
+                                                                     <div class="itemthumb"> <img src="<c:url value="${suggestProduct.thumbNailPhoto}"/>" class="img-responsive"></div>
                                                                 </a>
                                                                 <br/>
                                                                 <strong style="color:black">${suggestProduct.brandName}</strong>
@@ -177,9 +181,15 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    
+<!--     
     <script src="/ProjectDemo/assets/script/autoSuggestion.js"></script>
     <script src="/ProjectDemo/assets/script/addCartAjax.js"></script>
-    <script src="/ProjectDemo/assets/script/singleBuyAjax.js"></script>
+    <script src="/ProjectDemo/assets/script/singleBuyAjax.js"></script> -->
+    
+    <script src="<c:url value="/resources/script/autoSuggestion.js"/>"></script>
+    <script src="<c:url value="/resources/script/addCartAjax.js"/>"></script>
+    <script src="<c:url value="/resources/script/singleBuyAjax.js"/>"></script>
 
   </body>
 </html>

@@ -20,14 +20,11 @@ import com.app.model.ProductDetails;
 @Repository
 public class ProductAndBrandDetails 
 {
-	@Value("${jdbc.url}")
-	private String url;
+	private String url = "jdbc:sqlserver://MINDFIRE-PC;DatabaseName=onlineShoppingSpring;";
 	
-	@Value("${jdbc.userName}")
-	private String userName;
+	private String userName = "sa";
 	
-	@Value("${jdbc.password}")
-	private String password;
+	private String password = "mindfire";
 	
 	final static Logger log = Logger.getLogger(ProductAndBrandDetails.class);
 	

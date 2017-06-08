@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,9 +11,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-<link rel="stylesheet" href="/ProjectDemo/assets/css/csstyle.css">
+<!-- <link rel="stylesheet" href="/ProjectDemo/assets/css/csstyle.css">
 <link rel="stylesheet" href="/ProjectDemo/assets/css/notification.css">
-<link rel="stylesheet" href="/ProjectDemo/assets/css/signup.css">
+<link rel="stylesheet" href="/ProjectDemo/assets/css/signup.css"> -->
+
+<link rel="stylesheet" href="<c:url value ="/resources/css/csstyle.css"/>" >
+<link rel="stylesheet" href="<c:url value ="/resources/css/notification.css"/>" >
+<link rel="stylesheet" href="<c:url value ="/resources/css/signup.css"/>" >
+
 <!---<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--->
 
 <link rel="stylesheet"
@@ -21,7 +27,8 @@
 	href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css"
 	rel="Stylesheet"></link>
 	
-	<script src="/ProjectDemo/assets/script/headerMenuData.js"></script>
+	<!-- <script src="/ProjectDemo/assets/script/headerMenuData.js"></script> -->
+	<script src="<c:url value="/resources/script/headerMenuData.js"/>"></script>
 	
 
 </head>
@@ -34,7 +41,8 @@
 			<button class="btn btn-default navbar-toggle" data-toggle="collapse" data-target="#myMenu">
 				<span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 			</button>
-			<a href="index.html"><img class=" img-size" src="/ProjectDemo/assets/images/logo.png"></a>
+			<!-- <a href="index.html"><img class=" img-size" src="/ProjectDemo/assets/images/logo.png"></a> -->
+			<a href="index.html"><img class=" img-size" src="<c:url value ="/resources/images/logo.png"/>"></a>
 		</div>
 
 		<div class="collapse navbar-collapse" id="myMenu">
@@ -227,19 +235,16 @@
 	</div>
 	</nav>
 
-<!-- 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
-	<!-- Include all compiled plugins (below), or include individual files as needed -->
-	
 
-	<!--  <script src="/ProjectDemo/script/autoSuggestion.js"></script>
-      <script src="/ProjectDemo/assets/script/userSocketAjax.js"></script>
-      
-      -->
-        <script src="/ProjectDemo/assets/script/onWindowClose.js"></script>
+       <!--  <script src="/ProjectDemo/assets/script/onWindowClose.js"></script>
         <script src="/ProjectDemo/assets/script/notificationHeader.js"></script>
         
         <script src="/ProjectDemo/assets/script/onNotificationClick.js"></script>
-        <script src="/ProjectDemo/assets/script/headerNotification_user.js"></script>
+        <script src="/ProjectDemo/assets/script/headerNotification_user.js"></script> -->
+        
+        <script src="<c:url value="/resources/script/notificationHeader.js"/>"></script>
+        <script src="<c:url value="/resources/script/onNotificationClick.js"/>"></script>
+        <script src="<c:url value="/resources/script/headerNotification_user.js"/>"></script>
 
 
 </body>

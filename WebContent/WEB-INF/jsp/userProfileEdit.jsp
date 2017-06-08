@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
   <head>
@@ -39,7 +40,9 @@
                                               <c:when test="${fn:length(userProfilePhoto) > 0}">
                                             <div class="row">
                                                 <div style="height: 140px;width: 140px;overflow: hidden; overflow:hidden">
-                                                    <img class="img-rounded img-responsive" src="${userInfo.userProfilePhoto}" alt=" ">
+                                                   
+                                                    
+                                                     <img class="img-rounded img-responsive" src= "${userProfilePhoto }"alt=" "/>
                                                 </div>
                                             </div>
                                             </c:when>
@@ -122,11 +125,23 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
         <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-        <script src="/ProjectDemo/assets/script/autoSuggestion.js"></script>
+        
+        
+   <!-- <script src="/ProjectDemo/assets/script/autoSuggestion.js"></script> -->
+        
+        <script src="<c:url value="/resources/script/autoSuggestion.js"/>"></script>
+        
         <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>
         <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/additional-methods.min.js"></script>
-        <script src="/ProjectDemo/assets/script/validateClient.js"></script>
-        <script src="/ProjectDemo/assets/script/userEditAjax.js"></script>
+        
+        
+<!--    <script src="/ProjectDemo/assets/script/validateClient.js"></script>
+        <script src="/ProjectDemo/assets/script/userEditAjax.js"></script> -->
+        
+        <script src="<c:url value="/resources/script/validateClient.js"/>"></script>
+        <script src="<c:url value="/resources/script/userEditAjax.js"/>"></script>
+        
+        
     </body>
 
     </html>

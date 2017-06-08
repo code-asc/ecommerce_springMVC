@@ -89,7 +89,7 @@ public class FilterToCheckSessionExists implements Filter {
 	
 		requestOf.getSession().setAttribute("currentPath", currentPath);
 		
-		if(requestOf.getSession(false)==null && requestOf.getRequestURI().toString().compareTo("/ProjectDemo/signin.html")!=0)
+		/*if(requestOf.getSession(false)==null && requestOf.getRequestURI().toString().compareTo("/ProjectDemo/signin.html")!=0)
 		{
 			responseOf.sendRedirect("/ProjectDemo/signin.html");	
 		}
@@ -97,7 +97,7 @@ public class FilterToCheckSessionExists implements Filter {
 		{
 		chain.doFilter(request, response);
 		}
-			
+		*/	
 			
 			
 		
