@@ -3,11 +3,13 @@ package com.app.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 
 
 
@@ -31,7 +33,7 @@ public class SignUp {
 	 * @param session of type HttpSession
 	 * @param request of type HttpRequest
 	 */
-	@RequestMapping(value="/signup" , method=RequestMethod.GET)
+	@RequestMapping(value="/signup" , method=RequestMethod.GET , produces = MediaType.TEXT_HTML_VALUE)
 	public String onGetForSignUp(@ModelAttribute("signUpDetails") SignUpModel signUpModel , HttpSession session)
 	{
 		if(session.getAttribute("isUserLoggedIn")==null)
@@ -52,7 +54,7 @@ public class SignUp {
 	 * @param session of type HttpSession
 	 * @param request of type HttpRequest
 	 */
-	@RequestMapping(value="/signup" , method=RequestMethod.POST)
+	@RequestMapping(value="/signup" , method=RequestMethod.POST , produces = MediaType.TEXT_HTML_VALUE)
 	public String onPostForSignUp(@ModelAttribute("signUpDetails") SignUpModel signUpModel , Model model)
 	{
 

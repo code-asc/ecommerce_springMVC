@@ -87,5 +87,10 @@
 		<filter-name>RedirectFilter</filter-name>
 		<url-pattern>*.html</url-pattern>
 	</filter-mapping>
-
+	
+	
+	<error-page>
+	<error-code>406</error-code>
+	<location>/WEB-INF/jsp/error406.jsp</location>
+	</error-page>
 </web-app>

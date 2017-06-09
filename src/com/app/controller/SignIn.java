@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -40,7 +41,7 @@ public class SignIn {
 	 * @param session of type HttpSession
 	 * @param request of type HttpRequest
 	 */
-	@RequestMapping(value = "/signin" , method = RequestMethod.GET)
+	@RequestMapping(value = "/signin" , method = RequestMethod.GET , produces = MediaType.TEXT_HTML_VALUE)
 	public String onGetForSignIn(@ModelAttribute("loginForm") SignInModel signInModel, HttpServletRequest request , HttpSession session , Model model)
 	{
 		//System.out.println("the user part : "+request.getSession(false));
@@ -62,7 +63,7 @@ public class SignIn {
 	 * @param session of type HttpSession
 	 * @param request of type HttpRequest
 	 */
-	@RequestMapping(value = "/signin" , method = RequestMethod.POST)
+	@RequestMapping(value = "/signin" , method = RequestMethod.POST , produces = MediaType.TEXT_HTML_VALUE)
 	public String onPostForSignIn(@ModelAttribute("loginForm") SignInModel signInModel , Model model , HttpSession session , HttpServletRequest request)
 	{
 		log.info("Inside onPostForSignIn method....");

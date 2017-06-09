@@ -3,6 +3,7 @@ package com.app.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -54,7 +55,7 @@ public class AddressDetailsController {
 	 * @param session of type HttpSession. It is used to provide all the required session scope variables
 	 * @param option of type String. It is provided by the URL
 	 */
-	@RequestMapping(value = "/addressConfirm" , method = RequestMethod.GET)
+	@RequestMapping(value = "/addressConfirm" , method = RequestMethod.GET , produces = MediaType.TEXT_HTML_VALUE)
 	public String showUserDefaultAddress(Model model ,  HttpSession session , @RequestParam("buy") String option)
 	{
 	
@@ -87,7 +88,7 @@ public class AddressDetailsController {
 	 * @param session of type HttpSession. It is used to provide all the required session scope variables
 	 * @param option of type String. It is provided by the URL
 	 */
-	@RequestMapping(value = "/payment" , method = RequestMethod.GET)
+	@RequestMapping(value = "/payment" , method = RequestMethod.GET , produces = MediaType.TEXT_HTML_VALUE)
 	public String showPayment(Model model ,  HttpSession session , @RequestParam("buy") String option)
 	{
 		if(option.length() != 0)
@@ -123,7 +124,7 @@ public class AddressDetailsController {
 	 * @param updateAddress of type UpdateAddress.
 	 * @param buyType of type String. It is provided by the URL
 	 */
-	@RequestMapping(value = "address" , method = RequestMethod.GET)
+	@RequestMapping(value = "address" , method = RequestMethod.GET , produces = MediaType.TEXT_HTML_VALUE)
 	public String getNewAddress(@ModelAttribute("addressField") UpdateAddress updateAddress , @RequestParam("buy") String buyType)
 	{
 		return "address";
@@ -156,7 +157,7 @@ public class AddressDetailsController {
 	 * @param buyType of type String. It is provided by the URL
 	 * @param session of type HttpSession.
 	 */
-	@RequestMapping(value = "newAddress" , method = RequestMethod.GET)
+	@RequestMapping(value = "newAddress" , method = RequestMethod.GET , produces = MediaType.TEXT_HTML_VALUE)
 	public String getEditAddress(@ModelAttribute("addressField") UpdateAddress updateAddress , @RequestParam("buy") String buyType , HttpSession session)
 	{
 		if(session.getAttribute("isUserLoggedIn") != null && (boolean)session.getAttribute("isUserLoggedIn"))

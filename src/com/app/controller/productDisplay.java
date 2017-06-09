@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,7 +52,7 @@ public class productDisplay {
 	 * @param session of type HttpSession. It is used to provide all the required session scope variables
 	 * @param subCategoryID of type integer. It is provided by the URL
 	 */
-	@RequestMapping(value = "/user_action" , method = RequestMethod.GET)
+	@RequestMapping(value = "/user_action" , method = RequestMethod.GET , produces = MediaType.TEXT_HTML_VALUE)
 	public String getProductDisplayPage(@RequestParam("subCategoryID") int subCategoryID , Model model , HttpSession session )
 	{
 		model.addAttribute("subCategoryID" ,subCategoryID );
@@ -67,7 +68,7 @@ public class productDisplay {
 	 * @param session of type HttpSession. It is used to provide all the required session scope variables
 	 * @param productID of type integer. It is provided by the URL
 	 */
-	@RequestMapping(value="/user_action_single" , method=RequestMethod.GET)
+	@RequestMapping(value="/user_action_single" , method=RequestMethod.GET , produces = MediaType.TEXT_HTML_VALUE)
 	public String getProductDisplayPageByProductID(@RequestParam("productID") int productID , Model model , HttpSession session)
 	{
 		model.addAttribute("productID" , productID);
@@ -109,7 +110,7 @@ public class productDisplay {
 	 * @param model of type Model.
 	 * @param session of type HttpSession.
 	 */
-	@RequestMapping(value="/orderDetails" , method = RequestMethod.GET , params={"start" , "page"})
+	@RequestMapping(value="/orderDetails" , method = RequestMethod.GET , params={"start" , "page"} , produces = MediaType.TEXT_HTML_VALUE)
 	public String getOrderDetails(@RequestParam("start") int start , @RequestParam("page") int page , Model model , HttpSession session)
 	{
 		if(session.getAttribute("isUserLoggedIn") != null && (boolean)session.getAttribute("isUserLoggedIn"))
@@ -133,7 +134,7 @@ public class productDisplay {
 	 * @param model of type Model.
 	 * @param session of type HttpSession.
 	 */
-	@RequestMapping(value="/orderDetails" , method = RequestMethod.GET , params={"page"})
+	@RequestMapping(value="/orderDetails" , method = RequestMethod.GET , params={"page"} , produces = MediaType.TEXT_HTML_VALUE)
 	public String getOrderDetails(@RequestParam("page") int page , Model model , HttpSession session)
 	{
 		if(session.getAttribute("isUserLoggedIn") != null && (boolean)session.getAttribute("isUserLoggedIn"))

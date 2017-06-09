@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -72,7 +73,7 @@ public class AdminPageInfo {
 	/**
 	 *  getAdminPage method returns all the information such as number of customers, products, shipping, supplier, category and subcategory.
 	 */
-	@RequestMapping(value = "/admin" , method = RequestMethod.GET)
+	@RequestMapping(value = "/admin" , method = RequestMethod.GET , produces = MediaType.TEXT_HTML_VALUE)
 	public String getAdminPage(Model model , HttpSession session)
 	{
 		if(session.getAttribute("isUserLoggedIn") != null && session.getAttribute("role").toString().compareTo("admin")==0)
@@ -93,7 +94,7 @@ public class AdminPageInfo {
 	/**
 	 *  getAdminOther method is used to check whether the user is admin or customer and redirect to adminOther page
 	 */
-	@RequestMapping(value = "/adminOther" , method = RequestMethod.GET)
+	@RequestMapping(value = "/adminOther" , method = RequestMethod.GET , produces = MediaType.TEXT_HTML_VALUE)
 	public String getAdminOther(HttpSession session)
 	{
 		if(session.getAttribute("role").toString().compareTo("admin")==0)
@@ -172,7 +173,7 @@ public class AdminPageInfo {
 	 *  @param model of type Model
 	 *  @param session of type HttpSession
 	 */
-	@RequestMapping(value = "/adminSubCategory"  , method = RequestMethod.GET)
+	@RequestMapping(value = "/adminSubCategory"  , method = RequestMethod.GET , produces = MediaType.TEXT_HTML_VALUE)
 	public String getAdminSubCategory(Model model , HttpSession session)
 	{
 		if(session.getAttribute("role").toString().compareTo("admin")==0)
@@ -190,7 +191,7 @@ public class AdminPageInfo {
 	 *  @param model of type Model
 	 *  @param session of type HttpSession
 	 */
-	@RequestMapping(value = "/adminEditForm" , method = RequestMethod.GET)
+	@RequestMapping(value = "/adminEditForm" , method = RequestMethod.GET , produces = MediaType.TEXT_HTML_VALUE)
 	public String getAdminEditForm(Model model , HttpSession session)
 	{
 		if(session.getAttribute("role").toString().compareTo("admin")==0)
@@ -208,7 +209,7 @@ public class AdminPageInfo {
 	 *  @param model of type Model
 	 *  @param session of type HttpSession
 	 */
-	@RequestMapping(value = "/adminRemoveForm" , method = RequestMethod.GET)
+	@RequestMapping(value = "/adminRemoveForm" , method = RequestMethod.GET , produces = MediaType.TEXT_HTML_VALUE)
 	public String getAdminRemoveForm(Model model , HttpSession session)
 	{
 		if(session.getAttribute("role").toString().compareTo("admin")==0)
@@ -307,7 +308,7 @@ public class AdminPageInfo {
 	 *  @param model of type Model
 	 *  @param session of type HttpSession
 	 */
-	@RequestMapping(value = "adminAdd" , method = RequestMethod.GET)
+	@RequestMapping(value = "adminAdd" , method = RequestMethod.GET , produces = MediaType.TEXT_HTML_VALUE)
 	public String getAdminAdd(Model model , HttpSession session)
 	{
 		if(session.getAttribute("isUserLoggedIn") != null && session.getAttribute("role").toString().compareTo("admin")==0)
@@ -341,7 +342,7 @@ public class AdminPageInfo {
 	 *  @param supplierID of type integer
 	 *  @param shippingID of type integer
 	 */
-	@RequestMapping(value = "/addToDatabase" , method = RequestMethod.GET)
+	@RequestMapping(value = "/addToDatabase" , method = RequestMethod.GET , produces = MediaType.TEXT_HTML_VALUE)
 	public List<String> addProductToDB(@RequestParam("productName") String productName , @RequestParam("productDesc") String productDesc , @RequestParam("supplierID") int supplierID , @RequestParam("subCategoryID") int subcategoryID , @RequestParam("unitPrice") BigDecimal unitPrice , @RequestParam("thumbNail") String thumbNail , @RequestParam("thumbNailType") String thumbNailType , @RequestParam("largePhotoType") String largePhotoType , @RequestParam("largePhoto") String largePhoto , @RequestParam("quantity") int quantity , @RequestParam("discount") BigDecimal discount , @RequestParam("rating") int rating , @RequestParam("brandID") int brandID)
 	{
 		int temp = otherDetails.addProduct(productName, productDesc, supplierID, subcategoryID, unitPrice, thumbNail, thumbNailType, largePhotoType, largePhoto, quantity, discount, rating, brandID);	
@@ -366,7 +367,7 @@ public class AdminPageInfo {
 	 *  @param session of type HttpSession
 	 */
 	
-	@RequestMapping(value = "/adminProductEdit" , method = RequestMethod.GET)
+	@RequestMapping(value = "/adminProductEdit" , method = RequestMethod.GET , produces = MediaType.TEXT_HTML_VALUE)
 	public String getAdminProductEdit(@RequestParam("productID") int productID , Model model , HttpSession session)
 	{
 		if(session.getAttribute("role").toString().compareTo("admin")==0)
@@ -396,7 +397,7 @@ public class AdminPageInfo {
 	 *  @param shippingID of type integer
 	 */
 
-	@RequestMapping(value = "/editProductDirect" , method = RequestMethod.GET)
+	@RequestMapping(value = "/editProductDirect" , method = RequestMethod.GET , produces = MediaType.TEXT_HTML_VALUE)
 	public List<String> editProductDirect(@RequestParam("productID") int productID, @RequestParam("productDesc") String productDesc , @RequestParam("unitPrice") BigDecimal unitPrice , @RequestParam("thumbNailPhoto") String thumbNail ,  @RequestParam("largePhoto") String largePhoto , @RequestParam("unitInStock") int stock , @RequestParam("discount") BigDecimal discount )
 	{
 		int temp = otherDetails.editProductSinglePage(productID, productDesc, unitPrice, stock, discount, thumbNail, largePhoto);
@@ -419,7 +420,7 @@ public class AdminPageInfo {
 	 *  @param session of type HttpSession
 	 *  @param productID of type integer
 	 */
-	@RequestMapping(value = "/user_action_single_delete" , method = RequestMethod.GET)
+	@RequestMapping(value = "/user_action_single_delete" , method = RequestMethod.GET , produces = MediaType.TEXT_HTML_VALUE)
 	public String deleteFromUserPage(@RequestParam("removeProduct") int productID , HttpSession session)
 	{
 		if(session.getAttribute("role").toString().compareTo("admin")==0)

@@ -1,6 +1,7 @@
 package com.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +23,7 @@ public class Index {
 	 * @param model of type Model. It is used to modify the view accordingly.
 	 */
 	
-	@RequestMapping(value="index" , method=RequestMethod.GET)
+	@RequestMapping(value="index" , method=RequestMethod.GET , produces = MediaType.TEXT_HTML_VALUE)
 	public String onIndexGet(Model model)
 	{
 

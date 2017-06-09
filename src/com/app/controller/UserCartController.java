@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -61,7 +62,7 @@ public class UserCartController {
 	 * @param model of type Model
 	 * @param session of type HttpSession
 	 */
-	@RequestMapping(value = "/userCart" , method = RequestMethod.GET)
+	@RequestMapping(value = "/userCart" , method = RequestMethod.GET , produces = MediaType.TEXT_HTML_VALUE)
 	public  String getUserCartInfo(Model model , HttpSession session)
 	{
 		if(session.getAttribute("isUserLoggedIn") != null && (boolean)session.getAttribute("isUserLoggedIn"))
@@ -122,7 +123,7 @@ public class UserCartController {
 	 * @param detailID of type integer
 	 * @param session of type HttpSession
 	 */
-	@RequestMapping(value="deleteFromCart" , method = RequestMethod.GET)
+	@RequestMapping(value="deleteFromCart" , method = RequestMethod.GET , produces = MediaType.TEXT_HTML_VALUE)
 	public String deleteCartItems(@RequestParam("removeFromCart") int detailID , HttpSession session)
 	{
 		try
