@@ -453,8 +453,6 @@ public class AdminPageInfo {
 	{
 		try
 		{
-			System.out.println(session.getAttribute("isUserLoggedIn"));
-			System.out.println(session.getAttribute("isUserLoggedIn"));
 		 allInfo.changeUserStatusToOffline((int)session.getAttribute("userID"));
 		}catch(Exception e)
 		{

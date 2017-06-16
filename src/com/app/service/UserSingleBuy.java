@@ -30,6 +30,7 @@ public class UserSingleBuy implements SingleBuy {
 	 * @see com.app.service.SingleBuy#singleBuyProduct(int, int, int)
 	 */
 	@Override
+	@SuppressWarnings("all")
 	public void singleBuyProduct(int userID , int productID , long addressID)
 	{
 		
