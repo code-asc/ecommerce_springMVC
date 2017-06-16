@@ -11,7 +11,6 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import com.app.repository.UserDetails;
 
@@ -41,7 +40,7 @@ public class FilterToCheckSessionExists implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
 		HttpServletRequest requestOf =(HttpServletRequest)request;
-		HttpServletResponse responseOf=(HttpServletResponse)response;
+		//HttpServletResponse responseOf=(HttpServletResponse)response;
 		
 		/*The following 'if' condition creates a  thread for the request and makes LoggedIn user online*/
 		 

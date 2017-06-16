@@ -19,6 +19,7 @@ public class FilteredProduct implements FilterProductList {
 	 * @see com.app.service.FilterProductList#getFilteredProducts(java.lang.String, java.lang.String, int)
 	 */
 	@Override
+	@SuppressWarnings("unchecked")
 	public List<ProductDetails> getFilteredProducts(String brandID , String discount , int subCategoryID)
 	{
 		ArrayList<String> brandIDList = new Gson().fromJson(brandID, ArrayList.class);
