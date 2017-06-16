@@ -1,17 +1,16 @@
 package com.app.controller;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-
-
 
 import com.app.model.SignUpModel;
 import com.app.service.RegisterUser;
@@ -55,9 +54,10 @@ public class SignUp {
 	 * @param request of type HttpRequest
 	 */
 	@RequestMapping(value="/signup" , method=RequestMethod.POST , produces = MediaType.TEXT_HTML_VALUE)
-	public String onPostForSignUp(@ModelAttribute("signUpDetails") SignUpModel signUpModel , Model model)
+	public String onPostForSignUp(@Valid @ModelAttribute("signUpDetails") SignUpModel signUpModel , BindingResult result , Model model)
 	{
-
+		if(!result.hasErrors())
+		{
 		String firstName=signUpModel.getFirstName();
 		String middleName=signUpModel.getMiddleName();
 		String lastName=signUpModel.getLastName();
@@ -79,6 +79,11 @@ public class SignUp {
 			return "signUp";
 		
 		}
+		}
+		else
+		{
+			return "signUp";
+	}
 	}
 	
 }

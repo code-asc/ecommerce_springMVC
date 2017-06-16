@@ -1,13 +1,23 @@
 package com.app.model;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
+
 
 public class SignUpModel 
 {
+	@NotEmpty
 	private String firstName;
 	private String middleName;
 	private String lastName;
+	
+	@Email
 	private String email;
+	@NotEmpty
 	private String password;
+	
+	@Length(max=10)
 	private String mobile;
 	public String getFirstName() {
 		return firstName;
