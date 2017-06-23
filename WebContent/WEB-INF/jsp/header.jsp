@@ -170,7 +170,7 @@
 					</c:when>
 					<c:otherwise>
 						<li>
-						<a href="signin.html"><i class="fa fa-sign-in"aria-hidden="true"></i>&nbsp SignIn</a>
+						<a href="login.html"><i class="fa fa-sign-in"aria-hidden="true"></i>&nbsp SignIn</a>
 						</li>
 						<li>
 						<a href="signup.html"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp SignUp</a>

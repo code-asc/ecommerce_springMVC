@@ -94,6 +94,60 @@ public class UserDetails {
 		return list;	
 	}
 	
+	public LoggedInUserInfo loggedInUserInfo(String userEmail)
+	{
+		
+		LoggedInUserInfo userInfo = new LoggedInUserInfo();
+		Connection con = null;
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+		
+		try
+		{
+			String sqlStatement = "select userID , userFirstName , userLastName , userMiddleName , userEmail , userProfilePhoto , roles "
+					+ "from "
+					+ "Customer "
+					+ "where "
+					+ "userEmail=? ";
+
+			
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			con = DriverManager.getConnection(url, userName, password);
+			stmt = con.prepareStatement(sqlStatement);
+			stmt.setString(1, userEmail);
+			rs = stmt.executeQuery();
+			while(rs.next())
+			{
+				userInfo.setRole(rs.getString("roles"));
+				userInfo.setUserEmail(rs.getString("userEmail"));
+				userInfo.setUserFirstName(rs.getString("userFirstName"));
+				userInfo.setUserMiddleName(rs.getString("userMiddleName"));
+				userInfo.setUserLastName(rs.getString("userLastName"));
+				userInfo.setUserProfilePhoto(rs.getString("userProfilePhoto"));
+				userInfo.setUserID(rs.getInt("userID"));
+				
+			}
+		}catch(SQLException e)
+		{
+			e.printStackTrace();
+		}catch(ClassNotFoundException e)
+		{
+			e.printStackTrace();
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		try{
+			rs.close();
+			stmt.close();
+			con.close();
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return userInfo;
+	}
 	
 	public boolean checkUserEmailAlreadyExists(String email)
 	{
@@ -140,11 +194,15 @@ public class UserDetails {
 		boolean isSuccess = false;
 		Connection con = null;
 		CallableStatement cstmt=null;
+		PreparedStatement stmt = null;
 		try
 		{
-			String sql="exec hash_userDetails ? , ? , ? , ? , ? , ? , ? ";
+			String sql = "exec hash_userDetails ? , ? , ? , ? , ? , ? , ? ";
+			String _sql = "INSERT INTO Authorities(userEmail , authority)"
+					+ "VALUES(?,?)";
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			con = DriverManager.getConnection(url, userName, password);
+			con.setAutoCommit(false);
 			cstmt=con.prepareCall(sql);
 			cstmt.setString(1, firstName);
 			cstmt.setString(2,middleName);
@@ -153,8 +211,17 @@ public class UserDetails {
 			cstmt.setString(5, userPassword);
 			cstmt.setString(6, mobile);
 			cstmt.setString(7, "customer");
-			int rowEffected=cstmt.executeUpdate();
-			if(rowEffected>0)
+			
+			int rowEffected = cstmt.executeUpdate();
+			
+			stmt = con.prepareStatement(_sql);
+			stmt.setString(1, email);
+			stmt.setString(2, "ROLE_USER");
+			
+			int _rowEffected = stmt.executeUpdate();
+			
+			con.commit();
+			if(rowEffected > 0 && _rowEffected > 0)
 			{
 				isSuccess = true;
 			}
@@ -164,6 +231,13 @@ public class UserDetails {
 			log.error("isUserRegistrationSuccess method : "+ e.getMessage());
 			e.printStackTrace();
 			
+			try
+			{
+			con.rollback();
+			}catch(Exception exception)
+			{
+				exception.printStackTrace();
+			}
 		}
 		catch(ClassNotFoundException e)
 		{

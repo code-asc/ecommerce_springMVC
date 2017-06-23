@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -39,6 +40,7 @@ public class ProfileEdit {
 	 * @param session of type HttpSession. It is used to provide all the required session scope variables
 	 * @param editProfile1 of type EditUserProfile. It is provided by the URL
 	 */
+	@PreAuthorize("hasRole('ROLE_USER')")
 	@RequestMapping(value = "/userProfileEdit" , method = RequestMethod.GET , produces = MediaType.TEXT_HTML_VALUE)
 	public String onGetUserProfile(Model model , HttpSession session , @ModelAttribute("editProfile1") EditUserProfile editProfile1)
 	{
@@ -53,6 +55,7 @@ public class ProfileEdit {
 	 * @param session of type HttpSession. It is used to provide all the required session scope variables
 	 * @param editProfile1 of type EditUserProfile. It is provided by the URL
 	 */
+	@PreAuthorize("hasRole('ROLE_USER')")
 	@RequestMapping(value="/userProfileEdit" , method = RequestMethod.POST , produces = MediaType.TEXT_HTML_VALUE)
 	public String onPostUserProfile(@ModelAttribute("editProfile1") EditUserProfile editProfile1 , @RequestPart(value = "profilePhoto", required = false) MultipartFile file , Model model , HttpSession session)
 	{

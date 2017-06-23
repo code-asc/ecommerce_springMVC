@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -55,6 +56,7 @@ public class AddressDetailsController {
 	 * @param session of type HttpSession. It is used to provide all the required session scope variables
 	 * @param option of type String. It is provided by the URL
 	 */
+	@PreAuthorize("hasRole('ROLE_USER')")
 	@RequestMapping(value = "/addressConfirm" , method = RequestMethod.GET , produces = MediaType.TEXT_HTML_VALUE)
 	public String showUserDefaultAddress(Model model ,  HttpSession session , @RequestParam("buy") String option)
 	{
@@ -88,6 +90,7 @@ public class AddressDetailsController {
 	 * @param session of type HttpSession. It is used to provide all the required session scope variables
 	 * @param option of type String. It is provided by the URL
 	 */
+	@PreAuthorize("hasRole('ROLE_USER')")
 	@RequestMapping(value = "/payment" , method = RequestMethod.GET , produces = MediaType.TEXT_HTML_VALUE)
 	public String showPayment(Model model ,  HttpSession session , @RequestParam("buy") String option)
 	{
@@ -124,6 +127,7 @@ public class AddressDetailsController {
 	 * @param updateAddress of type UpdateAddress.
 	 * @param buyType of type String. It is provided by the URL
 	 */
+	@PreAuthorize("hasRole('ROLE_USER')")
 	@RequestMapping(value = "address" , method = RequestMethod.GET , produces = MediaType.TEXT_HTML_VALUE)
 	public String getNewAddress(@ModelAttribute("addressField") UpdateAddress updateAddress , @RequestParam("buy") String buyType)
 	{
@@ -137,6 +141,7 @@ public class AddressDetailsController {
 	 * @param buyType of type String. It is provided by the URL
 	 * @param session of type HttpSession.
 	 */
+	@PreAuthorize("hasRole('ROLE_USER')")
 	@RequestMapping(value = "address" , method = RequestMethod.POST)
 	public String postNewAddress(@ModelAttribute("addressField") UpdateAddress updateAddress ,  @RequestParam("buy") String buyType , HttpSession session)
 	{
@@ -157,6 +162,7 @@ public class AddressDetailsController {
 	 * @param buyType of type String. It is provided by the URL
 	 * @param session of type HttpSession.
 	 */
+	@PreAuthorize("hasRole('ROLE_USER')")
 	@RequestMapping(value = "newAddress" , method = RequestMethod.GET , produces = MediaType.TEXT_HTML_VALUE)
 	public String getEditAddress(@ModelAttribute("addressField") UpdateAddress updateAddress , @RequestParam("buy") String buyType , HttpSession session)
 	{
@@ -176,6 +182,7 @@ public class AddressDetailsController {
 	 * @param buyType of type String. It is provided by the URL
 	 * @param session of type HttpSession.
 	 */
+	@PreAuthorize("hasRole('ROLE_USER')")
 	@RequestMapping(value = "newAddress" , method = RequestMethod.POST)
 	public String postEditAddress(@ModelAttribute("addressField") UpdateAddress updateAddress , @RequestParam("buy") String buyType , HttpSession session)
 	{

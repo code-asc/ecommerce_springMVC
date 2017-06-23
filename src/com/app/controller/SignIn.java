@@ -1,5 +1,7 @@
 package com.app.controller;
 
+import java.security.Principal;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -106,6 +108,16 @@ public class SignIn {
 	}
 	
 	
-
+	@RequestMapping(value="/login" , method=RequestMethod.GET)
+	public String springSecurityLogin(Principal principal)
+	{
+		if(principal== null)
+			{
+				return "login";
+			}else{
+					return "redirect:index.html";
+			}
+	}
+	
 
 }

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -73,6 +74,7 @@ public class AdminPageInfo {
 	/**
 	 *  getAdminPage method returns all the information such as number of customers, products, shipping, supplier, category and subcategory.
 	 */
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/admin" , method = RequestMethod.GET , produces = MediaType.TEXT_HTML_VALUE)
 	public String getAdminPage(Model model , HttpSession session)
 	{
@@ -94,6 +96,7 @@ public class AdminPageInfo {
 	/**
 	 *  getAdminOther method is used to check whether the user is admin or customer and redirect to adminOther page
 	 */
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/adminOther" , method = RequestMethod.GET , produces = MediaType.TEXT_HTML_VALUE)
 	public String getAdminOther(HttpSession session)
 	{
@@ -110,27 +113,34 @@ public class AdminPageInfo {
 	 *  getAddBrand method provides user all brand details.
 	 * @param brandName of type String.
 	 */
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/addBrand")
 	public @ResponseBody int getAddBrand(@RequestParam("brandName") String brandName)
 	{
 		return otherDetails.addBrand(brandName);
 	}
 	
+	
+	
 	/**
 	 *  getAddCategory method provides user all category details.
 	 * @param categoryType of type String.
 	 */
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/addCategory")
 	public @ResponseBody int getAddCategory(@RequestParam("categoryType") String categoryType)
 	{
 		return otherDetails.addCategory(categoryType);
 	}
 	
+	
+	
 	/**
 	 *  getAddSubCategory method provides user all SubCategory details.
 	 * @param subCategoryType of type String.
 	 * @param categoryID of type integer
 	 */
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/addSubCategory")
 	public @ResponseBody int getAddSubCategory(@RequestParam("categoryID") int categoryID , @RequestParam("subCategoryType") String subCategoryType)
 	{
@@ -141,6 +151,7 @@ public class AdminPageInfo {
 	/**
 	 *  getBrand method provides user all Brand details.
 	 */
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/getOnlyBrand")
 	public @ResponseBody List<BrandsOnly> getBrand()
 	{
@@ -151,6 +162,7 @@ public class AdminPageInfo {
 	/**
 	 *  getCategory method provides user all category details.
 	 */
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/getCategoryOnly")
 	public @ResponseBody List<CategoryType> getCategory()
 	{
@@ -161,6 +173,7 @@ public class AdminPageInfo {
 	/**
 	 *  getSubCategory method provides user all subcategory details.
 	 */
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/getSubCategoryOnly")
 	public @ResponseBody List<SubCategoryType> getSubCategory()
 	{
@@ -173,6 +186,7 @@ public class AdminPageInfo {
 	 *  @param model of type Model
 	 *  @param session of type HttpSession
 	 */
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/adminSubCategory"  , method = RequestMethod.GET , produces = MediaType.TEXT_HTML_VALUE)
 	public String getAdminSubCategory(Model model , HttpSession session)
 	{
@@ -191,6 +205,7 @@ public class AdminPageInfo {
 	 *  @param model of type Model
 	 *  @param session of type HttpSession
 	 */
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/adminEditForm" , method = RequestMethod.GET , produces = MediaType.TEXT_HTML_VALUE)
 	public String getAdminEditForm(Model model , HttpSession session)
 	{
@@ -209,6 +224,7 @@ public class AdminPageInfo {
 	 *  @param model of type Model
 	 *  @param session of type HttpSession
 	 */
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/adminRemoveForm" , method = RequestMethod.GET , produces = MediaType.TEXT_HTML_VALUE)
 	public String getAdminRemoveForm(Model model , HttpSession session)
 	{
@@ -228,6 +244,7 @@ public class AdminPageInfo {
 	 *  @param productID of type integer
 	 *  @param session of type HttpSession
 	 */
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/adminRemoveForm" , method = RequestMethod.POST)
 	public String postAdminRemoveForm(Model model , @RequestParam("products") int productID , HttpSession session)
 	{
@@ -254,6 +271,7 @@ public class AdminPageInfo {
 	 *  @param largePhoto of type String
 	 *  @param session of type HttpSession
 	 */
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/adminEditForm" , method = RequestMethod.POST)
 	public String postAdminEditForm(Model model , HttpSession session , @RequestParam("products") int productID ,@RequestParam("productDesc") String productDesc , @RequestParam("unitPrice") BigDecimal unitPrice , @RequestParam("unitInStock") int unitInStock , @RequestParam("discount") BigDecimal discount , @RequestParam("thumbNailPhoto") String thumbNailPhoto , @RequestParam("largePhoto") String largePhoto)
 	{
@@ -273,6 +291,7 @@ public class AdminPageInfo {
 	 *  getSubCategoryBasedOnCategoryID method provides user to subCategory details of based on categoryID.
 	 *  @param categoryID of type integer
 	 */
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/getSubCategoryBasedOnCategoryID")
 	public @ResponseBody List<SubCategoryType> getSubCategoryBasedOnCategoryID(@RequestParam("categoryID") int categoryID)
 	{
@@ -284,6 +303,7 @@ public class AdminPageInfo {
 	 *  getProductInfoBySubCategoryID method provides user to product details of based on subcategoryID.
 	 *  @param subCategoryID of type integer
 	 */
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "getProductInfoBySubCategoryID" , method = RequestMethod.GET)
 	public @ResponseBody List<ProductDetails> getProductInfoBySubCategoryID(@RequestParam("subCategoryID") int subCategoryID)
 	{
@@ -295,6 +315,7 @@ public class AdminPageInfo {
 	 *  getProductInfoByProductID method provides user to product details of based on productID.
 	 *  @param productID of type integer
 	 */
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "getProductInfoByProductID" , method = RequestMethod.GET)
 	public @ResponseBody List<ProductDetails> getProductInfoByProductID(@RequestParam("productID") int productID)
 	{
@@ -308,6 +329,7 @@ public class AdminPageInfo {
 	 *  @param model of type Model
 	 *  @param session of type HttpSession
 	 */
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "adminAdd" , method = RequestMethod.GET , produces = MediaType.TEXT_HTML_VALUE)
 	public String getAdminAdd(Model model , HttpSession session)
 	{
@@ -342,6 +364,7 @@ public class AdminPageInfo {
 	 *  @param supplierID of type integer
 	 *  @param shippingID of type integer
 	 */
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/addToDatabase" , method = RequestMethod.GET , produces = MediaType.TEXT_HTML_VALUE)
 	public List<String> addProductToDB(@RequestParam("productName") String productName , @RequestParam("productDesc") String productDesc , @RequestParam("supplierID") int supplierID , @RequestParam("subCategoryID") int subcategoryID , @RequestParam("unitPrice") BigDecimal unitPrice , @RequestParam("thumbNail") String thumbNail , @RequestParam("thumbNailType") String thumbNailType , @RequestParam("largePhotoType") String largePhotoType , @RequestParam("largePhoto") String largePhoto , @RequestParam("quantity") int quantity , @RequestParam("discount") BigDecimal discount , @RequestParam("rating") int rating , @RequestParam("brandID") int brandID)
 	{
@@ -366,7 +389,7 @@ public class AdminPageInfo {
 	 *  @param productID of type integer
 	 *  @param session of type HttpSession
 	 */
-	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/adminProductEdit" , method = RequestMethod.GET , produces = MediaType.TEXT_HTML_VALUE)
 	public String getAdminProductEdit(@RequestParam("productID") int productID , Model model , HttpSession session)
 	{
@@ -397,6 +420,7 @@ public class AdminPageInfo {
 	 *  @param shippingID of type integer
 	 */
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/editProductDirect" , method = RequestMethod.GET , produces = MediaType.TEXT_HTML_VALUE)
 	public List<String> editProductDirect(@RequestParam("productID") int productID, @RequestParam("productDesc") String productDesc , @RequestParam("unitPrice") BigDecimal unitPrice , @RequestParam("thumbNailPhoto") String thumbNail ,  @RequestParam("largePhoto") String largePhoto , @RequestParam("unitInStock") int stock , @RequestParam("discount") BigDecimal discount )
 	{
@@ -437,6 +461,7 @@ public class AdminPageInfo {
 	/**
 	 *  getAllOnlineUsers method provides user to get number of active users.
 	 */
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@RequestMapping(value = "/onlineUsers" , method = RequestMethod.GET)
 	public @ResponseBody int getAllOnlineUsers()
 	{
@@ -448,12 +473,15 @@ public class AdminPageInfo {
 	/**
 	 *  getUserOffline method makes user offline when browser is closed.
 	 */
+	
 	@RequestMapping(value = "/onWindowClose" , method = RequestMethod.GET)
 	public @ResponseBody void getUserOffline(HttpSession session)
 	{
 		try
 		{
-		 allInfo.changeUserStatusToOffline((int)session.getAttribute("userID"));
+			if(session.getAttribute("userID") != null){
+				allInfo.changeUserStatusToOffline((int)session.getAttribute("userID"));
+			}
 		}catch(Exception e)
 		{
 			e.printStackTrace();

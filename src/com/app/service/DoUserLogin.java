@@ -68,4 +68,38 @@ public class DoUserLogin implements UserLogin {
 		return returnVal;
 	
 	}
+	
+	@Override
+	public void getLoggedInUserDetails(String email , HttpSession session) 
+	{		
+		LoggedInUserInfo userInfo = userDetails.loggedInUserInfo(email);
+		String userFirstName = "";
+		String userLastName = "";
+		String userMiddleName = "";
+		String userFullName = "";
+		String userEmail = "";
+		String userProfilePhoto = "";
+		String role = "";
+		int userID = 0;
+		if(userInfo != null)
+		{
+			userFirstName = userInfo.getUserFirstName();
+			userLastName = userInfo.getUserLastName();
+			userMiddleName = userInfo.getUserMiddleName();
+		    userEmail = userInfo.getUserEmail();
+		    userProfilePhoto = userInfo.getUserProfilePhoto();
+		    role = userInfo.getRole();
+		    userID = userInfo.getUserID();
+			
+			userFullName = userFirstName+" "+ userMiddleName+" "+userLastName;
+			session.setMaxInactiveInterval(360*60);
+			session.setAttribute("userID", userID);
+			session.setAttribute("userFullName", userFullName);
+			session.setAttribute("isUserLoggedIn", true);
+			session.setAttribute("userProfilePhoto" , userProfilePhoto);
+			session.setAttribute("userEmail", userEmail);
+			session.setAttribute("role", role);
+			session.setAttribute("userInfo", userInfo);
+		}
+	}
 }

@@ -92,6 +92,7 @@ public class LoggedInUserInfo implements HttpSessionBindingListener {
 	@Override
 	public void valueBound(HttpSessionBindingEvent event) {
 		
+		System.out.println("HttpSessionBindingListener....");
 		UserDetails info = new UserDetails();
 		HttpSession session = logins.remove(this.userEmail);
 		if(session != null)

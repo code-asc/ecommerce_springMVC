@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,6 +40,7 @@ public class UserCartController {
 	 * addProductToCart method allows the user to add products to cart.
 	 * @param session of type HttpSession
 	 */
+	@PreAuthorize("hasRole('ROLE_USER')")
 	@RequestMapping(value = "/addToCart" , method = RequestMethod.GET)
 	public @ResponseBody void addProductToCart( HttpSession session)
 	{
@@ -62,6 +64,7 @@ public class UserCartController {
 	 * @param model of type Model
 	 * @param session of type HttpSession
 	 */
+	@PreAuthorize("hasRole('ROLE_USER')")
 	@RequestMapping(value = "/userCart" , method = RequestMethod.GET , produces = MediaType.TEXT_HTML_VALUE)
 	public  String getUserCartInfo(Model model , HttpSession session)
 	{
@@ -80,6 +83,7 @@ public class UserCartController {
 	 * @param detailID of type integer
 	 * @param session of type HttpSession
 	 */
+	@PreAuthorize("hasRole('ROLE_USER')")
 	@RequestMapping(value = "/incrementQuantity" , method = RequestMethod.GET)
 	public @ResponseBody List<OrderDetailsInfo> incrementQuantity(@RequestParam("detailID") int detailID , HttpSession session)
 	{
@@ -102,6 +106,7 @@ public class UserCartController {
 	 * @param detailID of type integer
 	 * @param session of type HttpSession
 	 */
+	@PreAuthorize("hasRole('ROLE_USER')")
 	@RequestMapping(value = "/decrementQuantity" , method = RequestMethod.GET)
 	public @ResponseBody List<OrderDetailsInfo> decrementQuantity(@RequestParam("detailID") int detailID , HttpSession session)
 	{
@@ -123,6 +128,7 @@ public class UserCartController {
 	 * @param detailID of type integer
 	 * @param session of type HttpSession
 	 */
+	@PreAuthorize("hasRole('ROLE_USER')")
 	@RequestMapping(value="deleteFromCart" , method = RequestMethod.GET , produces = MediaType.TEXT_HTML_VALUE)
 	public String deleteCartItems(@RequestParam("removeFromCart") int detailID , HttpSession session)
 	{

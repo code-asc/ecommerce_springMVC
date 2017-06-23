@@ -86,10 +86,11 @@
 </dependency> -->
 
 <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
+<!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
 <dependency>
     <groupId>org.springframework</groupId>
     <artifactId>spring-core</artifactId>
-    <version>4.2.4.RELEASE</version>
+    <version>4.3.8.RELEASE</version>
 </dependency>
 
 
@@ -117,6 +118,37 @@
   <artifactId>slf4j-log4j12</artifactId>
   <version>1.7.21</version>
 </dependency>
+  
+  <!-- https://mvnrepository.com/artifact/javax.inject/javax.inject -->
+<dependency>
+    <groupId>javax.inject</groupId>
+    <artifactId>javax.inject</artifactId>
+    <version>1</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-jdbc</artifactId>
+    <version>4.2.3.RELEASE</version>
+</dependency>
+
+
+<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-web -->
+<dependency>
+    <groupId>org.springframework.security</groupId>
+    <artifactId>spring-security-web</artifactId>
+    <version>4.2.3.RELEASE</version>
+</dependency>
+
+
+<!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-config -->
+<dependency>
+    <groupId>org.springframework.security</groupId>
+    <artifactId>spring-security-config</artifactId>
+    <version>4.2.3.RELEASE</version>
+</dependency>
+
   
   </dependencies>
  

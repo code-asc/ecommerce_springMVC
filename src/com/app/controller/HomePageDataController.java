@@ -37,6 +37,7 @@ public class HomePageDataController {
 	/**
 	 *  pageData method provides images and details for carousal.
 	 */
+	
 	@RequestMapping(value="/getHomePageLargeContent" , method=RequestMethod.GET)
 	public @ResponseBody List<HomePageLargeImage> pageData()
 	{

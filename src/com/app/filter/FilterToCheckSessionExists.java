@@ -40,7 +40,6 @@ public class FilterToCheckSessionExists implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
 		HttpServletRequest requestOf =(HttpServletRequest)request;
-		//HttpServletResponse responseOf=(HttpServletResponse)response;
 		
 		/*The following 'if' condition creates a  thread for the request and makes LoggedIn user online*/
 		 
@@ -86,15 +85,7 @@ public class FilterToCheckSessionExists implements Filter {
 	
 		requestOf.getSession().setAttribute("currentPath", currentPath);
 		
-		/*if(requestOf.getSession(false)==null && requestOf.getRequestURI().toString().compareTo("/ProjectDemo/signin.html")!=0)
-		{
-			responseOf.sendRedirect("/ProjectDemo/signin.html");	
-		}
-		else
-		{
-		chain.doFilter(request, response);
-		}
-		*/	
+			
 		chain.doFilter(request, response);	
 		
 	}

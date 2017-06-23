@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -110,6 +111,7 @@ public class productDisplay {
 	 * @param model of type Model.
 	 * @param session of type HttpSession.
 	 */
+	@PreAuthorize("hasRole('ROLE_USER')")
 	@RequestMapping(value="/orderDetails" , method = RequestMethod.GET , params={"start" , "page"} , produces = MediaType.TEXT_HTML_VALUE)
 	public String getOrderDetails(@RequestParam("start") int start , @RequestParam("page") int page , Model model , HttpSession session)
 	{
@@ -134,6 +136,7 @@ public class productDisplay {
 	 * @param model of type Model.
 	 * @param session of type HttpSession.
 	 */
+	@PreAuthorize("hasRole('ROLE_USER')")
 	@RequestMapping(value="/orderDetails" , method = RequestMethod.GET , params={"page"} , produces = MediaType.TEXT_HTML_VALUE)
 	public String getOrderDetails(@RequestParam("page") int page , Model model , HttpSession session)
 	{
