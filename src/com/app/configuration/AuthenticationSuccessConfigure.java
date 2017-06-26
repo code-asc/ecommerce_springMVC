@@ -31,7 +31,7 @@ public class AuthenticationSuccessConfigure implements AuthenticationSuccessHand
 		User authUser = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String userEmail = authUser.getUsername();
 		HttpSession session = request.getSession(true);
-		session.setMaxInactiveInterval(1000*60);
+		session.setMaxInactiveInterval(100*60);
 		userDetails.getLoggedInUserDetails(userEmail, session);
 		String redirectPath = null;
 		if(session.getAttribute("previousPath") == null)

@@ -54,7 +54,7 @@ Functionality : It is used for sign In purpose
 			<div class="col-md-3" id="form-border" style="margin: auto; left: 0; right: 0; position: absolute">
 				<h2>SignIn</h2>
 
-				<form action="login.html"  name="f" method="post">
+				<form action="login.html"  name="f" method="post" id="form_signin">
 					<div class="form-group">
 						<div class="input-group">
 							<span class="input-group-addon">
