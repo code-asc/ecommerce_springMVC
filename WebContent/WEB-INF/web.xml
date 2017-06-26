@@ -9,84 +9,8 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-<!-- <servlet>
-		<servlet-name>dispatcherServlet</servlet-name>
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		
-		<init-param>
-			<param-name>contextClass</param-name>
-			<param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
-		</init-param>
-		
-		<init-param>
-			<param-name>contextConfigLocation</param-name>
-			<param-value>com.app.configuration.DispatcherServletConfig</param-value>
-		</init-param>
-		
-		<load-on-startup>1</load-on-startup>
-		<async-supported>true</async-supported>
-	
-	</servlet>
- -->	
-	
-	<!--In case if it does not work....remove this block of code and uncomment others  -->
-<!-- 	<servlet-mapping>
-	<servlet-name>dispatcherServlet</servlet-name>
-	<url-pattern>/</url-pattern>
-	</servlet-mapping>
-	
-	<security-constraint>
-	<web-resource-collection>
-	<web-resource-name>client_resources</web-resource-name>
-	<url-pattern>/ProjectDemo/assets/*</url-pattern>
-	</web-resource-collection>
-	</security-constraint> -->
-	<!--  -->
-	
-<!-- 	<servlet-mapping>
-		<servlet-name>dispatcherServlet</servlet-name>
-		<url-pattern>*.html</url-pattern>
-		<url-pattern>*.htm</url-pattern>
-		
-	</servlet-mapping>
-	
-	<servlet-mapping>
-		<servlet-name>dispatcherServlet</servlet-name>
-		<url-pattern>*.json</url-pattern>
-	</servlet-mapping>
- -->
-
-	
-<!-- 	<listener>
-		<listener-class>com.app.controller.SessionManagement</listener-class>
-	</listener> -->
-	
-	
-	<!-- <filter>
-		<filter-name>RedirectFilter</filter-name>
-		<filter-class>com.app.filter.FilterToCheckSessionExists</filter-class>
-		<async-supported>true</async-supported>
-	</filter>
-	
-	<filter-mapping>
-		<filter-name>RedirectFilter</filter-name>
-		<url-pattern>*.html</url-pattern>
-	</filter-mapping> -->
-	
-<!-- 	<filter>
-		<filter-name>RedirectFilter</filter-name>
-		<filter-class>com.app.filter.FilterToCheckSessionExists</filter-class>
-		<async-supported>true</async-supported>
-	</filter>
-	
-	<filter-mapping>
-		<filter-name>RedirectFilter</filter-name>
-		<url-pattern>*.html</url-pattern>
-	</filter-mapping> -->
-	
-	
-	<error-page>
-	<error-code>406</error-code>
-	<location>/WEB-INF/jsp/error406.jsp</location>
-	</error-page>
+  <error-page>
+    <error-code>406</error-code>
+    <location>/WEB-INF/jsp/error406.jsp</location>
+  </error-page>
 </web-app>

@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions" %>
-
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,7 +22,7 @@
 </head>
 
 <body>
-
+<sec:authorize access="hasRole('ROLE_USER')">
 <c:set var="start" value="${0}"/>
         <c:set var="totalPerPage" value="${4}"/>
         <c:set var="page" value="${1}"/>
@@ -124,12 +124,10 @@
                            </c:choose>
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+   
+    <script src="<c:url value="/resources/script/deleteFromOrderHistory.js"/>"></script>
     
-    
-   <!--<script src="/assets/script/deleteFromOrderHistory.js"></script> -->
-   <script src="<c:url value="/resources/script/deleteFromOrderHistory.js"/>"></script>
-    
-    
+    </sec:authorize>
 </body>
 </html>
                            

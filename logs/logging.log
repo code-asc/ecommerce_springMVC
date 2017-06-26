@@ -4991,3 +4991,67 @@ Caused by: java.lang.Error: Unresolved compilation problem:
 23-06-2017 18:57:20 ERROR CategoryAndSubCategoryDetails:112 - subCategoryDetails argument method : Cannot open database "onlineShoppingSpring" requested by the login. The login failed. ClientConnectionId:ebf7fccc-7477-4eef-be35-148bd6f10611
 23-06-2017 18:57:28 ERROR UserCartDetails:641 - updateProductInCart method : The statement did not return a result set.
 23-06-2017 18:58:24 ERROR UserDetails:581 - changeUserStatusOnline method : Violation of PRIMARY KEY constraint 'PK__OnlineUs__CB9A1CDF27ABE33C'. Cannot insert duplicate key in object 'dbo.OnlineUser'. The duplicate key value is (13).
+24-06-2017 10:25:26 ERROR CategoryAndSubCategoryDetails:58 - subCategoryDetails argument method : Cannot open database "onlineShoppingSpring" requested by the login. The login failed. ClientConnectionId:0bde4ff6-b608-43e7-b715-da5ed4937381
+24-06-2017 10:25:26 ERROR AdminEdit:490 - notificationQuery argument method : Cannot open database "onlineShoppingSpring" requested by the login. The login failed. ClientConnectionId:60cb4c9d-a271-4421-8878-832502946b42
+26-06-2017 11:42:28 ERROR CategoryAndSubCategoryDetails:112 - subCategoryDetails argument method : Cannot open database "onlineShoppingSpring" requested by the login. The login failed. ClientConnectionId:33906af2-074f-441c-b373-5b69d885a719
+26-06-2017 11:42:28 ERROR AdminEdit:490 - notificationQuery argument method : Cannot open database "onlineShoppingSpring" requested by the login. The login failed. ClientConnectionId:79cbce53-c9cc-4003-bc0a-48fe0884299f
+26-06-2017 11:42:28 ERROR CategoryAndSubCategoryDetails:112 - subCategoryDetails argument method : Cannot open database "onlineShoppingSpring" requested by the login. The login failed. ClientConnectionId:732c530b-eef5-4ff6-bc39-bfea684f12f4
+26-06-2017 13:16:58 WARN  PageNotFound:1136 - No mapping found for HTTP request with URI [/ProjectDemo/adminRemove.html] in DispatcherServlet with name 'dispatcher'
+26-06-2017 13:17:35 WARN  PageNotFound:1136 - No mapping found for HTTP request with URI [/ProjectDemo/adminRemove.html] in DispatcherServlet with name 'dispatcher'
+26-06-2017 13:19:23 WARN  AnnotationConfigWebApplicationContext:546 - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'springSecurityFilterChain' defined in class org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [javax.servlet.Filter]: Factory method 'springSecurityFilterChain' threw exception; nested exception is java.lang.IllegalArgumentException: errorPage must begin with '/'
+26-06-2017 13:19:23 ERROR ContextLoader:353 - Context initialization failed
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'springSecurityFilterChain' defined in class org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration: Bean instantiation via factory method failed; nested exception is org.springframework.beans.BeanInstantiationException: Failed to instantiate [javax.servlet.Filter]: Factory method 'springSecurityFilterChain' threw exception; nested exception is java.lang.IllegalArgumentException: errorPage must begin with '/'
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:599)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1123)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1018)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:510)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:482)
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:306)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:230)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:302)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:772)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:839)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:538)
+	at org.springframework.web.context.ContextLoader.configureAndRefreshWebApplicationContext(ContextLoader.java:446)
+	at org.springframework.web.context.ContextLoader.initWebApplicationContext(ContextLoader.java:328)
+	at org.springframework.web.context.ContextLoaderListener.contextInitialized(ContextLoaderListener.java:107)
+	at org.apache.catalina.core.StandardContext.listenerStart(StandardContext.java:5116)
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:5634)
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:145)
+	at org.apache.catalina.core.StandardContext.reload(StandardContext.java:4138)
+	at org.apache.catalina.loader.WebappLoader.backgroundProcess(WebappLoader.java:425)
+	at org.apache.catalina.core.ContainerBase.backgroundProcess(ContainerBase.java:1341)
+	at org.apache.catalina.core.StandardContext.backgroundProcess(StandardContext.java:5958)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1542)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1552)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1552)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.run(ContainerBase.java:1520)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [javax.servlet.Filter]: Factory method 'springSecurityFilterChain' threw exception; nested exception is java.lang.IllegalArgumentException: errorPage must begin with '/'
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:189)
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:588)
+	... 26 more
+Caused by: java.lang.IllegalArgumentException: errorPage must begin with '/'
+	at org.springframework.security.web.access.AccessDeniedHandlerImpl.setErrorPage(AccessDeniedHandlerImpl.java:92)
+	at org.springframework.security.config.annotation.web.configurers.ExceptionHandlingConfigurer.accessDeniedPage(ExceptionHandlingConfigurer.java:91)
+	at com.app.configuration.SecurityConfig.configure(SecurityConfig.java:79)
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter.getHttp(WebSecurityConfigurerAdapter.java:224)
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter.init(WebSecurityConfigurerAdapter.java:315)
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter.init(WebSecurityConfigurerAdapter.java:86)
+	at com.app.configuration.SecurityConfig$$EnhancerBySpringCGLIB$$9f6babb5.init(<generated>)
+	at org.springframework.security.config.annotation.AbstractConfiguredSecurityBuilder.init(AbstractConfiguredSecurityBuilder.java:371)
+	at org.springframework.security.config.annotation.AbstractConfiguredSecurityBuilder.doBuild(AbstractConfiguredSecurityBuilder.java:325)
+	at org.springframework.security.config.annotation.AbstractSecurityBuilder.build(AbstractSecurityBuilder.java:41)
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration.springSecurityFilterChain(WebSecurityConfiguration.java:104)
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration$$EnhancerBySpringCGLIB$$10929c8f.CGLIB$springSecurityFilterChain$0(<generated>)
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration$$EnhancerBySpringCGLIB$$10929c8f$$FastClassBySpringCGLIB$$cb19b.invoke(<generated>)
+	at org.springframework.cglib.proxy.MethodProxy.invokeSuper(MethodProxy.java:228)
+	at org.springframework.context.annotation.ConfigurationClassEnhancer$BeanMethodInterceptor.intercept(ConfigurationClassEnhancer.java:355)
+	at org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration$$EnhancerBySpringCGLIB$$10929c8f.springSecurityFilterChain(<generated>)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:162)
+	... 27 more

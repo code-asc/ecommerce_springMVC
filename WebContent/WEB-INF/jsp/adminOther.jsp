@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -24,8 +25,7 @@
 </head>
 
 <body>
-
-
+		<sec:authorize access="hasRole('ROLE_ADMIN')">
         <%@ include file="/WEB-INF/jsp/header.jsp" %>
             <div class="container-fluid">
             <%@ include file="/WEB-INF/jsp/adminMenu.jsp" %>
@@ -103,14 +103,11 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/jquery.validate.min.js"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.0/additional-methods.min.js"></script>
-  
-<!--<script src="/ProjectDemo/assets/script/adminValidate.js"></script>
-    <script src="/ProjectDemo/assets/script/brandAndCategoryList.js"></script>
-    <script src="/ProjectDemo/assets/script/adminOther.js"></script> -->
     
     <script src="<c:url value="/resources/script/adminValidate.js"/>"></script>
     <script src="<c:url value="/resources/script/brandAndCategoryList.js"/>"></script>
     <script src="<c:url value="/resources/script/adminOther.js"/>"></script>
     
+    </sec:authorize>
 </body>
 </html>

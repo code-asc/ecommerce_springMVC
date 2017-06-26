@@ -40,7 +40,6 @@ public class FilterToCheckSessionExists implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
 		HttpServletRequest requestOf =(HttpServletRequest)request;
-		
 		/*The following 'if' condition creates a  thread for the request and makes LoggedIn user online*/
 		 
 		if(requestOf.getSession().getAttribute("isUserLoggedIn") != null && (boolean)requestOf.getSession().getAttribute("isUserLoggedIn"))

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -23,6 +24,7 @@
 </head>
 
 <body>
+		<sec:authorize access="hasRole('ROLE_ADMIN')">
         <div class="col-md-2 col-sm-2 sidebar">
             <ul class="nav nav-pills nav-stacked" style="border: 1px solid #337ab7 ; border-radius:8px">
                 <li class="active"><a href="admin.html">DashBoard</a></li>
@@ -34,7 +36,7 @@
 
             </ul>
         </div>
-       
+        </sec:authorize>       
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <!---  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->

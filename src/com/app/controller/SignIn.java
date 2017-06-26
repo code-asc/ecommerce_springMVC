@@ -38,79 +38,16 @@ public class SignIn {
 
 	final static Logger log = Logger.getLogger(SignIn.class);
 	
-	/**
-	 *  onGetForSignIn method redirects the user to signIn page.
-	 * @param model of type Model. It is used to modify the view accordingly.
-	 * @param signInModel of type SignInModel.
-	 * @param session of type HttpSession
-	 * @param request of type HttpRequest
-	 */
-	@RequestMapping(value = "/signin" , method = RequestMethod.GET , produces = MediaType.TEXT_HTML_VALUE)
-	public String onGetForSignIn(@ModelAttribute("loginForm") SignInModel signInModel, HttpServletRequest request , HttpSession session , Model model)
-	{
-		//System.out.println("the user part : "+request.getSession(false));
-		if(session.getAttribute("isUserLoggedIn") == null)
-		{
-		return "signIn";
-		}
-		else
-		{
-			return "redirect:index.html";
-		}
-	}
-	
 	
 	/**
-	 * onPostForSignIn method get the input fields from signIn page.
-	 * @param model of type Model. It is used to modify the view accordingly.
-	 * @param signInModel of type SignInModel.
-	 * @param session of type HttpSession
-	 * @param request of type HttpRequest
+	 *  springSecurityLogin method is used for login.
+	 * @param principal of type Principal. It is used to check whether user is signed in with a username.
 	 */
-	@RequestMapping(value = "/signin" , method = RequestMethod.POST , produces = MediaType.TEXT_HTML_VALUE)
-	public String onPostForSignIn(@Valid @ModelAttribute("loginForm") SignInModel signInModel , BindingResult result , Model model , HttpSession session , HttpServletRequest request)
-	{
-		log.info("Inside onPostForSignIn method....");
-		if(!result.hasErrors())
-		{
-		
-		if(doUserLogin.isUserValid(signInModel.getEmail() , signInModel.getPassword() , session , request))
-		{
-			try{
-			int count = cartCount.getCartCount((int)session.getAttribute("userID"));
-			session.setAttribute("cartCount" , count);		
-			}
-			catch(Exception e)
-			{
-				System.out.println(e.getMessage());
-				e.printStackTrace();
-				log.error("onPostForSignIn method : "+e);
-			}
-			if(session.getAttribute("tempPath") != null)
-			{
-			return "redirect:"+session.getAttribute("tempPath").toString();
-			}else
-			{
-				return "redirect:"+session.getAttribute("previousPath").toString();
-			}
-		}else
-		{
-			model.addAttribute("showMessage", true);
-			model.addAttribute("signInStatus","Invaild Credentials");
-			return "signIn";
-		}
-		
-		}
-		else
-		{
-			return "signIn";
-		}
-	}
-	
 	
 	@RequestMapping(value="/login" , method=RequestMethod.GET)
 	public String springSecurityLogin(Principal principal)
 	{
+		log.info("Inside login method....");
 		if(principal== null)
 			{
 				return "login";
