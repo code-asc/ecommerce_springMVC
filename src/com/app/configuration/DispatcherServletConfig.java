@@ -37,11 +37,16 @@ import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 
+
 @EnableWebMvc
 @EnableAsync
 @EnableCaching
 @ComponentScan(basePackages = "com.app")
 @Configuration
+/**
+ * The DispatcherServletConfig class is a java config similar for dispatcherServlet-servlet.xml
+ * This class implements WebMvcConfigurer to set the resource handler for static resources.
+ */
 public class DispatcherServletConfig implements WebMvcConfigurer{
 	
 	@Bean

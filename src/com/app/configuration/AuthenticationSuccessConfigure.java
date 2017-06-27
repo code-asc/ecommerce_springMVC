@@ -16,12 +16,17 @@ import org.springframework.stereotype.Component;
 
 import com.app.service.UserLogin;
 
+
+/**
+ * The AuthenticationSuccessConfigure class is fired when on success login.
+ * It assigns the required user session variables.
+ */
 @Component
 public class AuthenticationSuccessConfigure implements AuthenticationSuccessHandler{
 
 	@Autowired
 	UserLogin userDetails;
-	
+
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request,
 			HttpServletResponse response, Authentication authentication) throws IOException,
@@ -31,7 +36,7 @@ public class AuthenticationSuccessConfigure implements AuthenticationSuccessHand
 		User authUser = (User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String userEmail = authUser.getUsername();
 		HttpSession session = request.getSession(true);
-		session.setMaxInactiveInterval(100*60);
+		session.setMaxInactiveInterval(1000*60);
 		userDetails.getLoggedInUserDetails(userEmail, session);
 		String redirectPath = null;
 		if(session.getAttribute("previousPath") == null)

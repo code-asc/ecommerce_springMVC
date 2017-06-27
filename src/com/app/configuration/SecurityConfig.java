@@ -17,6 +17,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled=true)
 @Import({DispatcherServletConfig.class})
+
+/**
+ * SecurityConfig class is a java config for Spring Security
+ * It extends WebSecurityConfigurerAdapter
+ */
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	@Autowired

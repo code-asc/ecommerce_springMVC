@@ -12,7 +12,10 @@ import org.springframework.web.servlet.DispatcherServlet;
 import com.app.controller.SessionManagement;
 import com.app.filter.FilterToCheckSessionExists;
 
-
+/**
+ * WebConfig class is a java config similar to web.xml 
+ * It implements WebApplicationInitilizer
+ */
 public class WebConfig implements WebApplicationInitializer{
 
 	@Override
@@ -34,7 +37,6 @@ public class WebConfig implements WebApplicationInitializer{
 		redirectFilter.addMappingForUrlPatterns(null, true, "*.html");
 		redirectFilter.setInitParameter("encoding", "UTF-8");
 		redirectFilter.setInitParameter("forceEncoding", "true");
-		
+	
 	}
-
 }

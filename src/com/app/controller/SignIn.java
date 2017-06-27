@@ -2,22 +2,13 @@ package com.app.controller;
 
 import java.security.Principal;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
-
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.app.model.SignInModel;
 import com.app.service.CartCount;
 import com.app.service.UserLogin;
 
@@ -52,7 +43,7 @@ public class SignIn {
 			{
 				return "login";
 			}else{
-					return "redirect:index.html";
+				return "redirect:index.html";
 			}
 	}
 	
